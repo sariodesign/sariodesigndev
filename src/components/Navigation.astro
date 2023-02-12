@@ -1,0 +1,22 @@
+---
+interface Link {
+    label: string,
+    url: string
+}
+
+interface Navigation extends Array<Link>{}
+
+const NavigationLinks:Navigation = [
+    {
+        label: 'Home',
+        url: '/',
+    },
+    {
+        label: 'About me',
+        url: '/about',
+    }
+];
+---
+<nav>
+    {NavigationLinks.map(link => <a href={link.url} >{link.label}</a>)}    
+</nav> 
