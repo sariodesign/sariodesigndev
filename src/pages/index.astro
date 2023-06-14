@@ -4,7 +4,7 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout title="SarioDesign Front-end developer - Personal website">
 	<main>
-		<h1>Front-end & UI Developer <br>currently based in <span>Naples</span></h1>
+		<h1>Front-end & UI Developer <br>currently based in <span>Tuscany</span></h1>
 	</main>
 </Layout>
 
@@ -23,8 +23,18 @@ import Layout from '../layouts/Layout.astro';
 		text-align: center;
 	}
 
+	@media (prefers-color-scheme: dark) {
+		h1 {
+			color: #fff
+		}
+	}
+	@media (prefers-color-scheme: light) {
+		h1 {
+			color: var(--dark-black);
+		}
+	}
 	span {
-		color: #DD7A4C
+		color: var(--orange)
 	}
 	
 </style>
