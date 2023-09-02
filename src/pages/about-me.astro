@@ -1,0 +1,70 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Welcome to Astro.">
+	<main>
+		<section>
+			<img src="./about-me-photo.jpg" alt="me" />
+			<div class="about-text">
+				<p>I have been working for ten years. I started with a focus on design, but step-by-step I moved on code, working mainly in the publishing industry.</p>
+				<p>I focused my skills on the basics of front-end development: <span>HTML</span>, <span>CSS</span>, <span>JAVASCRIPT</span></p>
+				<p>In recent years, I have approached various JS frameworks and libraries, like <span>React</span>, <span>Vuejs</span>, <span>Svelte</span>, discovering others with a broad ecosystem and community, such as <span>Next.js</span>, <span>Nuxt</span>, <span>Astro</span> with which I maintain different personal projects in my free time.</p>
+			</div>
+		</section>
+	</main>
+</Layout>
+
+<style lang="scss">
+	section {
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 0 16px;
+
+		@media screen and (min-width: 1024px) {
+			padding: 0;
+		}
+	}
+
+	img {
+		border: 8px solid white;
+		border-radius: 16px;
+		box-shadow: 0 20px 60px -30px rgba(0,0,0,.45);
+		max-width: 100%;
+
+		@media screen and (min-width: 1024px) {
+			border-radius: 32px;
+			float: left;
+			height: 280px;
+			margin: 0 32px 32px 0;
+			shape-outside: margin-box;
+			width: 280px;
+		}
+	}
+
+	.about-text {
+		padding-top: 32px;
+		
+		p {
+			color: var(--dark-black);
+			font-size: 18px;
+			line-height: 32px;
+			margin: 0 0 32px;
+
+			@media screen and (min-width: 1024px) {
+				width: calc(100% - 150px);		
+			}
+
+		}
+		
+		span {
+			font-family: 'Roboto Serif', serif;
+			font-style: italic;
+			color: var(--orange)
+		}
+	}
+
+	.header {
+		transform: translateY(0);
+	}
+</style>

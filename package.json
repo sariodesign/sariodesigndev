@@ -11,6 +11,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^1.4.7"
+    "astro": "^3.0.1",
+    "gsap": "^3.12.2",
+    "sass": "^1.66.1",
+    "split-type": "^0.3.3"
   }
 }

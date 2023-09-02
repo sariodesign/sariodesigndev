@@ -8,15 +8,52 @@ interface Navigation extends Array<Link>{}
 
 const NavigationLinks:Navigation = [
     {
-        label: 'Home',
-        url: '/',
+        label: 'About me',
+        url: '/about-me',
     },
     {
-        label: 'About me',
-        url: '/about',
+        label: 'Playground',
+        url: '/playground',
     }
 ];
 ---
 <nav>
-    {NavigationLinks.map(link => <a href={link.url} >{link.label}</a>)}    
+    { NavigationLinks.map((link, i, arr) => {
+        console.log(link)
+        if(arr.length - 1 === i){
+                return <a href={link.url} data-astro-reload>{link.label}</a>
+            } else {
+                return <a href={link.url} data-astro-reload>{link.label} / </a>
+            }
+        })
+    }
+            
 </nav> 
+
+<style lang="scss">
+
+nav {
+    display: flex;
+    column-gap: 16px;
+}
+
+a {
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all .25s ease-in-out;
+
+    &:hover {
+        opacity: .5;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        color: var(--light-gray);
+    }
+
+    @media (prefers-color-scheme: light) {
+        color: var(--dark-black);
+    }
+}     
+
+</style>
