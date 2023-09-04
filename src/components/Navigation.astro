@@ -18,7 +18,11 @@ const NavigationLinks:Navigation = [
 ];
 ---
 <nav class="js-menu">
-    <button class="btn-menu js-btn-menu">Open menu</button>
+    <button class="btn-menu js-btn-menu">
+        <svg id="icon-menu" viewBox="0 0 24 24">
+            <path d="M3 13h18c0.552 0 1-0.448 1-1s-0.448-1-1-1h-18c-0.552 0-1 0.448-1 1s0.448 1 1 1zM3 7h18c0.552 0 1-0.448 1-1s-0.448-1-1-1h-18c-0.552 0-1 0.448-1 1s0.448 1 1 1zM3 19h18c0.552 0 1-0.448 1-1s-0.448-1-1-1h-18c-0.552 0-1 0.448-1 1s0.448 1 1 1z"></path>
+        </svg>
+    </button>
     <div class="nav-menu">
         { NavigationLinks.map((link, i, arr) => {
             console.log(link)
@@ -66,26 +70,26 @@ nav {
 
 .nav-menu {
     background-color: var(--white);
-    align-items: center;
     display: flex;
     gap: 48px;
     flex-direction: column;
-    height: 25vh;
-    left: 0;
-    justify-content: center;
+    height: 100vh;
     opacity: 0;
-    padding: 64px 0;
+    padding-top: 80px;
+    padding-right: calc(10% + 48px);
     position: absolute;
+    right: 0;
+    text-align: right;
     top: 0;
     transition: transform .35s linear .125s, opacity .25s ease-in, visibility .5s linear;
-    transform: translateY(-25vh);
+    transform: translateX(100%);
     visibility: hidden;
     width: 100%;
     z-index: 1;
 
     .is-opened & {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateX(10%);
         visibility: visible;
     }
 
@@ -106,14 +110,32 @@ nav {
 }
 
 .btn-menu {
-    position: relative;
+    border: 0;
+    bottom: 16px;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px -5px rgba(0,0,0,0.5);
+    height: 48px;
+    position: fixed;
+    right: 16px;
+    width: 48px;
     z-index: 2;
     @media screen and (min-width: 1024px) {
         display: none;
     }
+
+    @media (prefers-color-scheme: light) {
+        background-color: var(--dark-black);
+
+        svg {
+            height: 24px;
+            fill: var(--orange);
+            width: 24px;
+        }
+    }
 }
 
 a {
+    font-size: 64px;
     font-weight: 700;
     text-transform: uppercase;
     text-decoration: none;
@@ -121,6 +143,10 @@ a {
 
     &:hover {
         opacity: .5;
+    }
+
+    @media screen and (min-width: 1024px) {
+        font-size: 16px;
     }
 
     @media (prefers-color-scheme: dark) {
