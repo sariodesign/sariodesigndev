@@ -23,7 +23,7 @@
     .footer {
         align-items: center;
         bottom: 0;
-        display: flex;
+        display: none;
         left: 0;
         gap: 16px;
         padding: 16px;
@@ -43,6 +43,10 @@
             @media (prefers-color-scheme: light) {
                 color: var(--dark-black);
             }
+        }
+
+        @media screen and (min-width: 1024px) {
+            display: flex;
         }
 
         
