@@ -33,10 +33,12 @@ const NavigationLinks:Navigation = [
 </nav>
 
 <script>
+    const gloabelPage = document.querySelector('.js-page');
     const navMenu = document.querySelector('.js-menu');
     const btnMenu = document.querySelector('.js-btn-menu');
 
     btnMenu.addEventListener('click', () => {
+        gloabelPage.classList.toggle('is-locked');
         navMenu.classList.toggle('is-opened');
     })
 </script>
@@ -71,12 +73,12 @@ nav {
 .nav-menu {
     background-color: var(--white);
     display: flex;
-    gap: 48px;
+    gap: 24px;
     flex-direction: column;
     height: 100vh;
     opacity: 0;
     padding-top: 80px;
-    padding-right: calc(10% + 48px);
+    padding-right: calc(10% + 32px);
     position: absolute;
     right: 0;
     text-align: right;
@@ -104,9 +106,7 @@ nav {
         position: relative;
         transform: none;
         visibility: visible;
-    }
-
-    
+    }    
 }
 
 .btn-menu {
@@ -135,7 +135,7 @@ nav {
 }
 
 a {
-    font-size: 64px;
+    font-size: 48px;
     font-weight: 700;
     text-transform: uppercase;
     text-decoration: none;
