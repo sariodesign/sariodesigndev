@@ -13,29 +13,12 @@ import Layout from '../layouts/Layout.astro';
 	import SplitType from 'split-type'
 
 	const Intro = new SplitType('#intro')
-
-	const charCallback = () => {
-		let isMobile = window.matchMedia("(max-width: 767px)");
-		
-		if(!isMobile.matches) {
-			return;
-		}
-
-		gsap.to('.js-btn-menu', {
-			y: 0,
-			opacity: 1,
-			stagger: 0.05,
-			delay: 0.2,
-			duration: .25
-		})
-	}
 	
 	gsap.from('.char', {
 		opacity: 0,
 		stagger: 0.05,
 		delay: 0,
 		duration: .0125,
-		onComplete: charCallback
 	})
 
 	gsap.to('.header', {

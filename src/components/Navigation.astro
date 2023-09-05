@@ -10,11 +10,7 @@ const NavigationLinks:Navigation = [
     {
         label: 'About me',
         url: '/about-me',
-    },
-    /* {
-        label: 'Playground',
-        url: '/playground',
-    } */
+    }
 ];
 ---
 <nav class="js-menu">
@@ -27,20 +23,9 @@ const NavigationLinks:Navigation = [
     </div>            
 </nav>
 
-<script>
-    const gloabelPage = document.querySelector('.js-page');
-    const navMenu = document.querySelector('.js-menu');
-    const btnMenu = document.querySelector('.js-btn-menu');
-
-    btnMenu.addEventListener('click', () => {
-        gloabelPage.classList.toggle('is-locked');
-        navMenu.classList.toggle('is-opened');
-    })
-</script>
-
 <style lang="scss">
 nav {
-    &:after {
+    /* &:after {
         background-color: rgba(0,0,0,.75);
         content: '';
         left: 0;
@@ -55,7 +40,7 @@ nav {
         @media screen and (min-width: 768px) {
             display: none;
         }
-    }
+    } */
 
     &.is-opened {
         &:after {
@@ -66,10 +51,10 @@ nav {
 }
 
 .nav-menu {
-    background-color: var(--white);
+    /* background-color: var(--white);
     display: flex;
-    gap: 24px;
-    flex-direction: column;
+    gap: 24px; 
+    flex-direction: column; 
     height: 100vh;
     opacity: 0;
     padding-top: 80px;
@@ -80,7 +65,7 @@ nav {
     top: 0;
     transition: transform .35s linear .125s, opacity .25s ease-in, visibility .5s linear;
     transform: translateX(100%);
-    visibility: hidden;
+    visibility: hidden;*/
     width: 100%;
     z-index: 1;
 
@@ -91,7 +76,7 @@ nav {
     }
 
     @media screen and (min-width: 768px) {
-        background-color: transparent;
+        /* background-color: transparent;
         display: flex;
         column-gap: 16px;
         flex-direction: row;
@@ -100,11 +85,11 @@ nav {
         padding: 0;
         position: relative;
         transform: none;
-        visibility: visible;
+        visibility: visible; */
     }    
 }
 a {
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 700;
     text-transform: uppercase;
     text-decoration: none;

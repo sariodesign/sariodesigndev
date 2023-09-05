@@ -11,6 +11,7 @@ import Layout from '../layouts/Layout.astro';
 				<p>I focused my skills on the basics of front-end development: <span>HTML</span>, <span>CSS</span>, <span>JAVASCRIPT</span></p>
 				<p>In recent years, I have approached various JS frameworks and libraries, like <span>React</span>, <span>Vuejs</span>, <span>Svelte</span>, discovering others with a broad ecosystem and community, such as <span>Next.js</span>, <span>Nuxt</span>, <span>Astro</span> with which I maintain different personal projects in my free time.</p>
 				<p>I usually carve out free time to immerse myself in a good read, listen to the latest releases or trends on Spotify, watch the latest season of my favorite series, or delve into a video game adventure.</p>
+				<p><a href="/cv-rosario-russo-2023.pdf" target="_blank">View my CV</a></p>
 			</div>
 		</section>
 	</main>
@@ -46,7 +47,6 @@ import Layout from '../layouts/Layout.astro';
 		padding-top: 32px;
 		
 		p {
-			color: var(--dark-black);
 			font-size: 18px;
 			line-height: 32px;
 			margin: 0 0 32px;
@@ -55,12 +55,24 @@ import Layout from '../layouts/Layout.astro';
 				width: calc(100% - 150px);		
 			}
 
+			@media (prefers-color-scheme: dark) {
+				color: var(--white);
+			}
+			@media (prefers-color-scheme: light) {
+				color: var(--dark-black);
+			}
+
 		}
 		
 		span {
 			font-family: 'Roboto Serif', serif;
 			font-style: italic;
 			color: var(--orange)
+		}
+
+		a {
+			color: var(--orange);
+			font-family: 'Roboto Serif', serif;
 		}
 	}
 
