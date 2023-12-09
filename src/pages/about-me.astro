@@ -1,16 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import myPhoto from '../../public/about-me-photo.jpg'
+import { Image } from 'astro:assets';
 ---
 
 <Layout title="Welcome to Astro.">
 	<main>
 		<section>
-			<img src="./about-me-photo.jpg" alt="me" />
+			<img cursor-class="photo" src="./about-me-photo.jpg" alt="me" />
 			<div class="about-text">
-				<p>I have been working for ten years. I started with a focus on design, but step-by-step I moved on code, working mainly in the publishing industry.</p>
-				<p>I focused my skills on the basics of front-end development: <span>HTML</span>, <span>CSS</span>, <span>JAVASCRIPT</span></p>
-				<p>In recent years, I have approached various JS frameworks and libraries, like <span>React</span>, <span>Vuejs</span>, <span>Svelte</span>, discovering others with a broad ecosystem and community, such as <span>Next.js</span>, <span>Nuxt</span>, <span>Astro</span> with which I maintain different personal projects in my free time.</p>
-				<p>I usually carve out free time to immerse myself in a good read, listen to the latest releases or trends on Spotify, watch the latest season of my favorite series, or delve into a video game adventure.</p>
+				<p cursor-class="text">I have been working for ten years. I started with a focus on design, but step-by-step I moved on code, working mainly in the publishing industry.</p>
+				<p cursor-class="text">I focused my skills on the basics of front-end development: <span>HTML</span>, <span>CSS</span>, <span>JAVASCRIPT</span></p>
+				<p cursor-class="text">In recent years, I have approached various JS frameworks and libraries, like <span>React</span>, <span>Vuejs</span>, <span>Svelte</span>, discovering others with a broad ecosystem and community, such as <span>Next.js</span>, <span>Nuxt</span>, <span>Astro</span> with which I maintain different personal projects in my free time.</p>
+				<p cursor-class="text">I usually carve out free time to immerse myself in a good read, listen to the latest releases or trends on Spotify, watch the latest season of my favorite series, or delve into a video game adventure.</p>
 				<p><a href="/cv-rosario-russo-2023.pdf" target="_blank">View my CV</a></p>
 			</div>
 		</section>
@@ -41,6 +43,11 @@ import Layout from '../layouts/Layout.astro';
 			shape-outside: margin-box;
 			width: 280px;
 		}
+
+		@media screen and (min-width: 1366px) {
+			height: 320px;
+			width: 320px;
+		}
 	}
 
 	.about-text {
@@ -52,6 +59,8 @@ import Layout from '../layouts/Layout.astro';
 			margin: 0 0 32px;
 
 			@media screen and (min-width: 1366px) {
+				font-size: 24px;
+				line-height: 40px;
 				width: calc(100% - 150px);		
 			}
 
@@ -81,3 +90,33 @@ import Layout from '../layouts/Layout.astro';
 		transform: translateY(0);
 	}
 </style>
+
+<script>
+	import { gsap } from 'gsap'
+	import SplitType from 'split-type'
+
+	const Intro = new SplitType('#intro')
+	
+	gsap.from('.char', {
+		opacity: 0,
+		stagger: 0.05,
+		delay: 0,
+		duration: .0125,
+	})
+
+	gsap.to('.header', {
+		y: 0,
+		opacity: 1,
+		stagger: 0.05,
+		delay: 0.1,
+		duration: .5
+	})
+
+	gsap.to('.footer', {
+		y: 0,
+		opacity: 1,
+		stagger: 0.05,
+		delay: 0.2,
+		duration: .5
+	})
+</script>
