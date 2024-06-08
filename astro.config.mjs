@@ -1,4 +1,11 @@
 import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
-export default defineConfig();
+
+import vercel from '@astrojs/vercel/static';
+
+export default defineConfig({
+  adapter: vercel({
+    analytics: true
+  }),
+});
