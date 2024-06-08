@@ -10,11 +10,11 @@ const NavigationLinks:Navigation = [
     {
         label: 'About me',
         url: '/about-me',
-    },
+    }/* ,
     {
         label: 'Playground',
         url: '/playground'
-    }
+    } */
 ];
 ---
 <nav class="js-menu">
@@ -100,8 +100,9 @@ a {
     transition: all .25s ease-in-out;
 
     &:hover {
-        opacity: .5;
-        text-decoration: underline;
+        cursor: none;
+        transform: scale(1.1);
+        text-decoration: none;
     }
 
     @media screen and (min-width: 768px) {

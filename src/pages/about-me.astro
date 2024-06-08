@@ -4,17 +4,19 @@ import myPhoto from '../../public/about-me-photo.jpg'
 import { Image } from 'astro:assets';
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="SarioDesign Front-end developer - About me">
 	<main>
 		<section>
 			<img cursor-class="photo" src="./about-me-photo.jpg" alt="me" />
 			<div class="about-text">
+				<span class="about-text-start">about</span>
 				<p cursor-class="text">I have been working for ten years. I started with a focus on design, but step-by-step I moved on code, working mainly in the publishing industry.</p>
 				<p cursor-class="text">I focused my skills on the basics of front-end development: <span>HTML</span>, <span>CSS</span>, <span>JAVASCRIPT</span></p>
 				<p cursor-class="text">In recent years, I have approached various JS frameworks and libraries, like <span>React</span>, <span>Vuejs</span>, <span>Svelte</span>, discovering others with a broad ecosystem and community, such as <span>Next.js</span>, <span>Nuxt</span>, <span>Astro</span> with which I maintain different personal projects in my free time.</p>
 				<p cursor-class="text">I usually carve out free time to immerse myself in a good read, listen to the latest releases or trends on Spotify, watch the latest season of my favorite series, or delve into a video game adventure.</p>
-				<p><a href="/cv-rosario-russo-2023.pdf" target="_blank">View my CV</a></p>
+				<span class="about-text-end">me</span>
 			</div>
+			<p><a class="about-cv-link" cursor-class="link" href="/cv-rosario-russo-2023.pdf" target="_blank">View my CV</a></p>
 		</section>
 	</main>
 </Layout>
@@ -27,6 +29,28 @@ import { Image } from 'astro:assets';
 
 		@media screen and (min-width: 1366px) {
 			padding: 0;
+		}
+
+		h1 {
+			font-size: 32px;
+			letter-spacing: 2px;
+			margin: 0 0 32px;
+			text-align: right;
+
+			&:before {
+				content: '<';
+			}
+
+			&:after {
+				content: '/>';
+			}
+		}
+
+		a {
+			color: var(--orange);
+			display: block;
+			font-family: 'Roboto Serif', serif;
+			text-align: right;
 		}
 	}
 
@@ -54,14 +78,18 @@ import { Image } from 'astro:assets';
 		padding-top: 32px;
 		
 		p {
-			font-size: 18px;
-			line-height: 32px;
+			font-size: 16px;
+			line-height: 28px;
 			margin: 0 0 32px;
 
+			&:nth-last-child(2) {
+				margin: 0;
+			}
+
 			@media screen and (min-width: 1366px) {
-				font-size: 24px;
-				line-height: 40px;
-				width: calc(100% - 150px);		
+				font-size: 20px;
+				line-height: 36px;		
+				width: 100%;
 			}
 
 			@media (prefers-color-scheme: dark) {
@@ -79,9 +107,36 @@ import { Image } from 'astro:assets';
 			color: var(--orange)
 		}
 
-		a {
-			color: var(--orange);
-			font-family: 'Roboto Serif', serif;
+		.about-cv-link {
+			font-style: normal;
+		}
+	}
+
+	span.about-text-start {
+		display: block;
+		font-size: 20px;
+		margin: 0 0 16px;
+		text-transform: uppercase;
+		&:before {
+			content: '<';
+		}
+
+		&:after {
+			content: '>';
+		}
+	}
+
+	span.about-text-end {
+		display: block;
+		font-size: 20px;
+		margin: 16px 0 0;
+		text-transform: uppercase;
+		&:before {
+			content: '</';
+		}
+
+		&:after {
+			content: '>';
 		}
 	}
 
