@@ -19,13 +19,24 @@ const NavigationLinks:Navigation = [
 ---
 <nav class="js-menu">
     <div class="nav-menu">
+        <svg class="js-close-menu" width="48" height="48" viewBox="0 0 24 24">
+            <path d="M18.984 6.422l-5.578 5.578 5.578 5.578-1.406 1.406-5.578-5.578-5.578 5.578-1.406-1.406 5.578-5.578-5.578-5.578 1.406-1.406 5.578 5.578 5.578-5.578z"></path>
+        </svg>
         { NavigationLinks.map((link, i, arr) => {
-            console.log(link)
             return <a cursor-class="link" href={link.url} data-astro-reload>{link.label}</a>
             })
         }
     </div>            
 </nav>
+
+<script>
+	const menu = document.querySelector('.js-menu');
+	const btnIconMenu = document.querySelector('.js-close-menu');
+	
+	btnIconMenu.addEventListener('click', () => {
+		menu.classList.remove('is-opened')
+	})
+</script>
 
 <style lang="scss">
 nav {
@@ -52,6 +63,11 @@ nav {
             visibility: visible;
         }
     }
+    @media screen and (min-width: 768px) {
+		svg {
+			display: none;
+		}
+	}
 }
 
 .nav-menu {
@@ -61,22 +77,26 @@ nav {
     flex-direction: column; 
     height: 100vh;
     opacity: 0;
-    padding-top: 80px;
+    padding: 32px;
     padding-right: calc(10% + 32px);
+    padding-bottom: 0;
     position: absolute;
     right: 0;
-    text-align: right;
     top: 0;
     transition: transform .35s linear .125s, opacity .25s ease-in, visibility .5s linear;
     transform: translateX(100%);
     visibility: hidden;
     width: 100%;
-    z-index: 1;
+    z-index: 2;
 
     .is-opened & {
         opacity: 1;
         transform: translateX(10%);
         visibility: visible;
+    }
+
+    svg {
+        margin-left: auto
     }
 
     @media screen and (min-width: 768px) {
@@ -93,20 +113,37 @@ nav {
     }    
 }
 a {
-    font-size: 24px;
+    font-size: 48px;
+    font-family: var(--base-font-family-serif);
     font-weight: 700;
-    text-transform: uppercase;
+    position: relative;
+    text-transform: capitalize;
     text-decoration: none;
     transition: all .25s ease-in-out;
 
+    &:after {
+        content: '';
+        left: 0;
+        position: absolute;
+        height: 2px;
+        transition: all .25s linear;
+        top: calc(100% - 2px);
+        width: 0;
+    }
+
     &:hover {
         cursor: none;
-        transform: scale(1.1);
+        //transform: scale(1.1);
         text-decoration: none;
     }
 
+    &:hover::after {
+        width: 100%;
+        background-color: var(--dark-black);
+    }
+
     @media screen and (min-width: 768px) {
-        font-size: 16px;
+        font-size: 20px;
     }
 
     @media (prefers-color-scheme: dark) {

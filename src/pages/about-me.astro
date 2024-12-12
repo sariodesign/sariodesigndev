@@ -1,34 +1,44 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import myPhoto from '../../public/about-me-photo.jpg'
+import myPhoto from '../assets/about-me-photo.jpg';
 import { Image } from 'astro:assets';
 ---
 
 <Layout title="About me | SarioDesign" metaDescription="I focused my skills on the basics of front-end development: HTML, CSS and JAVASCRIPT">
 	<main>
 		<section>
-			<img cursor-class="photo" src="./about-me-photo.jpg" alt="me" />
+			<Image cursor-class="photo" class="photo" src={myPhoto} alt="me" />
 			<div class="about-text">
-				<span class="about-text-start">about</span>
-				<p cursor-class="text">I have been working for ten years. I started with a focus on design, but step-by-step I moved on code, working mainly in the publishing industry.</p>
-				<p cursor-class="text">I focused my skills on the basics of front-end development: <span>HTML</span>, <span>CSS</span>, <span>JAVASCRIPT</span></p>
-				<p cursor-class="text">In recent years, I have approached various JS frameworks and libraries, like <span>React</span>, <span>Vuejs</span>, <span>Svelte</span>, discovering others with a broad ecosystem and community, such as <span>Next.js</span>, <span>Nuxt</span>, <span>Astro</span> with which I maintain different personal projects in my free time.</p>
-				<p cursor-class="text">I usually carve out free time to immerse myself in a good read, listen to the latest releases or trends on Spotify, watch the latest season of my favorite series, or delve into a video game adventure.</p>
-				<span class="about-text-end">me</span>
+				<span class="about-text-start">About</span>
+					<div class="paragraphs">
+						<div cursor-class="text" class="paragraph">I have been working for ten years. I started with a focus on design, but step-by-step I moved on code, working mainly in the publishing industry.</div>
+						<div cursor-class="text" class="paragraph">I focused my skills on the basics of front-end development: <span>HTML</span>, <span>CSS</span>, <span>JAVASCRIPT</span></div>
+						<div cursor-class="text" class="paragraph">In recent years, I have approached various JS frameworks and libraries, like <span>React</span>, <span>Vuejs</span>, <span>Svelte</span>, discovering others with a broad ecosystem and community, such as <span>Next.js</span>, <span>Nuxt</span>, <span>Astro</span> with which I maintain different personal projects in my free time.</div>
+						<div cursor-class="text" class="paragraph">I usually carve out free time to immerse myself in a good read, listen to the latest releases or trends on Spotify, watch the latest season of my favorite series, or delve into a video game adventure.</div>
+					</div>
+					<!-- <p><a class="about-cv-link" cursor-class="link" href="/cv-rosario-russo-2023.pdf" target="_blank">View my CV</a></p> -->
+				<span class="about-text-end">Me</span>
 			</div>
-			<p><a class="about-cv-link" cursor-class="link" href="/cv-rosario-russo-2023.pdf" target="_blank">View my CV</a></p>
 		</section>
 	</main>
 </Layout>
 
 <style lang="scss" is:global>
 	section {
-		max-width: 1100px;
+		display: flex;
+		flex-direction: column;
 		margin: 0 auto;
 		padding: 0 16px;
 
 		@media screen and (min-width: 1366px) {
+			max-width: 1200px;
+			flex-direction: row;
+			gap: 64px;
 			padding: 0;
+		}
+
+		@media screen and (min-width: 1680px) {
+			max-width: 1560px;
 		}
 
 		h1 {
@@ -57,15 +67,12 @@ import { Image } from 'astro:assets';
 	img {
 		border-radius: 16px;
 		box-shadow: 0 20px 60px -30px rgba(0,0,0,.45);
-		width: 100%;
+		margin: 0 auto;
+		width: 280px;
 
 		@media screen and (min-width: 768px) {
 			border-radius: 50%;
-			float: left;
 			height: 280px;
-			margin: 0 32px 32px 0;
-			shape-outside: margin-box;
-			width: 280px;
 		}
 
 		@media screen and (min-width: 1366px) {
@@ -76,47 +83,44 @@ import { Image } from 'astro:assets';
 
 	.about-text {
 		padding-top: 32px;
-		
-		p {
-			font-size: 16px;
-			line-height: 28px;
-			margin: 0 0 32px;
-
-			&:nth-last-child(2) {
-				margin: 0;
-			}
-
-			@media screen and (min-width: 1366px) {
-				font-size: 20px;
-				line-height: 36px;		
-				width: 100%;
-			}
-
-			@media (prefers-color-scheme: dark) {
-				color: var(--white);
-			}
-			@media (prefers-color-scheme: light) {
-				color: var(--dark-black);
-			}
-
-		}
-		
-		span {
-			font-family: 'Roboto Serif', serif;
-			font-style: italic;
-			color: var(--orange)
-		}
 
 		.about-cv-link {
 			font-style: normal;
 		}
 	}
 
+	.paragraph {
+		font-size: 16px;
+		line-height: 28px;
+		margin: 0 0 32px;
+		padding-left: 32px;
+
+		@media screen and (min-width: 1366px) {
+			font-size: 20px;
+			line-height: 36px;		
+			width: 100%;
+		}
+
+		@media (prefers-color-scheme: dark) {
+			color: var(--white);
+		}
+		@media (prefers-color-scheme: light) {
+			color: var(--dark-black);
+		}
+	}
+
+	.line {
+		height: 36px;
+		overflow: hidden;
+	}
+
 	span.about-text-start {
+		font-family: var(--base-font-family-serif);
+		color: var(--orange);
+
 		display: block;
-		font-size: 20px;
+		font-size: 24px;
 		margin: 0 0 16px;
-		text-transform: uppercase;
 		&:before {
 			content: '<';
 		}
@@ -127,10 +131,12 @@ import { Image } from 'astro:assets';
 	}
 
 	span.about-text-end {
+		font-family: var(--base-font-family-serif);
+		color: var(--orange);
+
 		display: block;
-		font-size: 20px;
+		font-size: 24px;
 		margin: 16px 0 0;
-		text-transform: uppercase;
 		&:before {
 			content: '</';
 		}
@@ -149,29 +155,28 @@ import { Image } from 'astro:assets';
 <script>
 	import { gsap } from 'gsap'
 	import SplitType from 'split-type'
+	import { TypeShuffle } from '../assets/js/typeShuffle.js';
 
-	const Intro = new SplitType('#intro')
+	const textElement = document.querySelector('.paragraphs');
+    
+	const ts = new TypeShuffle(textElement);
+	ts.trigger('fx5');
+
+	/* const Intro = new SplitType('.paragraph', {
+		types: 'words,lines'
+	})
 	
-	gsap.from('.char', {
+	gsap.from(".word", {
 		opacity: 0,
-		stagger: 0.05,
-		delay: 0,
-		duration: .0125,
-	})
+		stagger: 0.025,
+		delay: 0.25,
+		y: 20,
+		duration: .05,
+	}) */
 
-	gsap.to('.header', {
-		y: 0,
-		opacity: 1,
-		stagger: 0.05,
-		delay: 0.1,
-		duration: .5
-	})
-
-	gsap.to('.footer', {
-		y: 0,
-		opacity: 1,
-		stagger: 0.05,
-		delay: 0.2,
-		duration: .5
+	gsap.from('.photo', {
+		delay: 0.125,
+		duration: 1,
+		rotationY: 90,
 	})
 </script>
