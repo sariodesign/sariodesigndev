@@ -10,11 +10,15 @@ const NavigationLinks:Navigation = [
     {
         label: 'About me',
         url: '/about-me',
-    }/* ,
+    },
+    {
+        label: 'Blog',
+        url: '/blog'
+    },
     {
         label: 'Playground',
         url: '/playground'
-    } */
+    }
 ];
 ---
 <nav class="js-menu">
@@ -26,6 +30,20 @@ const NavigationLinks:Navigation = [
             return <a cursor-class="link" href={link.url} data-astro-reload>{link.label}</a>
             })
         }
+        <div class="nav-menu-contact">
+            <a class="contact-link" cursor-class="link" href="https://www.linkedin.com/in/sariodesign/" target="_blank">
+                <svg width="32" viewBox="0 0 24 28">
+                    <path d="M3.703 22.094h3.609v-10.844h-3.609v10.844zM7.547 7.906c-0.016-1.062-0.781-1.875-2.016-1.875s-2.047 0.812-2.047 1.875c0 1.031 0.781 1.875 2 1.875h0.016c1.266 0 2.047-0.844 2.047-1.875zM16.688 22.094h3.609v-6.219c0-3.328-1.781-4.875-4.156-4.875-1.937 0-2.797 1.078-3.266 1.828h0.031v-1.578h-3.609s0.047 1.016 0 10.844v0h3.609v-6.062c0-0.313 0.016-0.641 0.109-0.875 0.266-0.641 0.859-1.313 1.859-1.313 1.297 0 1.813 0.984 1.813 2.453v5.797zM24 6.5v15c0 2.484-2.016 4.5-4.5 4.5h-15c-2.484 0-4.5-2.016-4.5-4.5v-15c0-2.484 2.016-4.5 4.5-4.5h15c2.484 0 4.5 2.016 4.5 4.5z"></path>
+                </svg>
+                <span>LINKEDIN</span>
+            </a>
+            <a class="contact-link" cursor-class="link" href="https://github.com/sariodesign" target="_blank">
+                <svg width="32" viewBox="0 0 24 28">
+                    <path d="M8.109 18.75v0c0.031-0.047 0.016-0.141-0.047-0.203-0.078-0.063-0.172-0.078-0.219-0.031-0.031 0.047-0.016 0.141 0.047 0.203 0.078 0.063 0.172 0.078 0.219 0.031zM7.672 18.109c-0.047-0.063-0.125-0.094-0.187-0.063-0.047 0.031-0.047 0.125 0 0.187 0.063 0.078 0.141 0.109 0.187 0.078v0c0.047-0.031 0.047-0.125 0-0.203zM7.031 17.484v0c0.016-0.031-0.016-0.094-0.078-0.125-0.047-0.016-0.109-0.016-0.125 0.031-0.031 0.047 0 0.094 0.063 0.125 0.063 0.016 0.125 0.016 0.141-0.031zM7.359 17.844v0c0.031-0.031 0.031-0.109-0.031-0.156-0.047-0.063-0.125-0.078-0.156-0.047-0.047 0.047-0.031 0.109 0.016 0.172 0.047 0.047 0.125 0.078 0.172 0.031zM8.703 19.016v0c0.016-0.063-0.047-0.141-0.141-0.172s-0.172 0-0.203 0.063c-0.016 0.063 0.047 0.141 0.141 0.172s0.172 0 0.203-0.063zM9.359 19.063v0c0-0.063-0.078-0.125-0.187-0.125-0.094 0-0.156 0.063-0.156 0.125s0.078 0.125 0.172 0.125 0.172-0.063 0.172-0.125zM9.969 18.953v0c-0.016-0.063-0.109-0.094-0.203-0.078s-0.156 0.078-0.141 0.141 0.094 0.109 0.187 0.094 0.156-0.094 0.156-0.156zM20 14c0-4.422-3.578-8-8-8s-8 3.578-8 8c0 3.531 2.297 6.531 5.469 7.594 0.406 0.078 0.547-0.172 0.547-0.391 0-0.187 0-0.812-0.016-1.484 0 0-2.219 0.484-2.688-0.953 0 0-0.359-0.922-0.891-1.156 0 0-0.719-0.5 0.063-0.5 0 0 0.781 0.063 1.219 0.828 0.703 1.234 1.875 0.875 2.328 0.672 0.078-0.516 0.281-0.875 0.516-1.078-1.781-0.203-3.656-0.891-3.656-3.953 0-0.875 0.313-1.578 0.828-2.141-0.078-0.203-0.359-1.016 0.078-2.125 0.672-0.203 2.203 0.828 2.203 0.828 0.641-0.187 1.313-0.266 2-0.266s1.359 0.078 2 0.266c0 0 1.531-1.031 2.203-0.828 0.438 1.109 0.156 1.922 0.078 2.125 0.516 0.562 0.828 1.266 0.828 2.141 0 3.078-1.875 3.75-3.656 3.953 0.281 0.25 0.547 0.734 0.547 1.484 0 1.062-0.016 1.922-0.016 2.188 0 0.219 0.141 0.469 0.547 0.391 3.172-1.062 5.469-4.062 5.469-7.594zM24 6.5v15c0 2.484-2.016 4.5-4.5 4.5h-15c-2.484 0-4.5-2.016-4.5-4.5v-15c0-2.484 2.016-4.5 4.5-4.5h15c2.484 0 4.5 2.016 4.5 4.5z"></path>
+                </svg>
+                <span>GITHUB</span>
+            </a>
+        </div>
     </div>            
 </nav>
 
@@ -52,7 +70,7 @@ nav {
         visibility: hidden;
         z-index: 0;
 
-        @media screen and (min-width: 768px) {
+        @media screen and (min-width: 1024px) {
             display: none;
         }
     }
@@ -63,7 +81,7 @@ nav {
             visibility: visible;
         }
     }
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 1024px) {
 		svg {
 			display: none;
 		}
@@ -79,7 +97,6 @@ nav {
     opacity: 0;
     padding: 32px;
     padding-right: calc(10% + 32px);
-    padding-bottom: 0;
     position: absolute;
     right: 0;
     top: 0;
@@ -99,10 +116,10 @@ nav {
         margin-left: auto
     }
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 1024px) {
         background-color: transparent;
         display: flex;
-        column-gap: 16px;
+        column-gap: 24px;
         flex-direction: row;
         height: auto;
         opacity: 1;
@@ -113,7 +130,7 @@ nav {
     }    
 }
 a {
-    font-size: 48px;
+    font-size: 40px;
     font-family: var(--base-font-family-serif);
     font-weight: 700;
     position: relative;
@@ -138,12 +155,14 @@ a {
     }
 
     &:hover::after {
-        width: 100%;
-        background-color: var(--dark-black);
+        @media screen and (hover: hover) {
+            background-color: var(--dark-black);
+            width: 100%;
+        }
     }
 
-    @media screen and (min-width: 768px) {
-        font-size: 20px;
+    @media screen and (min-width: 1024px) {
+        font-size: 18px;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -153,6 +172,13 @@ a {
     @media (prefers-color-scheme: light) {
         color: var(--dark-black);
     }
-}     
+}
+
+.nav-menu-contact {
+    margin-top: auto;
+    @media screen and (min-width: 1024px) {
+        display: none;
+    }
+}
 
 </style>
