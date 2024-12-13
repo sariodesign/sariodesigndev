@@ -1,9 +1,10 @@
 ---
+import { fade, slide } from 'astro:transitions';
 import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="SarioDesign Front-end developer - Personal website" metaDescription="Rosario Russo Front-end developer personal website">
-	<main>
+	<main transition:name="main" transition:animate={slide()}>
 		<h1 cursor-class="text" id="intro">I'm Rosario Russo also known as SarioDesign<br> Front-end & UI Developer <br>currently based in <span class="evidence">Tuscany</span></h1>
 	</main>
 </Layout>
@@ -42,7 +43,7 @@ import Layout from '../layouts/Layout.astro';
 	h1 {
 		color: #fff;
 		font-size: clamp(1.5rem, 4vw, 3rem);
-		line-height: clamp(2.5rem, 4vw, 4.5rem);
+		line-height: clamp(2.75rem, 4vw, 4.5rem);
 		margin: 0;
 		opacity: 1;
 		text-align: center;

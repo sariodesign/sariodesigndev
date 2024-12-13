@@ -27,7 +27,7 @@ const NavigationLinks:Navigation = [
             <path d="M18.984 6.422l-5.578 5.578 5.578 5.578-1.406 1.406-5.578-5.578-5.578 5.578-1.406-1.406 5.578-5.578-5.578-5.578 1.406-1.406 5.578 5.578 5.578-5.578z"></path>
         </svg>
         { NavigationLinks.map((link, i, arr) => {
-            return <a cursor-class="link" href={link.url} data-astro-reload>{link.label}</a>
+            return <a cursor-class="link" class="link" href={link.url} data-astro-reload>{link.label}</a>
             })
         }
         <div class="nav-menu-contact">
@@ -95,7 +95,7 @@ nav {
     flex-direction: column; 
     height: 100vh;
     opacity: 0;
-    padding: 32px;
+    padding: 32px 16px;
     padding-right: calc(10% + 32px);
     position: absolute;
     right: 0;
@@ -129,7 +129,7 @@ nav {
         visibility: visible;
     }    
 }
-a {
+.link {
     font-size: 40px;
     font-family: var(--base-font-family-serif);
     font-weight: 700;

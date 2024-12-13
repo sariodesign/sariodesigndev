@@ -1,10 +1,10 @@
 ---
+import { fade, slide } from 'astro:transitions';
 import Layout from '../layouts/Layout.astro';
-import myPhoto from '../assets/about-me-photo.jpg';
 ---
 
 <Layout title="About me | SarioDesign" metaDescription="I focused my skills on the basics of front-end development: HTML, CSS and JAVASCRIPT">
-	<main>
+	<main transition:name="main" transition:animate={slide()}>
 		<section>
 			<img cursor-class="photo" class="photo" src="about-me-photo.webp" alt="me" />
 			<div class="about-text">
