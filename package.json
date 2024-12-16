@@ -19,6 +19,9 @@
     "split-type": "^0.3.3"
   },
   "devDependencies": {
-    "splitting": "^1.1.0"
+    "ogl": "^1.0.9",
+    "resolve-lygia": "^1.0.4",
+    "splitting": "^1.1.0",
+    "tweakpane": "^4.0.5"
   }
 }

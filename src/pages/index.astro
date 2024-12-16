@@ -22,13 +22,13 @@ import Layout from '../layouts/Layout.astro';
 		duration: 0.025,
 	})
 
-	gsap.to('.header', {
+	/* gsap.to('.header', {
 		y: 0,
 		opacity: 1,
 		stagger: 0.05,
 		delay: 0.1,
 		duration: .5
-	})
+	}) */
 
 	gsap.to('.footer', {
 		y: 0,
@@ -65,12 +65,12 @@ import Layout from '../layouts/Layout.astro';
 		z-index: -1;
 	}
 
-	.header {
+	/* .header {
 		opacity: 0;
 		position: fixed;
 		transform: translateY(-50px);
 		transition: all .15s;
-	}
+	} */
 
 	main {
 		min-height: 100vh;
@@ -91,5 +91,16 @@ import Layout from '../layouts/Layout.astro';
 		border-radius: 50%;
     z-index: 999;
 	}
+
+	canvas {
+    display: block;
+    background-color: transparent;
+		left: 0;
+		position: absolute;
+		top: 0;
+		z-index: 1;
+  }
 	
 </style>
+
+<script src="../assets/js/main.js"></script>

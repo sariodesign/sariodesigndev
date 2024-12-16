@@ -155,7 +155,19 @@ import Layout from '../layouts/Layout.astro';
 		position: relative;
 		transform: translateY(0);
 	}
+	
+	canvas {
+    display: block;
+    background-color: transparent;
+		left: 0;
+		position: absolute;
+		top: 0;
+		z-index: 1;
+  }
+	
 </style>
+
+<script src="../assets/js/main.js"></script>
 
 <script>
 	import { gsap } from 'gsap'
