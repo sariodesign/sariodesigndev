@@ -1,4 +1,5 @@
 ---
+
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 export interface Props {
@@ -31,7 +32,7 @@ const { title, metaDescription } = Astro.props;
 			<div class="cursor__circle"></div>
 		</div>
 		<Header />
-		<slot/>
+		<slot transition:animate={fade()} />
 		<Footer />
 	</body>
 </html>
@@ -43,6 +44,7 @@ const { title, metaDescription } = Astro.props;
 		--orange: #DD7A4C;
 		--base-font-family: 'Roboto Mono', monospace;
 		--base-font-family-serif: 'Roboto Serif', monospace;
+		--header-bg: rgba(255, 255, 255, 0.85);
 	}
 
 	* {
@@ -97,7 +99,7 @@ const { title, metaDescription } = Astro.props;
 		}
 	}
 
-	@media screen and (min-width: 768px) {
+	@media screen and (min-width: 1024px) {
 		main {
 			min-height: 100vh;
 		}
@@ -113,7 +115,7 @@ const { title, metaDescription } = Astro.props;
     right: 16px;
     width: 48px;
     z-index: 2;
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 1024px) {
         display: none;
     }
 
@@ -163,7 +165,7 @@ const { title, metaDescription } = Astro.props;
 			height: 16px;
 		}
 
-		@media screen and (min-width: 768px) {
+		@media screen and (min-width: 1024px) {
 			.photo .cursor__circle {
 				height: 140px;
 				width: 140px;
@@ -185,6 +187,31 @@ const { title, metaDescription } = Astro.props;
 				width: 100px;
 			}
 
+		}
+	}
+
+	.contact-links {
+		display: none;
+		gap: 16px;
+		
+		@media screen and (min-width: 1024px) {
+				display: flex;
+		}
+	}
+	
+	.contact-link {
+		display: inline-flex;
+		font-size: 14px;
+		gap: 8px;
+		align-items: center;
+		transition: all .25s linear;
+    text-decoration: none;
+
+		@media (prefers-color-scheme: dark) {
+			color: var(--white);
+		}
+		@media (prefers-color-scheme: light) {
+			color: var(--dark-black);
 		}
 	}
 </style>

@@ -1,10 +1,10 @@
 ---
+import { fade, slide } from 'astro:transitions';
 import Layout from '../layouts/Layout.astro';
-import myPhoto from '../assets/about-me-photo.jpg';
 ---
 
 <Layout title="About me | SarioDesign" metaDescription="I focused my skills on the basics of front-end development: HTML, CSS and JAVASCRIPT">
-	<main>
+	<main transition:name="main" transition:animate={slide()}>
 		<section>
 			<img cursor-class="photo" class="photo" src="about-me-photo.webp" alt="me" />
 			<div class="about-text">
@@ -23,11 +23,14 @@ import myPhoto from '../assets/about-me-photo.jpg';
 </Layout>
 
 <style lang="scss" is:global>
+	main {
+		padding-top: 56px;
+	}
 	section {
 		display: flex;
 		flex-direction: column;
 		margin: 0 auto;
-		padding: 32px 16px 0;
+		padding: 32px 16px 100px;
 
 		@media screen and (min-width: 1366px) {
 			max-width: 1200px;
@@ -69,7 +72,7 @@ import myPhoto from '../assets/about-me-photo.jpg';
 		margin: 0 auto;
 		width: 280px;
 
-		@media screen and (min-width: 768px) {
+		@media screen and (min-width: 1024px) {
 			border-radius: 50%;
 			height: 280px;
 		}
@@ -83,6 +86,7 @@ import myPhoto from '../assets/about-me-photo.jpg';
 	.about-text {
 		padding-top: 32px;
 
+
 		.about-cv-link {
 			font-style: normal;
 		}
@@ -94,11 +98,16 @@ import myPhoto from '../assets/about-me-photo.jpg';
 		margin: 0 0 32px;
 
 		@media screen and (min-width: 1366px) {
-			font-size: 20px;
-			line-height: 36px;
 			padding-left: 32px;		
 			width: 100%;
 		}
+
+		@media screen and (min-width: 1680px) {
+			font-size: 20px;
+			line-height: 36px;
+		}
+	}
+
 
 		@media (prefers-color-scheme: dark) {
 			color: var(--white);
@@ -106,6 +115,7 @@ import myPhoto from '../assets/about-me-photo.jpg';
 		@media (prefers-color-scheme: light) {
 			color: var(--dark-black);
 		}
+
 	}
 
 	.line {
@@ -149,7 +159,19 @@ import myPhoto from '../assets/about-me-photo.jpg';
 		position: relative;
 		transform: translateY(0);
 	}
+	
+	canvas {
+    display: block;
+    background-color: transparent;
+		left: 0;
+		position: absolute;
+		top: 0;
+		z-index: 1;
+  }
+	
 </style>
+
+<script src="../assets/js/main.js"></script>
 
 <script>
 	import { gsap } from 'gsap'
@@ -160,18 +182,6 @@ import myPhoto from '../assets/about-me-photo.jpg';
     
 	const ts = new TypeShuffle(textElement);
 	ts.trigger('fx5');
-
-	/* const Intro = new SplitType('.paragraph', {
-		types: 'words,lines'
-	})
-	
-	gsap.from(".word", {
-		opacity: 0,
-		stagger: 0.025,
-		delay: 0.25,
-		y: 20,
-		duration: .05,
-	}) */
 
 	gsap.from('.photo', {
 		delay: 0.125,

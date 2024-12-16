@@ -8,25 +8,39 @@ import Navigation from '../components/Navigation.astro';
 	<Logo />
 	<MenuIcon />
 	<Navigation />
+	<div class="backdrop"></div>
 </header>
 
 <style>
 	.header {
 		align-items: center;
-		background-color: var(--white);
+		background-color: var(--header-bg);
 		display: flex;
 		justify-content: space-between;
-		padding: 32px 16px;
+		left: 0;
+		padding: 8px 16px;
+		position: fixed;
+		top: 0;
 		width: 100%;
 		z-index: 2;
 	}
 	
-	@media screen and (min-width: 768px) {
+	@media screen and (min-width: 1024px) {
 		.header {
-			left: 0;
 			margin-bottom: 0;
-			position: fixed;
-			top: 0;
+			padding: 16px;
 		}
 	}
+
+	.backdrop {
+    position: absolute;
+    inset: 0;
+    height: 200%;
+    backdrop-filter: blur(16px);
+    mask-image: linear-gradient(
+      to bottom,
+      black 0% 50%,
+      transparent 50% 100%
+    );
+  }
 </style>
