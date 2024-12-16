@@ -81,10 +81,11 @@ nav {
             visibility: visible;
         }
     }
+
     @media screen and (min-width: 1024px) {
-		svg {
-			display: none;
-		}
+		  svg {
+			  display: none;
+		  }
 	}
 }
 
@@ -97,6 +98,7 @@ nav {
     opacity: 0;
     padding: 32px 16px;
     padding-right: calc(10% + 32px);
+    padding-bottom: 0;
     position: absolute;
     right: 0;
     top: 0;
@@ -116,6 +118,7 @@ nav {
         margin-left: auto
     }
 
+
     @media screen and (min-width: 1024px) {
         background-color: transparent;
         display: flex;
@@ -129,6 +132,7 @@ nav {
         visibility: visible;
     }    
 }
+
 .link {
     font-size: 40px;
     font-family: var(--base-font-family-serif);
@@ -155,6 +159,7 @@ nav {
     }
 
     &:hover::after {
+
         @media screen and (hover: hover) {
             background-color: var(--dark-black);
             width: 100%;
