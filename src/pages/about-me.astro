@@ -1,12 +1,11 @@
 ---
-import { fade, slide } from 'astro:transitions';
 import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="About me | SarioDesign" metaDescription="I focused my skills on the basics of front-end development: HTML, CSS and JAVASCRIPT">
-	<main transition:name="main" transition:animate={slide()}>
+	<main>
 		<section>
-			<img cursor-class="photo" class="photo" src="about-me-photo.webp" alt="me" />
+			<img cursor-class="photo" class="photo" width="320" height="320" src="about-me-photo.webp" alt="me" />
 			<div class="about-text">
 				<span class="about-text-start">About</span>
 					<div class="paragraphs">
@@ -22,9 +21,32 @@ import Layout from '../layouts/Layout.astro';
 	</main>
 </Layout>
 
+<script>
+	import { gsap } from 'gsap'
+	import { TypeShuffle } from '../assets/js/typeShuffle.js';
+
+	const textElement = document.querySelector('.paragraphs');
+
+	setTimeout(() => {
+		const el = document.querySelector('.paragraphs') as HTMLElement;
+    el.style.visibility = 'visible';
+	}, 300)
+    
+	const ts = new TypeShuffle(textElement);
+	ts.trigger('fx5');
+
+	gsap.set('.photo', { opacity: 0 });
+	gsap.to('.photo', {
+		duration: 1,
+		opacity: 1,
+	})
+</script>
+
 <style lang="scss" is:global>
 	main {
 		padding-top: 56px;
+		position: relative;
+		z-index: 2;
 	}
 	section {
 		display: flex;
@@ -89,6 +111,10 @@ import Layout from '../layouts/Layout.astro';
 		.about-cv-link {
 			font-style: normal;
 		}
+	}
+
+	.paragraphs {
+		visibility: hidden;
 	}
 
 	.paragraph {
@@ -168,20 +194,3 @@ import Layout from '../layouts/Layout.astro';
 </style>
 
 <script src="../assets/js/main.js"></script>
-
-<script>
-	import { gsap } from 'gsap'
-	import SplitType from 'split-type'
-	import { TypeShuffle } from '../assets/js/typeShuffle.js';
-
-	const textElement = document.querySelector('.paragraphs');
-    
-	const ts = new TypeShuffle(textElement);
-	ts.trigger('fx5');
-
-	gsap.from('.photo', {
-		delay: 0.125,
-		duration: 1,
-		rotationY: 90,
-	})
-</script>

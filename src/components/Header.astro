@@ -14,7 +14,7 @@ import Navigation from '../components/Navigation.astro';
 <style>
 	.header {
 		align-items: center;
-		background-color: var(--header-bg);
+		background-color: transparent;
 		display: flex;
 		justify-content: space-between;
 		left: 0;
@@ -22,7 +22,7 @@ import Navigation from '../components/Navigation.astro';
 		position: fixed;
 		top: 0;
 		width: 100%;
-		z-index: 2;
+		z-index: 3;
 	}
 	
 	@media screen and (min-width: 1024px) {
@@ -31,16 +31,4 @@ import Navigation from '../components/Navigation.astro';
 			padding: 16px;
 		}
 	}
-
-	.backdrop {
-    position: absolute;
-    inset: 0;
-    height: 200%;
-    backdrop-filter: blur(16px);
-    mask-image: linear-gradient(
-      to bottom,
-      black 0% 50%,
-      transparent 50% 100%
-    );
-  }
 </style>

@@ -25,15 +25,16 @@ const { title, metaDescription } = Astro.props;
 		</script>
 		<script defer src="/_vercel/insights/script.js"></script>
 		<title>{title}</title>
+		<style>h1{opacity: 0;}</style>
 	</head>
 	<body class="js-body">
 		<div id="cursor">
 			<div class="cursor__circle"></div>
 		</div>
 		<Header />
-		<slot transition:animate={fade()} />
+			<slot />
 		<Footer />
-	</body>
+	</body>	
 </html>
 <style is:global  lang="scss">
 	:root {
@@ -51,6 +52,7 @@ const { title, metaDescription } = Astro.props;
 	}
 
 	html {
+		cursor: none;
 		overflow-x: hidden;
 
 		&.is-locked {
@@ -71,6 +73,16 @@ const { title, metaDescription } = Astro.props;
 
 	body a:hover {
 		cursor: none;
+	}
+
+	#page-overlay {
+		position: fixed;
+		top: 0; left: 0;
+		width: 100%; height: 100%;
+		background-color: var(--orange); /* o il colore che preferisci */
+		z-index: 4;
+		transform: translateX(-100%);
+		pointer-events: none;
 	}
 
 	main {
@@ -213,6 +225,51 @@ const { title, metaDescription } = Astro.props;
 			color: var(--dark-black);
 		}
 	}
+
+	.link {
+    font-size: 40px;
+    font-family: var(--base-font-family-serif);
+    font-weight: 700;
+    position: relative;
+    text-transform: capitalize;
+    text-decoration: none;
+    transition: all .25s ease-in-out;
+
+    &:after {
+        content: '';
+        left: 0;
+        position: absolute;
+        height: 2px;
+        transition: all .25s linear;
+        top: calc(100% - 2px);
+        width: 0;
+    }
+
+    &:hover {
+        cursor: none;
+        //transform: scale(1.1);
+        text-decoration: none;
+    }
+
+    &:hover::after {
+        @media screen and (hover: hover) {
+            background-color: var(--dark-black);
+            width: 100%;
+        }
+    }
+
+    @media screen and (min-width: 1024px) {
+        font-size: 18px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        color: var(--light-gray);
+    }
+
+    @media (prefers-color-scheme: light) {
+        color: var(--dark-black);
+    }
+}
 </style>
 
 <script>
@@ -282,4 +339,5 @@ cursorModifiers.forEach(curosrModifier => {
     cursor.classList.remove(className);
   });
 });
+
 </script>

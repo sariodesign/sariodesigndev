@@ -19,6 +19,7 @@
     "split-type": "^0.3.3"
   },
   "devDependencies": {
+    "@swup/astro": "^1.5.0",
     "ogl": "^1.0.9",
     "resolve-lygia": "^1.0.4",
     "splitting": "^1.1.0"

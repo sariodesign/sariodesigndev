@@ -14,11 +14,11 @@ const NavigationLinks:Navigation = [
     /* {
         label: 'Blog',
         url: '/blog'
-    },
+    }
     {
-        label: 'Playground',
-        url: '/playground'
-    } */
+        label: 'Works',
+        url: '/works'
+    }*/
 ];
 ---
 <nav class="js-menu">
@@ -130,50 +130,6 @@ nav {
         transform: none;
         visibility: visible;
     }    
-}
-.link {
-    font-size: 40px;
-    font-family: var(--base-font-family-serif);
-    font-weight: 700;
-    position: relative;
-    text-transform: capitalize;
-    text-decoration: none;
-    transition: all .25s ease-in-out;
-
-    &:after {
-        content: '';
-        left: 0;
-        position: absolute;
-        height: 2px;
-        transition: all .25s linear;
-        top: calc(100% - 2px);
-        width: 0;
-    }
-
-    &:hover {
-        cursor: none;
-        //transform: scale(1.1);
-        text-decoration: none;
-    }
-
-    &:hover::after {
-        @media screen and (hover: hover) {
-            background-color: var(--dark-black);
-            width: 100%;
-        }
-    }
-
-    @media screen and (min-width: 1024px) {
-        font-size: 18px;
-    }
-
-    @media (prefers-color-scheme: dark) {
-        color: var(--light-gray);
-    }
-
-    @media (prefers-color-scheme: light) {
-        color: var(--dark-black);
-    }
 }
 
 .nav-menu-contact {
