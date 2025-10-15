@@ -11,9 +11,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/ts-plugin": "^1.10.4",
-    "@astrojs/vercel": "^8.0.0",
-    "astro": "^5.0.5",
+    "@astrojs/ts-plugin": "^1.10.5",
+    "@astrojs/vercel": "^8.2.10",
+    "astro": "^5.14.5",
     "gsap": "^3.12.2",
     "sass": "^1.66.1",
     "split-type": "^0.3.3"
