@@ -1,35 +1,106 @@
-// src/scripts/loader.js
-import { gsap } from 'gsap';
+const MIN_VISIBLE_MS = 380;
+const RELOAD_NAV_DELAY_MS = 180;
 
-export function initPageTransition() {
-  const overlay = document.getElementById('page-overlay');
-  if (!overlay) {
-    console.warn('[loader] #page-overlay non trovato');
-    return;
-  }
+const isInternalHref = (href) => {
+	if (!href) {
+		return false;
+	}
 
-  // mostra l’overlay (lo fa “calare” dall’alto)
-  const showOverlay = () =>
-    gsap.to(overlay, { y: 0, duration: 0.5, ease: 'power1.out' });
-  // nasconde l’overlay (lo riporta fuori)
-  const hideOverlay = () =>
-    gsap.to(overlay, { y: '-100%', duration: 0.5, ease: 'power1.in' });
+	if (href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+		return false;
+	}
 
-  // al caricamento della pagina, lo facciamo sparire
-  window.addEventListener('load', hideOverlay);
+	try {
+		const url = new URL(href, window.location.href);
+		return url.origin === window.location.origin;
+	} catch {
+		return false;
+	}
+};
 
-  // ogni click su link interno…
-  document
-    .querySelectorAll('a[href^="/"]')
-    .forEach((link) =>
-      link.addEventListener('click', (e) => {
-        // skip sui click con ctrl/meta/shift o target="_blank"
-        if (e.metaKey || e.ctrlKey || e.shiftKey || link.target === '_blank')
-          return;
-        e.preventDefault();
-        showOverlay();
-        // dopo 500ms navighiamo
-        setTimeout(() => (window.location.href = link.href), 500);
-      })
-    );
+export function initPageLoader() {
+	const loader = document.querySelector('#page-loader');
+	if (!loader) {
+		return;
+	}
+
+	let shownAt = Date.now();
+	let hideTimer = null;
+
+	const showLoader = () => {
+		shownAt = Date.now();
+		if (hideTimer) {
+			window.clearTimeout(hideTimer);
+			hideTimer = null;
+		}
+
+		document.documentElement.classList.add('is-loading-page');
+		loader.classList.remove('is-hidden');
+	};
+
+	const hideLoader = () => {
+		const elapsed = Date.now() - shownAt;
+		const wait = Math.max(MIN_VISIBLE_MS - elapsed, 0);
+
+		if (hideTimer) {
+			window.clearTimeout(hideTimer);
+		}
+
+		hideTimer = window.setTimeout(() => {
+			loader.classList.add('is-hidden');
+			document.documentElement.classList.remove('is-loading-page');
+		}, wait);
+	};
+
+	// First paint loader
+	showLoader();
+
+	if (document.readyState === 'complete') {
+		hideLoader();
+	} else {
+		window.addEventListener('load', hideLoader, { once: true });
+	}
+
+	// Astro SPA lifecycle hooks
+	document.addEventListener('astro:before-preparation', showLoader);
+	document.addEventListener('astro:page-load', hideLoader);
+
+	// Handle clicks early so loader appears before navigation starts.
+	document.addEventListener(
+		'click',
+		(event) => {
+			if (event.defaultPrevented) {
+				return;
+			}
+
+			const anchor = event.target instanceof Element ? event.target.closest('a[href]') : null;
+			if (!anchor) {
+				return;
+			}
+
+			if (
+				event.metaKey ||
+				event.ctrlKey ||
+				event.shiftKey ||
+				event.altKey ||
+				anchor.hasAttribute('download') ||
+				anchor.target === '_blank' ||
+				!isInternalHref(anchor.getAttribute('href'))
+			) {
+				return;
+			}
+
+			showLoader();
+
+			// Links with data-astro-reload do a hard reload: delay it a bit for the loader reveal.
+			if (anchor.hasAttribute('data-astro-reload')) {
+				event.preventDefault();
+				const to = anchor.href;
+				window.setTimeout(() => {
+					window.location.href = to;
+				}, RELOAD_NAV_DELAY_MS);
+			}
+		},
+		{ capture: true }
+	);
 }

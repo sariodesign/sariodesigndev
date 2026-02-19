@@ -1,0 +1,329 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const projects = [
+	{
+		name: "Cohabs",
+		year: "2025",
+		services: "Product design, UX",
+		description: "Booking flow and membership experience for a multi-city housing platform.",
+		preview:
+			"linear-gradient(140deg, #1f2b3a 0%, #4f6a82 55%, #d9dfe8 100%)",
+	},
+	{
+		name: "Luminus",
+		year: "2024",
+		services: "Website, campaign",
+		description: "Campaign-driven website with modular storytelling blocks for marketing teams.",
+		preview:
+			"linear-gradient(140deg, #1b2b67 0%, #3769b3 52%, #9dd2fb 100%)",
+	},
+	{
+		name: "STOW",
+		year: "2024",
+		services: "Brand identity, motion",
+		description: "Brand refresh translated into digital touchpoints and motion language.",
+		preview:
+			"linear-gradient(140deg, #182433 0%, #3f5a73 50%, #f2ad58 100%)",
+	},
+];
+---
+
+<Layout title="Work | SarioDesign" metaDescription="Selected projects and case studies">
+	<main class="work-page">
+		<section class="work-hero">
+			<p class="work-kicker js-work-hero">Selected work</p>
+			<h1 class="work-title">
+				<span class="work-title-wrap">
+					<span class="work-title-line js-work-hero">All Juice&apos;s work.</span>
+				</span>
+			</h1>
+			<p class="work-intro js-work-hero">
+				Three projects, same approach: strong structure, precise interaction design and
+				frontend execution with attention to performance.
+			</p>
+		</section>
+
+		<section class="work-list" aria-label="Projects list">
+			{
+				projects.map((project, index) => (
+					<article class="work-row js-work-row">
+						<button type="button" class="work-row-link" cursor-class="link" aria-label={`Open ${project.name} project`}>
+							<span class="work-row-index">{String(index + 1).padStart(2, "0")}</span>
+							<div class="work-row-main">
+								<h2 class="work-row-title">{project.name}</h2>
+								<p class="work-row-description">{project.description}</p>
+							</div>
+							<div class="work-row-meta">
+								<span>{project.services}</span>
+								<span>{project.year}</span>
+							</div>
+							<span class="work-row-arrow" aria-hidden="true">↗</span>
+							<div class="work-row-preview" style={`background:${project.preview};`} aria-hidden="true"></div>
+						</button>
+					</article>
+				))
+			}
+		</section>
+	</main>
+</Layout>
+
+<script>
+	import { gsap } from "gsap";
+
+	const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+	const heroItems = [...document.querySelectorAll(".js-work-hero")];
+	const rows = [...document.querySelectorAll(".js-work-row")];
+
+	if (!reduceMotion) {
+		gsap
+			.timeline({ delay: 0.1 })
+			.fromTo(
+				heroItems,
+				{ yPercent: 120, rotateX: -16, filter: "blur(8px)", autoAlpha: 0 },
+				{
+					yPercent: 0,
+					rotateX: 0,
+					filter: "blur(0px)",
+					autoAlpha: 1,
+					duration: 0.9,
+					stagger: 0.1,
+					ease: "power4.out",
+				},
+			)
+			.fromTo(
+				rows,
+				{ y: 28, autoAlpha: 0 },
+				{
+					y: 0,
+					autoAlpha: 1,
+					duration: 0.55,
+					stagger: 0.08,
+					ease: "power3.out",
+				},
+				"-=0.35",
+			);
+	}
+</script>
+
+<style lang="scss">
+	.work-page {
+		--work-text: var(--dark-black);
+		--work-muted: #5f6571;
+		--work-border: rgba(16, 32, 32, 0.18);
+		--work-border-hover: rgba(16, 32, 32, 0.36);
+		min-height: 100vh;
+		padding: clamp(82px, 11vh, 122px) 16px 120px;
+		position: relative;
+		z-index: 2;
+	}
+
+	.work-hero {
+		margin-bottom: 24px;
+	}
+
+	.work-kicker {
+		color: var(--orange);
+		font-size: 0.78rem;
+		letter-spacing: 0.14em;
+		margin: 0 0 0.65rem;
+		text-transform: uppercase;
+	}
+
+	.work-title {
+		color: var(--work-text);
+		font-family: var(--base-font-family-serif);
+		font-size: clamp(2rem, 8vw, 5.2rem);
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		line-height: 0.92;
+		margin: 0;
+	}
+
+	.work-title-wrap {
+		display: block;
+		overflow: hidden;
+	}
+
+	.work-title-line {
+		display: inline-block;
+		transform-origin: 50% 100%;
+		will-change: transform, filter, opacity;
+	}
+
+	.work-intro {
+		color: var(--work-muted);
+		font-size: clamp(1rem, 1.7vw, 1.25rem);
+		line-height: 1.45;
+		margin: 1rem 0 0;
+		max-width: 62ch;
+	}
+
+	.work-list {
+		display: block;
+	}
+
+	.work-row {
+		border-top: 1px solid var(--work-border);
+	}
+
+	.work-row:last-child {
+		border-bottom: 1px solid var(--work-border);
+	}
+
+	.work-row-link {
+		align-items: center;
+		background: transparent;
+		border: 0;
+		color: var(--work-text);
+		cursor: pointer;
+		display: grid;
+		gap: 12px;
+		grid-template-columns: 50px minmax(0, 1fr) 220px 28px;
+		min-height: 124px;
+		padding: 24px 0;
+		position: relative;
+		text-align: left;
+		width: 100%;
+	}
+
+	.work-row-index {
+		color: var(--work-muted);
+		font-size: 0.75rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.work-row-main {
+		min-width: 0;
+		padding-right: 8px;
+	}
+
+	.work-row-title {
+		color: var(--work-text);
+		font-family: var(--base-font-family-serif);
+		font-size: clamp(1.4rem, 4vw, 2.65rem);
+		letter-spacing: -0.01em;
+		line-height: 0.98;
+		margin: 0;
+		text-transform: uppercase;
+		transform: translateX(0);
+		transition: transform 0.25s ease;
+	}
+
+	.work-row-description {
+		color: var(--work-muted);
+		font-size: 0.9rem;
+		line-height: 1.4;
+		margin: 0.45rem 0 0;
+		max-width: 48ch;
+	}
+
+	.work-row-meta {
+		color: var(--work-muted);
+		display: flex;
+		flex-direction: column;
+		font-size: 0.72rem;
+		gap: 6px;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+	}
+
+	.work-row-arrow {
+		font-size: 1.2rem;
+		opacity: 0;
+		transform: translate(-6px, 6px);
+		transition: opacity 0.22s ease, transform 0.22s ease;
+	}
+
+	.work-row-preview {
+		border: 1px solid rgba(255, 255, 255, 0.5);
+		border-radius: 14px;
+		box-shadow: 0 14px 24px -18px rgba(0, 0, 0, 0.35);
+		contain: paint;
+		height: 128px;
+		opacity: 0;
+		pointer-events: none;
+		position: absolute;
+		right: 54px;
+		top: 50%;
+		transform: translate3d(24px, -50%, 0) scale(0.98);
+		transition: opacity 0.25s ease, transform 0.3s ease;
+		will-change: transform, opacity;
+		width: 220px;
+	}
+
+	.work-row-link:hover,
+	.work-row-link:focus-visible {
+		.work-row-title {
+			transform: translateX(12px);
+		}
+
+		.work-row-arrow {
+			opacity: 1;
+			transform: translate(0, 0);
+		}
+	}
+
+	.work-row-link:hover .work-row-preview,
+	.work-row-link:focus-visible .work-row-preview {
+		opacity: 1;
+		transform: translate3d(0, -50%, 0) scale(1);
+	}
+
+	.work-row-link:focus-visible {
+		outline: 2px solid var(--orange);
+		outline-offset: -2px;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		.work-page {
+			--work-text: var(--light-gray);
+			--work-muted: #bec2cc;
+			--work-border: rgba(238, 238, 238, 0.2);
+			--work-border-hover: rgba(238, 238, 238, 0.34);
+		}
+
+		.work-row-preview {
+			border-color: rgba(238, 238, 238, 0.22);
+		}
+	}
+
+	@media screen and (max-width: 1023px) {
+		.work-page {
+			padding-top: 74px;
+		}
+
+		.work-row-link {
+			grid-template-columns: 40px minmax(0, 1fr) 24px;
+			min-height: 110px;
+		}
+
+		.work-row-meta {
+			display: none;
+		}
+
+		.work-row-preview {
+			display: none;
+		}
+
+		.work-row-description {
+			font-size: 0.85rem;
+			max-width: 100%;
+		}
+	}
+
+	@media screen and (min-width: 1024px) {
+		.work-page {
+			padding-inline: 24px;
+		}
+
+		.work-row:hover {
+			border-top-color: var(--work-border-hover);
+		}
+
+		.work-row:last-child:hover {
+			border-bottom-color: var(--work-border-hover);
+		}
+	}
+</style>

@@ -1,49 +1,74 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 export interface Props {
 	title: string;
-	metaDescription: string
+	metaDescription: string;
 }
 
 const { title, metaDescription } = Astro.props;
+const isHome =
+	Astro.url.pathname === "/" || Astro.url.pathname === "/index.html";
 ---
 
-<!DOCTYPE html>
-<html lang="en" class="theme-light js-page">
+<!doctype html>
+<html lang="en" class:list={["theme-light", "js-page", isHome && "is-home"]}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto+Serif:opsz,wght@8..144,700&display=swap" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto+Serif:opsz,wght@8..144,700&display=swap"
+			rel="stylesheet"
+		/>
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={metaDescription} />
 		<script>
-			window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+			window.va =
+				window.va ||
+				function () {
+					(window.vaq = window.vaq || []).push(arguments);
+				};
 		</script>
 		<script defer src="/_vercel/insights/script.js"></script>
 		<title>{title}</title>
-		<style>h1{opacity: 0;}</style>
+		<style>
+			h1 {
+				opacity: 0;
+			}
+		</style>
 	</head>
-	<body class="js-body">
-		<div id="cursor">
-			<div class="cursor__circle"></div>
+	<body class:list={["js-body", isHome && "is-home"]}>
+		<div id="page-loader" aria-hidden="true">
+			<div class="page-loader__inner">
+				<span class="page-loader__brand">&lt;sario/design&gt;</span>
+				<span class="page-loader__line">
+					<span class="page-loader__progress"></span>
+				</span>
+			</div>
 		</div>
+		{
+			isHome && (
+				<div id="cursor">
+					<div class="cursor__circle" />
+				</div>
+			)
+		}
 		<Header />
-			<slot />
+		<slot />
 		<Footer />
-	</body>	
+	</body>
 </html>
-<style is:global  lang="scss">
+<style is:global lang="scss">
 	:root {
 		--dark-black: #102020;
 		--light-gray: #eee;
 		--white: #fff;
-		--orange: #DD7A4C;
-		--base-font-family: 'Roboto Mono', monospace;
-		--base-font-family-serif: 'Roboto Serif', monospace;
+		--orange: #dd7a4c;
+		--base-font-family: "Roboto Mono", monospace;
+		--base-font-family-serif: "Roboto Serif", monospace;
 		--header-bg: rgba(255, 255, 255, 0.85);
 	}
 
@@ -52,15 +77,17 @@ const { title, metaDescription } = Astro.props;
 	}
 
 	html {
-		cursor: none;
 		overflow-x: hidden;
 
 		&.is-locked {
 			overflow-y: hidden;
 		}
+
+		&.is-loading-page {
+			overflow: hidden;
+		}
 	}
 	body {
-		cursor: none;
 		font-family: var(--base-font-family);
 		font-size: 16px;
 		margin: 0;
@@ -71,18 +98,96 @@ const { title, metaDescription } = Astro.props;
 		}
 	}
 
-	body a:hover {
+	body.is-home a:hover {
 		cursor: none;
 	}
 
-	#page-overlay {
+	html.is-home,
+	body.is-home {
+		cursor: none;
+	}
+
+	#page-loader {
 		position: fixed;
-		top: 0; left: 0;
-		width: 100%; height: 100%;
-		background-color: var(--orange); /* o il colore che preferisci */
-		z-index: 4;
-		transform: translateX(-100%);
+		inset: 0;
+		align-items: center;
+		background:
+			radial-gradient(
+				circle at 25% 20%,
+				rgba(221, 122, 76, 0.16),
+				transparent 48%
+			),
+			radial-gradient(
+				circle at 75% 80%,
+				rgba(255, 255, 255, 0.06),
+				transparent 52%
+			),
+			linear-gradient(160deg, #0f1f1f 0%, #102020 65%, #182626 100%);
+		display: flex;
+		justify-content: center;
+		opacity: 1;
+		transition:
+			opacity 0.55s ease,
+			visibility 0.55s ease;
+		visibility: visible;
+		z-index: 200;
+	}
+
+	#page-loader.is-hidden {
+		opacity: 0;
 		pointer-events: none;
+		visibility: hidden;
+	}
+
+	.page-loader__inner {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 16px;
+		padding: 0 24px;
+	}
+
+	.page-loader__brand {
+		color: var(--white);
+		font-family: var(--base-font-family);
+		font-size: clamp(20px, 2vw, 30px);
+		letter-spacing: 2px;
+	}
+
+	.page-loader__line {
+		background-color: rgba(255, 255, 255, 0.2);
+		border-radius: 999px;
+		display: block;
+		height: 3px;
+		overflow: hidden;
+		position: relative;
+		width: min(320px, 65vw);
+	}
+
+	.page-loader__progress {
+		animation: loader-progress 1.1s ease-in-out infinite;
+		background: linear-gradient(
+			90deg,
+			transparent,
+			var(--orange),
+			transparent
+		);
+		border-radius: inherit;
+		display: block;
+		height: 100%;
+		left: -40%;
+		position: absolute;
+		top: 0;
+		width: 40%;
+	}
+
+	@keyframes loader-progress {
+		0% {
+			left: -40%;
+		}
+		100% {
+			left: 100%;
+		}
 	}
 
 	main {
@@ -117,28 +222,28 @@ const { title, metaDescription } = Astro.props;
 	}
 
 	.btn-menu {
-    border: 0;
-    bottom: 16px;
-    border-radius: 50%;
-    box-shadow: 0 5px 15px -5px rgba(0,0,0,0.5);
-    height: 48px;
-    position: fixed;
-    right: 16px;
-    width: 48px;
-    z-index: 2;
-    @media screen and (min-width: 1024px) {
-        display: none;
-    }
+		border: 0;
+		bottom: 16px;
+		border-radius: 50%;
+		box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.5);
+		height: 48px;
+		position: fixed;
+		right: 16px;
+		width: 48px;
+		z-index: 2;
+		@media screen and (min-width: 1024px) {
+			display: none;
+		}
 
-    @media (prefers-color-scheme: light) {
-        background-color: var(--dark-black);
+		@media (prefers-color-scheme: light) {
+			background-color: var(--dark-black);
 
-        svg {
-            height: 24px;
-            fill: var(--orange);
-            width: 24px;
-        }
-    }
+			svg {
+				height: 24px;
+				fill: var(--orange);
+				width: 24px;
+			}
+		}
 	}
 
 	#cursor {
@@ -159,7 +264,8 @@ const { title, metaDescription } = Astro.props;
 			margin-top: -50%;
 			margin-left: -50%;
 			border-radius: 50%;
-			transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+			transition:
+				opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1),
 				background-color 0.3s cubic-bezier(0.25, 1, 0.5, 1),
 				border-color 0.3s cubic-bezier(0.25, 1, 0.5, 1),
 				width 0.3s cubic-bezier(0.25, 1, 0.5, 1),
@@ -181,7 +287,6 @@ const { title, metaDescription } = Astro.props;
 				height: 140px;
 				width: 140px;
 			}
-
 		}
 
 		@media screen and (min-width: 1366px) {
@@ -197,26 +302,25 @@ const { title, metaDescription } = Astro.props;
 				height: 40px;
 				width: 100px;
 			}
-
 		}
 	}
 
 	.contact-links {
 		display: none;
 		gap: 16px;
-		
+
 		@media screen and (min-width: 1024px) {
-				display: flex;
+			display: flex;
 		}
 	}
-	
+
 	.contact-link {
 		display: inline-flex;
 		font-size: 14px;
 		gap: 8px;
 		align-items: center;
-		transition: all .25s linear;
-    text-decoration: none;
+		transition: all 0.25s linear;
+		text-decoration: none;
 
 		@media (prefers-color-scheme: dark) {
 			color: var(--white);
@@ -227,117 +331,119 @@ const { title, metaDescription } = Astro.props;
 	}
 
 	.link {
-    font-size: 40px;
-    font-family: var(--base-font-family-serif);
-    font-weight: 700;
-    position: relative;
-    text-transform: capitalize;
-    text-decoration: none;
-    transition: all .25s ease-in-out;
+		font-size: 40px;
+		font-family: var(--base-font-family-serif);
+		font-weight: 700;
+		position: relative;
+		text-transform: capitalize;
+		text-decoration: none;
+		transition: all 0.25s ease-in-out;
 
-    &:after {
-        content: '';
-        left: 0;
-        position: absolute;
-        height: 2px;
-        transition: all .25s linear;
-        top: calc(100% - 2px);
-        width: 0;
-    }
+		&:after {
+			content: "";
+			left: 0;
+			position: absolute;
+			height: 2px;
+			transition: all 0.25s linear;
+			top: calc(100% - 2px);
+			width: 0;
+		}
 
-    &:hover {
-        cursor: none;
-        //transform: scale(1.1);
-        text-decoration: none;
-    }
+		&:hover {
+			//transform: scale(1.1);
+			text-decoration: none;
+		}
 
-    &:hover::after {
-        @media screen and (hover: hover) {
-            background-color: var(--dark-black);
-            width: 100%;
-        }
-    }
+		&:hover::after {
+			@media screen and (hover: hover) {
+				background-color: var(--dark-black);
+				width: 100%;
+			}
+		}
 
-    @media screen and (min-width: 1024px) {
-        font-size: 18px;
-    }
+		@media screen and (min-width: 1024px) {
+			font-size: 18px;
+		}
 
-    @media (prefers-color-scheme: dark) {
-        color: var(--light-gray);
-    }
+		@media (prefers-color-scheme: dark) {
+			color: var(--light-gray);
+		}
 
-    @media (prefers-color-scheme: light) {
-        color: var(--dark-black);
-    }
-}
+		@media (prefers-color-scheme: light) {
+			color: var(--dark-black);
+		}
+	}
 </style>
 
 <script>
-	const cursor = document.querySelector<HTMLElement>('#cursor');
-	const cursorCircle = cursor.querySelector<HTMLElement>('.cursor__circle');
+	import { initPageLoader } from "../assets/js/loader.js";
 
-	const mouse = { x: -100, y: -100 }; // mouse pointer's coordinates
-	const pos = { x: 0, y: 0 }; // cursor's coordinates
-	const speed = 0.1; // between 0 and 1
+	initPageLoader();
 
-	const updateCoordinates = e => {
-		mouse.x = e.clientX;
-		mouse.y = e.clientY;
+	const cursor = document.querySelector<HTMLElement>("#cursor");
+	const cursorCircle = cursor?.querySelector<HTMLElement>(".cursor__circle");
+
+	if (cursor && cursorCircle) {
+		const mouse = { x: -100, y: -100 }; // mouse pointer's coordinates
+		const pos = { x: 0, y: 0 }; // cursor's coordinates
+		const speed = 0.1; // between 0 and 1
+
+		const updateCoordinates = (e) => {
+			mouse.x = e.clientX;
+			mouse.y = e.clientY;
+		};
+
+		window.addEventListener("mousemove", updateCoordinates);
+
+		function getAngle(diffX, diffY) {
+			return (Math.atan2(diffY, diffX) * 180) / Math.PI;
+		}
+
+		function getSqueeze(diffX, diffY) {
+			const distance = Math.sqrt(Math.pow(diffX, 2) + Math.pow(diffY, 2));
+			const maxSqueeze = 0.15;
+			const accelerator = 1500;
+			return Math.min(distance / accelerator, maxSqueeze);
+		}
+
+		const updateCursor = () => {
+			const diffX = Math.round(mouse.x - pos.x);
+			const diffY = Math.round(mouse.y - pos.y);
+
+			pos.x += diffX * speed;
+			pos.y += diffY * speed;
+
+			const angle = getAngle(diffX, diffY);
+			const squeeze = getSqueeze(diffX, diffY);
+
+			const scale = "scale(" + (1 + squeeze) + ", " + (1 - squeeze) + ")";
+			const rotate = "rotate(" + angle + "deg)";
+			const translate =
+				"translate3d(" + pos.x + "px ," + pos.y + "px, 0)";
+
+			cursor.style.transform = translate;
+			cursorCircle.style.transform = rotate + scale;
+		};
+
+		function loop() {
+			updateCursor();
+			requestAnimationFrame(loop);
+		}
+
+		requestAnimationFrame(loop);
+
+		const cursorModifiers = document.querySelectorAll("[cursor-class]");
+
+		cursorModifiers.forEach((curosrModifier) => {
+			curosrModifier.addEventListener("mouseenter", function () {
+				const className = this.getAttribute("cursor-class");
+				cursor.classList.add(className);
+			});
+
+			curosrModifier.addEventListener("mouseleave", function () {
+				const className = this.getAttribute("cursor-class");
+				cursor.classList.remove(className);
+			});
+		});
 	}
-
-	window.addEventListener('mousemove', updateCoordinates);
-
-	function getAngle(diffX, diffY) {
-  return Math.atan2(diffY, diffX) * 180 / Math.PI;
-}
-
-function getSqueeze(diffX, diffY) {
-  const distance = Math.sqrt(
-    Math.pow(diffX, 2) + Math.pow(diffY, 2)
-  );
-  const maxSqueeze = 0.15;
-  const accelerator = 1500;
-  return Math.min(distance / accelerator, maxSqueeze);
-}
-
-
-const updateCursor = () => {
-  const diffX = Math.round(mouse.x - pos.x);
-  const diffY = Math.round(mouse.y - pos.y);
-  
-  pos.x += diffX * speed;
-  pos.y += diffY * speed;
-  
-  const angle = getAngle(diffX, diffY);
-  const squeeze = getSqueeze(diffX, diffY);
-  
-  const scale = 'scale(' + (1 + squeeze) + ', ' + (1 - squeeze) +')';
-  const rotate = 'rotate(' + angle +'deg)';
-  const translate = 'translate3d(' + pos.x + 'px ,' + pos.y + 'px, 0)';
-
-  cursor.style.transform = translate;
-  cursorCircle.style.transform = rotate + scale;
-};
-
-function loop() {
-  updateCursor();
-  requestAnimationFrame(loop);
-}
-
-requestAnimationFrame(loop);
-
-const cursorModifiers = document.querySelectorAll('[cursor-class]');
-
-cursorModifiers.forEach(curosrModifier => {
-  curosrModifier.addEventListener('mouseenter', function() {
-    const className = this.getAttribute('cursor-class');
-    cursor.classList.add(className);
-  });
-  
-  curosrModifier.addEventListener('mouseleave', function() {
-    const className = this.getAttribute('cursor-class');
-    cursor.classList.remove(className);
-  });
-});
-
 </script>
