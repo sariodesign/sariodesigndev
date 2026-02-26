@@ -1,0 +1,209 @@
+---
+import type { Dictionary, LocalizedProject } from "../i18n";
+import { getLocalizedPath, type Locale } from "../i18n/config";
+
+interface Props {
+	dict: Dictionary;
+	project: LocalizedProject;
+	locale: Locale;
+}
+
+const { dict, project, locale } = Astro.props;
+---
+
+<main class="work-detail-page">
+	<section class="work-detail-wrap">
+		<a
+			class="work-detail-back js-detail-reveal"
+			href={getLocalizedPath(locale, "/works")}
+			cursor-class="link"
+		>
+			← {dict.works.backToWorksLabel}
+		</a>
+
+		<h1 class="work-detail-title js-detail-reveal">{project.name}</h1>
+
+		<div class="work-detail-grid">
+			<aside class="work-detail-meta js-detail-reveal">
+				<div class="work-detail-meta-block">
+					<h2>{dict.works.clientLabel}</h2>
+					<p>{project.client}</p>
+				</div>
+
+				<div class="work-detail-meta-block">
+					<h2>{dict.works.techStackLabel}</h2>
+					<p>{project.techStack}</p>
+				</div>
+			</aside>
+
+			<article class="work-detail-story">
+				{
+					project.detailBlocks.map((block) =>
+						block.type === "text" ? (
+							<p class="work-detail-paragraph js-detail-reveal">{block.value}</p>
+						) : (
+							<figure class="work-detail-figure js-detail-reveal">
+								<img
+									class="work-detail-image"
+									src={block.src}
+									alt={block.alt}
+									loading="lazy"
+									decoding="async"
+								/>
+							</figure>
+						),
+					)
+				}
+			</article>
+		</div>
+	</section>
+</main>
+
+<script>
+	import { gsap } from "gsap";
+
+	const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+	const revealItems = [...document.querySelectorAll(".js-detail-reveal")];
+
+	if (!reduceMotion) {
+		gsap.fromTo(
+			revealItems,
+			{ y: 28, autoAlpha: 0 },
+			{
+				y: 0,
+				autoAlpha: 1,
+				duration: 0.55,
+				stagger: 0.08,
+				ease: "power3.out",
+				delay: 0.08,
+			},
+		);
+	}
+</script>
+
+<style lang="scss">
+	.work-detail-page {
+		--work-text: var(--dark-black);
+		--work-muted: #5f6571;
+		--work-border: rgba(16, 32, 32, 0.18);
+		min-height: 100vh;
+		padding: clamp(82px, 11vh, 122px) 16px 120px;
+		position: relative;
+		z-index: 2;
+	}
+
+	.work-detail-wrap {
+		margin: 0 auto;
+		max-width: 1440px;
+	}
+
+	.work-detail-back {
+		color: var(--work-muted);
+		display: inline-flex;
+		font-size: 0.8rem;
+		letter-spacing: 0.1em;
+		margin-bottom: 1rem;
+		text-decoration: none;
+		text-transform: uppercase;
+	}
+
+	.work-detail-title {
+		color: var(--work-text);
+		font-family: var(--base-font-family-serif);
+		font-size: clamp(2rem, 6vw, 4.6rem);
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		line-height: 0.94;
+		margin: 0 0 28px;
+	}
+
+	.work-detail-grid {
+		align-items: start;
+		display: grid;
+		gap: clamp(28px, 4vw, 64px);
+		grid-template-columns: minmax(220px, 20%) minmax(0, 80%);
+	}
+
+	.work-detail-story {
+		min-width: 0;
+	}
+
+	.work-detail-paragraph {
+		color: var(--work-text);
+		font-size: 1rem;
+		line-height: 1.6;
+		margin: 0 0 1.25rem;
+	}
+
+	.work-detail-figure {
+		border: 1px solid var(--work-border);
+		border-radius: 14px;
+		margin: 0 0 1.5rem;
+		overflow: hidden;
+	}
+
+	.work-detail-image {
+		display: block;
+		height: auto;
+		width: 100%;
+	}
+
+	.work-detail-meta {
+		border-right: 1px solid var(--work-border);
+		display: grid;
+		gap: 22px;
+		padding-right: clamp(20px, 2.2vw, 36px);
+		position: sticky;
+		top: 104px;
+	}
+
+	.work-detail-meta-block h2 {
+		color: var(--work-muted);
+		font-family: var(--base-font-family);
+		font-size: 0.72rem;
+		letter-spacing: 0.11em;
+		margin: 0 0 0.5rem;
+		text-transform: uppercase;
+	}
+
+	.work-detail-meta-block p {
+		color: var(--work-text);
+		font-size: 1rem;
+		line-height: 1.55;
+		margin: 0;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		.work-detail-page {
+			--work-text: var(--light-gray);
+			--work-muted: #bec2cc;
+			--work-border: rgba(238, 238, 238, 0.2);
+		}
+	}
+
+	@media screen and (min-width: 1024px) {
+		.work-detail-page {
+			padding-inline: 24px;
+		}
+	}
+
+	@media screen and (max-width: 1023px) {
+		.work-detail-grid {
+			gap: 22px;
+			grid-template-columns: 1fr;
+		}
+
+		.work-detail-meta {
+			border-right: 0;
+			border-top: 1px solid var(--work-border);
+			order: 2;
+			padding-right: 0;
+			padding-top: 18px;
+			position: static;
+		}
+
+		.work-detail-story {
+			order: 1;
+		}
+	}
+</style>

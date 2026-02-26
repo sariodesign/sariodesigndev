@@ -1,0 +1,204 @@
+---
+import type { Dictionary } from "../i18n";
+
+interface Props {
+	dict: Dictionary;
+}
+
+const { dict } = Astro.props;
+const posts = dict.blog.posts;
+---
+
+<main class="blog-page">
+	<section class="blog-list-section js-blog-reveal">
+		<h1>
+			<span class="blog-title-wrap">
+				<span class="blog-title-line js-blog-title"
+					>{dict.blog.heading}</span
+				>
+			</span>
+		</h1>
+		<ul class="blog-list" aria-label={dict.blog.listAriaLabel}>
+			{
+				posts.map((post) => (
+					<li class="blog-item js-blog-item">
+						<article class="blog-entry" cursor-class="text">
+							<div class="blog-entry-meta">
+								<span class="blog-entry-category">
+									{post.category}
+								</span>
+								<span class="blog-entry-date">{post.date}</span>
+								<span class="blog-entry-read-time">
+									{post.readTime}
+								</span>
+							</div>
+							<h2 class="blog-entry-title">{post.title}</h2>
+							<p class="blog-entry-excerpt">{post.excerpt}</p>
+						</article>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+</main>
+
+<script>
+	import { gsap } from "gsap";
+
+	const reduceMotion = window.matchMedia(
+		"(prefers-reduced-motion: reduce)",
+	).matches;
+	const titleLine = document.querySelector(".js-blog-title");
+	const revealItems = [...document.querySelectorAll(".js-blog-reveal")];
+	const cards = [...document.querySelectorAll(".js-blog-item")];
+
+	if (!reduceMotion && titleLine) {
+		gsap.timeline({ delay: 0.1 })
+			.fromTo(
+				titleLine,
+				{
+					yPercent: 120,
+					rotateX: -18,
+					filter: "blur(8px)",
+					opacity: 0,
+				},
+				{
+					yPercent: 0,
+					rotateX: 0,
+					filter: "blur(0px)",
+					opacity: 1,
+					duration: 1,
+					ease: "power4.out",
+				},
+			)
+			.fromTo(
+				revealItems,
+				{ y: 20, opacity: 0 },
+				{
+					y: 0,
+					opacity: 1,
+					duration: 0.52,
+					stagger: 0.08,
+					ease: "power3.out",
+				},
+				"-=0.55",
+			)
+			.fromTo(
+				cards,
+				{ y: 24, opacity: 0 },
+				{
+					y: 0,
+					opacity: 1,
+					duration: 0.45,
+					stagger: 0.08,
+					ease: "power2.out",
+				},
+				"-=0.35",
+			);
+	}
+</script>
+
+<style lang="scss" is:global>
+	.blog-page {
+		--blog-text: var(--dark-black);
+		--blog-muted: #6f6a66;
+		--blog-border: rgba(16, 32, 32, 0.16);
+		display: block;
+		min-height: 100vh;
+		padding: clamp(88px, 10vh, 126px) 16px 132px;
+		position: relative;
+		z-index: 2;
+	}
+
+	.blog-title-wrap {
+		display: block;
+		overflow: hidden;
+	}
+
+	.blog-title-line {
+		color: var(--blog-text);
+		display: block;
+		font-family: var(--base-font-family-serif);
+		font-size: clamp(2rem, 7vw, 5.1rem);
+		font-weight: 700;
+		transform-origin: 50% 100%;
+		will-change: transform, filter, opacity;
+	}
+
+	.blog-list-section {
+		width: 100%;
+		max-width: 1440px;
+		margin: 0 auto;
+	}
+
+	.blog-list-section h1 {
+		margin: 0 0 36px;
+		width: 100%;
+	}
+
+	.blog-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.blog-item {
+		border-bottom: 1px solid var(--blog-border);
+		padding: 18px 0 20px;
+	}
+
+	.blog-entry {
+		display: grid;
+		gap: 0.55rem;
+	}
+
+	.blog-entry-meta {
+		display: flex;
+		align-items: baseline;
+		flex-wrap: wrap;
+		gap: 4px 14px;
+		margin-bottom: 0.7rem;
+	}
+
+	.blog-entry-category {
+		color: var(--orange);
+		font-size: 0.88rem;
+		font-weight: 700;
+		letter-spacing: 0.04em;
+	}
+
+	.blog-entry-date,
+	.blog-entry-read-time {
+		color: var(--blog-muted);
+		font-size: 0.7rem;
+		letter-spacing: 0.04em;
+	}
+
+	.blog-entry-title {
+		color: var(--blog-text);
+		font-family: var(--base-font-family-serif);
+		font-size: clamp(1.15rem, 2.4vw, 1.75rem);
+		line-height: 1.02;
+		margin: 0;
+	}
+
+	.blog-entry-excerpt {
+		color: var(--blog-muted);
+		line-height: 1.6;
+		margin: 0;
+	}
+
+	@media screen and (min-width: 1024px) {
+		.blog-page {
+			padding-inline: 24px;
+		}
+	}
+
+	@media (prefers-color-scheme: dark) {
+		.blog-page {
+			--blog-text: #ebebeb;
+			--blog-muted: #c0c3cb;
+			--blog-border: rgba(238, 238, 238, 0.14);
+		}
+	}
+</style>

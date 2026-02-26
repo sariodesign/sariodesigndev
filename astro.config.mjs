@@ -5,6 +5,7 @@ import swup from '@swup/astro';
 import vercel from '@astrojs/vercel/static';
 
 export default defineConfig({
+  site: 'https://sariodesign.dev',
   router: 'spa',
   adapter: vercel({
     analytics: true

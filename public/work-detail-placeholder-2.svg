@@ -1,0 +1,15 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg2" x1="1500" y1="0" x2="80" y2="980" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#557D8E"/>
+      <stop offset="1" stop-color="#1F4250"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg2)"/>
+  <rect x="88" y="88" width="1424" height="824" rx="20" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width="4"/>
+  <circle cx="170" cy="170" r="18" fill="rgba(255,255,255,0.4)"/>
+  <path d="M152 740L420 490L630 650L880 420L1130 620L1452 340V740H152Z" fill="rgba(255,255,255,0.22)"/>
+  <rect x="154" y="786" width="420" height="20" rx="10" fill="rgba(255,255,255,0.26)"/>
+  <text x="800" y="530" text-anchor="middle" fill="white" font-family="Roboto Mono, monospace" font-size="54" font-weight="700">PROJECT DETAIL PLACEHOLDER</text>
+  <text x="800" y="588" text-anchor="middle" fill="rgba(255,255,255,0.82)" font-family="Roboto Mono, monospace" font-size="24">Replace with real project screenshot</text>
+</svg>

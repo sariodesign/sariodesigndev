@@ -1,0 +1,14 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="1200" y1="0" x2="0" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7B8FA8"/>
+      <stop offset="1" stop-color="#32465E"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect x="56" y="56" width="1088" height="688" rx="20" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="4"/>
+  <circle cx="158" cy="158" r="22" fill="rgba(255,255,255,0.45)"/>
+  <path d="M120 654L340 430L500 570L692 368L888 548L1040 392V654H120Z" fill="rgba(255,255,255,0.25)"/>
+  <text x="600" y="390" text-anchor="middle" fill="white" font-family="Roboto Mono, monospace" font-size="64" font-weight="700">PROJECT PREVIEW</text>
+  <text x="600" y="455" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-family="Roboto Mono, monospace" font-size="28">Replace this image in i18n project data</text>
+</svg>

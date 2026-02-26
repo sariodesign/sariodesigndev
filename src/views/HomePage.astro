@@ -1,0 +1,445 @@
+---
+import { slide } from "astro:transitions";
+import aboutMePhoto from "../assets/about-me-photo.jpg";
+import { defaultLocale, getLocalizedPath, type Locale } from "../i18n/config";
+import type { Dictionary } from "../i18n";
+
+interface Props {
+	dict: Dictionary;
+	locale: Locale;
+}
+
+const { dict, locale } = Astro.props;
+const worksHref =
+	locale === defaultLocale ? "/works" : getLocalizedPath(locale, "/works");
+---
+
+<main transition:name="main" transition:animate={slide()}>
+	<div class="home-intro">
+		<div class="home-photo-wrap">
+			<img
+				class="home-photo"
+				cursor-class="photo-home"
+				src={aboutMePhoto.src}
+				alt={dict.home.photoAlt}
+				width="360"
+				height="360"
+				loading="eager"
+				decoding="async"
+			/>
+		</div>
+		<div class="home-copy">
+			<p class="availability-badge" cursor-class="text">
+				<span class="availability-badge__dot" aria-hidden="true"></span>
+				<span>{dict.home.availability}</span>
+			</p>
+			<h1 cursor-class="text" id="intro">
+				<span class="intro-line-wrap">
+					<span class="intro-line">
+						{dict.home.headingLead}
+						<br /><span class="evidence">{dict.home.headingHighlight}</span>
+						{` ${dict.home.headingTrail}`}
+					</span>
+				</span>
+			</h1>
+				<p id="intro-summary" class="intro-summary" cursor-class="text">
+					<span class="intro-line-wrap">
+						<span class="intro-line">{dict.home.summary}</span>
+					</span>
+				</p>
+				<div class="home-cta">
+					<a
+						class="home-cta__btn home-cta__btn--primary"
+						href={worksHref}
+						data-astro-reload
+						cursor-class="link"
+					>
+						{dict.home.ctaWorks}
+					</a>
+					<a
+						class="home-cta__btn home-cta__btn--secondary"
+						href="mailto:hello@sariodesign.dev"
+						cursor-class="link"
+					>
+						{dict.home.ctaEmail}
+					</a>
+				</div>
+			</div>
+		</div>
+	</main>
+
+<script>
+	import { gsap } from "gsap";
+
+	const intro = document.querySelector("#intro");
+	const introLines = document.querySelectorAll(".intro-line");
+	const availabilityBadge = document.querySelector(".availability-badge");
+	const homePhoto = document.querySelector(".home-photo");
+	const homeCta = document.querySelector(".home-cta");
+
+	if (intro) {
+		gsap.set(intro, { autoAlpha: 1 });
+	}
+	if (homePhoto) {
+		gsap.set(homePhoto, { autoAlpha: 0 });
+	}
+
+	const introTimeline = gsap.timeline({ delay: 0.15 });
+	if (homePhoto) {
+		introTimeline.fromTo(
+			homePhoto,
+			{
+				y: 28,
+				scale: 0.94,
+				rotate: -2.5,
+				autoAlpha: 0,
+			},
+			{
+				y: 0,
+				scale: 1,
+				rotate: 0,
+				autoAlpha: 1,
+				duration: 0.95,
+				ease: "power3.out",
+			},
+			0,
+		);
+	}
+	if (availabilityBadge) {
+		introTimeline.fromTo(
+			availabilityBadge,
+			{
+				y: 14,
+				opacity: 0,
+			},
+			{
+				y: 0,
+				opacity: 1,
+				duration: 0.55,
+				ease: "power3.out",
+			},
+			0.05,
+		);
+	}
+	introTimeline.fromTo(
+		introLines,
+		{
+			yPercent: 120,
+			rotateX: -22,
+			opacity: 0,
+		},
+		{
+			yPercent: 0,
+			rotateX: 0,
+			opacity: 1,
+			stagger: 0.13,
+			duration: 1.05,
+			ease: "power4.out",
+		},
+		0.1,
+	);
+	if (homeCta) {
+		introTimeline.fromTo(
+			homeCta,
+			{
+				y: 12,
+				opacity: 0,
+			},
+			{
+				y: 0,
+				opacity: 1,
+				duration: 0.55,
+				ease: "power2.out",
+			},
+			0.35,
+		);
+	}
+
+	gsap.to(".footer", {
+		y: 0,
+		opacity: 1,
+		stagger: 0.05,
+		delay: 0.2,
+		duration: 0.5,
+	});
+</script>
+
+<style is:global>
+	h1 {
+		color: #fff;
+		font-size: clamp(1.25rem, 4vw, 2.75rem);
+		line-height: clamp(2.75rem, 4vw, 4.5rem);
+		margin: 0;
+		opacity: 0;
+		perspective: 1000px;
+		transition: opacity 0.15s;
+		visibility: visible;
+	}
+
+	.intro-line-wrap {
+		display: block;
+		overflow: hidden;
+	}
+
+	.intro-line {
+		display: block;
+		transform-origin: 50% 100%;
+		will-change: transform, opacity;
+	}
+
+	.intro-summary {
+		font-size: clamp(1.05rem, 1.7vw, 1.45rem);
+		line-height: 1.45;
+		margin: 1.35rem 0 0;
+		max-width: 52ch;
+		opacity: 1;
+	}
+
+	.home-cta {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		margin-top: 1.35rem;
+		opacity: 0;
+		width: min(420px, 100%);
+	}
+
+	.home-cta__btn {
+		align-items: center;
+		border-radius: 12px;
+		display: inline-flex;
+		font-size: clamp(0.95rem, 1.2vw, 1.02rem);
+		font-weight: 700;
+		justify-content: center;
+		min-height: 48px;
+		padding: 0.65rem 1rem;
+		text-decoration: none;
+		transition: transform 0.2s ease, filter 0.2s ease;
+	}
+
+	.home-cta__btn:hover {
+		filter: brightness(0.97);
+		transform: translateY(-1px);
+	}
+
+	.home-cta__btn--primary {
+		background-color: var(--dark-black);
+		border: 1px solid var(--dark-black);
+		color: var(--white);
+	}
+
+	.home-cta__btn--secondary {
+		backdrop-filter: blur(4px);
+		background-color: rgba(255, 255, 255, 0.35);
+		border: 1px solid rgba(16, 32, 32, 0.2);
+		color: var(--dark-black);
+	}
+
+	.availability-badge {
+		align-items: center;
+		backdrop-filter: blur(5px);
+		border: 1px solid transparent;
+		border-radius: 999px;
+		display: inline-flex;
+		font-size: clamp(0.84rem, 1.05vw, 0.94rem);
+		font-weight: 700;
+		gap: 10px;
+		letter-spacing: 0.03em;
+		margin: 0 0 1rem;
+		opacity: 0;
+		padding: 0.5rem 0.95rem;
+		text-transform: uppercase;
+	}
+
+	.availability-badge__dot {
+		animation: badgePulse 1.8s ease-out infinite;
+		border-radius: 50%;
+		display: inline-block;
+		height: 9px;
+		width: 9px;
+	}
+
+	@keyframes badgePulse {
+		0% {
+			box-shadow: 0 0 0 0 rgba(45, 219, 143, 0.45);
+		}
+		70% {
+			box-shadow: 0 0 0 9px rgba(45, 219, 143, 0);
+		}
+		100% {
+			box-shadow: 0 0 0 0 rgba(45, 219, 143, 0);
+		}
+	}
+
+	.intro-summary .intro-line-wrap + .intro-line-wrap {
+		margin-top: 0.12em;
+	}
+
+	.summary-highlight {
+		color: var(--orange);
+		font-weight: 700;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		h1 {
+			color: #fff;
+		}
+
+		.intro-summary {
+			color: #d4d5df;
+		}
+
+		.availability-badge {
+			background: linear-gradient(
+				120deg,
+				rgba(64, 236, 156, 0.12),
+				rgba(38, 147, 95, 0.18)
+			);
+			border-color: rgba(101, 226, 167, 0.35);
+			color: #7cf0ba;
+		}
+
+		.availability-badge__dot {
+			background: #49e6a0;
+		}
+
+		.home-cta__btn--primary {
+			background-color: #f3f4f8;
+			border-color: #f3f4f8;
+			color: #102020;
+		}
+
+		.home-cta__btn--secondary {
+			background-color: rgba(255, 255, 255, 0.08);
+			border-color: rgba(255, 255, 255, 0.2);
+			color: var(--white);
+		}
+	}
+	@media (prefers-color-scheme: light) {
+		h1 {
+			color: var(--dark-black);
+		}
+
+		.intro-summary {
+			color: #505468;
+		}
+
+		.availability-badge {
+			background: linear-gradient(
+				120deg,
+				rgba(16, 170, 108, 0.08),
+				rgba(16, 170, 108, 0.18)
+			);
+			border-color: rgba(16, 170, 108, 0.32);
+			color: #0f8b5a;
+		}
+
+		.availability-badge__dot {
+			background: #0da566;
+		}
+	}
+	.evidence {
+		color: var(--orange);
+		z-index: -1;
+	}
+
+	main {
+		justify-content: center;
+		align-items: center;
+		min-height: 100vh;
+		padding: 0 16px;
+	}
+
+	.home-intro {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		row-gap: 24px;
+		width: 100%;
+	}
+
+	.home-photo-wrap {
+		align-self: center;
+	}
+
+	.home-photo {
+		border-radius: 16px;
+		box-shadow: 0 20px 60px -30px rgba(0, 0, 0, 0.45);
+		display: block;
+		height: auto;
+		width: clamp(220px, 55vw, 320px);
+		will-change: transform, opacity;
+	}
+
+	.home-copy {
+		width: 100%;
+	}
+
+	@media screen and (min-width: 1024px) {
+		main {
+			padding-inline: 24px;
+		}
+
+		.home-intro {
+			align-items: center;
+			column-gap: 56px;
+			display: flex;
+			flex-direction: row-reverse;
+			justify-content: space-between;
+			max-width: 1440px;
+		}
+
+		.home-photo-wrap {
+			align-items: center;
+			display: flex;
+			flex: 0 1 40%;
+			justify-content: center;
+			align-self: auto;
+		}
+
+		.home-photo {
+			width: clamp(260px, 26vw, 360px);
+		}
+
+		.home-copy {
+			align-self: auto;
+			flex: 1 1 60%;
+			max-width: none;
+		}
+
+		.home-cta {
+			flex-direction: row;
+			width: auto;
+		}
+
+		.home-cta__btn {
+			min-width: 170px;
+		}
+	}
+
+	.footer,
+	.btn-menu {
+		opacity: 0;
+		transform: translateY(50px);
+		transition: all 0.15s;
+	}
+
+	.rounded {
+		width: 30px;
+		height: 30px;
+		border: 2px solid #fff;
+		border-radius: 50%;
+		z-index: 999;
+	}
+
+	canvas {
+		display: block;
+		background-color: transparent;
+		left: 0;
+		position: absolute;
+		top: 0;
+		z-index: -1;
+	}
+</style>
+
+<script src="../assets/js/main.js"></script>

@@ -1,18 +1,49 @@
 ---
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import {
+	defaultLocale,
+	getLocalizedPath,
+	locales,
+	normalizePagePath,
+	type Locale,
+} from "../i18n/config";
+
 export interface Props {
 	title: string;
 	metaDescription: string;
+	locale: Locale;
+	pagePath: string;
 }
 
-const { title, metaDescription } = Astro.props;
-const isHome =
-	Astro.url.pathname === "/" || Astro.url.pathname === "/index.html";
+const { title, metaDescription, locale, pagePath } = Astro.props;
+const normalizedPagePath = normalizePagePath(pagePath);
+const pathname = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const isLocalizedHomePath = pathname === getLocalizedPath(locale, "/");
+const isRootDefaultHome =
+	locale === defaultLocale &&
+	normalizedPagePath === "/" &&
+	pathname === "/";
+const isHome = isLocalizedHomePath || isRootDefaultHome;
+
+const canonicalPath = getLocalizedPath(locale, normalizedPagePath);
+const xDefaultPath = getLocalizedPath(defaultLocale, normalizedPagePath);
+
+const alternateLinks = locales.map((altLocale) => ({
+	locale: altLocale,
+	href: getLocalizedPath(altLocale, normalizedPagePath),
+}));
+
+const toAbsoluteUrl = (path: string) => {
+	if (Astro.site) {
+		return new URL(path, Astro.site).toString();
+	}
+	return path;
+};
 ---
 
 <!doctype html>
-<html lang="en" class:list={["theme-light", "js-page", isHome && "is-home"]}>
+<html lang={locale} class:list={["theme-light", "js-page", isHome && "is-home"]}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -25,6 +56,17 @@ const isHome =
 		/>
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={metaDescription} />
+		<link rel="canonical" href={toAbsoluteUrl(canonicalPath)} />
+		{
+			alternateLinks.map((alternate) => (
+				<link
+					rel="alternate"
+					hreflang={alternate.locale}
+					href={toAbsoluteUrl(alternate.href)}
+				/>
+			))
+		}
+		<link rel="alternate" hreflang="x-default" href={toAbsoluteUrl(xDefaultPath)} />
 		<script>
 			window.va =
 				window.va ||
@@ -54,11 +96,11 @@ const isHome =
 				<div id="cursor">
 					<div class="cursor__circle" />
 				</div>
-			)
+				)
 		}
-		<Header />
+		<Header locale={locale} currentPagePath={normalizedPagePath} />
 		<slot />
-		<Footer />
+		<Footer locale={locale} />
 	</body>
 </html>
 <style is:global lang="scss">
@@ -265,11 +307,11 @@ const isHome =
 			margin-left: -50%;
 			border-radius: 50%;
 			transition:
-				opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-				background-color 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-				border-color 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-				width 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-				height 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+				opacity 0.16s cubic-bezier(0.25, 1, 0.5, 1),
+				background-color 0.16s cubic-bezier(0.25, 1, 0.5, 1),
+				border-color 0.16s cubic-bezier(0.25, 1, 0.5, 1),
+				width 0.14s cubic-bezier(0.25, 1, 0.5, 1),
+				height 0.14s cubic-bezier(0.25, 1, 0.5, 1);
 		}
 
 		.text .cursor__circle {
@@ -280,6 +322,12 @@ const isHome =
 		.link .cursor__circle {
 			width: 16px;
 			height: 16px;
+			transition: none;
+		}
+
+		.photo-home .cursor__circle {
+			width: 64px;
+			height: 64px;
 		}
 
 		@media screen and (min-width: 1024px) {
@@ -386,7 +434,7 @@ const isHome =
 	if (cursor && cursorCircle) {
 		const mouse = { x: -100, y: -100 }; // mouse pointer's coordinates
 		const pos = { x: 0, y: 0 }; // cursor's coordinates
-		const speed = 0.1; // between 0 and 1
+		const speed = 0.24; // between 0 and 1
 
 		const updateCoordinates = (e) => {
 			mouse.x = e.clientX;
@@ -406,9 +454,18 @@ const isHome =
 			return Math.min(distance / accelerator, maxSqueeze);
 		}
 
-		const updateCursor = () => {
-			const diffX = Math.round(mouse.x - pos.x);
-			const diffY = Math.round(mouse.y - pos.y);
+			const updateCursor = () => {
+				if (cursor.classList.contains("link")) {
+					pos.x = mouse.x;
+					pos.y = mouse.y;
+					cursor.style.transform =
+						"translate3d(" + pos.x + "px ," + pos.y + "px, 0)";
+					cursorCircle.style.transform = "none";
+					return;
+				}
+
+				const diffX = Math.round(mouse.x - pos.x);
+				const diffY = Math.round(mouse.y - pos.y);
 
 			pos.x += diffX * speed;
 			pos.y += diffY * speed;

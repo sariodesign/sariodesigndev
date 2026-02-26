@@ -1,5 +1,22 @@
+---
+import { getLocalizedPath, type Locale } from "../i18n/config";
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
 <div class="logo">
-	<a class="logo__link" cursor-class="link" href="/" data-astro-reload>{'<sario/design>'}</a>
+	<a
+		class="logo__link"
+		cursor-class="link"
+		href={getLocalizedPath(locale, "/")}
+		data-astro-reload
+	>
+		{"<sario/design>"}
+	</a>
 </div>
 
 <style lang="scss">
@@ -16,9 +33,8 @@
 				color: var(--white);
 			}
 			@media (prefers-color-scheme: light) {
-					color: var(--dark-black);
+				color: var(--dark-black);
 			}
 		}
-
 	}
 </style>

@@ -1,0 +1,17 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg1" x1="1520" y1="60" x2="120" y2="980" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4A5F7B"/>
+      <stop offset="1" stop-color="#1F3146"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg1)"/>
+  <rect x="84" y="84" width="1432" height="832" rx="20" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="4"/>
+  <rect x="154" y="182" width="516" height="42" rx="8" fill="rgba(255,255,255,0.25)"/>
+  <rect x="154" y="252" width="780" height="18" rx="8" fill="rgba(255,255,255,0.18)"/>
+  <rect x="154" y="286" width="710" height="18" rx="8" fill="rgba(255,255,255,0.14)"/>
+  <rect x="154" y="320" width="640" height="18" rx="8" fill="rgba(255,255,255,0.12)"/>
+  <rect x="154" y="418" width="1292" height="360" rx="16" fill="rgba(255,255,255,0.16)"/>
+  <text x="800" y="560" text-anchor="middle" fill="white" font-family="Roboto Mono, monospace" font-size="54" font-weight="700">PROJECT DETAIL PLACEHOLDER</text>
+  <text x="800" y="618" text-anchor="middle" fill="rgba(255,255,255,0.82)" font-family="Roboto Mono, monospace" font-size="24">Replace with real project screenshot</text>
+</svg>

@@ -1,0 +1,32 @@
+---
+import { getDictionary } from "../../i18n";
+import {
+	defaultLocale,
+	isLocale,
+	locales,
+	type Locale,
+} from "../../i18n/config";
+import Layout from "../../layouts/Layout.astro";
+import WorksPage from "../../views/WorksPage.astro";
+
+export function getStaticPaths() {
+	return locales.map((locale) => ({ params: { locale } }));
+}
+
+const paramLocale = Astro.params.locale ?? defaultLocale;
+if (!isLocale(paramLocale)) {
+	return Astro.redirect(`/${defaultLocale}`);
+}
+
+const locale: Locale = paramLocale;
+const dict = getDictionary(locale);
+---
+
+<Layout
+	title={dict.meta.works.title}
+	metaDescription={dict.meta.works.description}
+	locale={locale}
+	pagePath="/works"
+>
+	<WorksPage dict={dict} locale={locale} />
+</Layout>

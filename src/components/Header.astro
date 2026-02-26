@@ -1,13 +1,21 @@
 ---
-import Logo from '../components/Logo.astro';
-import MenuIcon from './MenuIcon.astro';
-import Navigation from '../components/Navigation.astro';
+import Logo from "../components/Logo.astro";
+import MenuIcon from "./MenuIcon.astro";
+import Navigation from "../components/Navigation.astro";
+import { type Locale } from "../i18n/config";
+
+interface Props {
+	locale: Locale;
+	currentPagePath: string;
+}
+
+const { locale, currentPagePath } = Astro.props;
 ---
 
 <header class="header">
-	<Logo />
+	<Logo locale={locale} />
 	<MenuIcon />
-	<Navigation />
+	<Navigation locale={locale} currentPagePath={currentPagePath} />
 	<div class="backdrop"></div>
 </header>
 
@@ -24,7 +32,7 @@ import Navigation from '../components/Navigation.astro';
 		width: 100%;
 		z-index: 3;
 	}
-	
+
 	@media screen and (min-width: 1024px) {
 		.header {
 			margin-bottom: 0;
