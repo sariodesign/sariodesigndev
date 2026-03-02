@@ -47,6 +47,10 @@ export interface Dictionary {
 			title: string;
 			description: string;
 		};
+		services: {
+			title: string;
+			description: string;
+		};
 	};
 	navigation: {
 		works: string;
@@ -81,5 +85,15 @@ export interface Dictionary {
 		techStackLabel: string;
 		backToWorksLabel: string;
 		projects: LocalizedProject[];
+	};
+	services: {
+		heading: string;
+		intro: string;
+		background: string;
+		stackTitle: string;
+		stackItems: string[];
+		toolingTitle: string;
+		toolingItems: string[];
+		lifestyle: string;
 	};
 }

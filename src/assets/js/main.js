@@ -59,6 +59,7 @@ const asciiShaderProgram = new Program(gl, {
 			},
 			uBrightness: { value: 1.00 },
 			uAlpha: { value: 0.5 },
+			uGlyphColor: { value: [0.87, 0.48, 0.30] },
 	},
 });
 

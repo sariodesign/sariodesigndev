@@ -16,6 +16,11 @@ const it: Dictionary = {
 			title: "Works | SarioDesign",
 			description: "Progetti selezionati e case study.",
 		},
+		services: {
+			title: "Servizi | SarioDesign",
+			description:
+				"Profilo e servizi di Rosario Russo: front-end development, UI engineering e stack utilizzato.",
+		},
 	},
 	navigation: {
 		works: "Works",
@@ -29,14 +34,14 @@ const it: Dictionary = {
 	},
 	home: {
 		photoAlt: "Ritratto di Rosario Russo",
-		availability: "Disponibile per freelance",
+		availability: "Parlami del tuo progetto",
 		headingLead: "Progetto e sviluppo interfacce web",
 		headingHighlight: "veloci e intuitive",
 		headingTrail: "su misura.",
 		summary:
 			"Aiuto team e aziende a trasformare idee in siti e web app affidabili, con UI curate, performance solide e accessibilita integrata.",
 		ctaWorks: "Vedi i lavori",
-		ctaEmail: "Scrivimi via email",
+		ctaEmail: "Scopri di più",
 	},
 	blog: {
 		heading: "Progettare prodotti digitali con intenzione.",
@@ -184,6 +189,39 @@ const it: Dictionary = {
 				],
 			},
 		],
+	},
+	services: {
+		heading: "Servizi",
+		intro:
+			"Lavoro nel digitale da circa dieci anni. Ho iniziato dal design e, progetto dopo progetto, mi sono spostato sempre di piu sul codice, lavorando soprattutto in ambito publishing.",
+		background:
+			"Oggi supporto team e aziende su front-end development e UI engineering, con attenzione a performance, accessibilita e qualita del codice.",
+		stackTitle: "Linguaggi e framework",
+		stackItems: [
+			"HTML",
+			"CSS / SCSS",
+			"JavaScript (ES6+)",
+			"TypeScript",
+			"React",
+			"Vue",
+			"Svelte",
+			"Next.js",
+			"Nuxt",
+			"Astro",
+		],
+		toolingTitle: "Tool che utilizzo",
+		toolingItems: [
+			"Git e GitHub",
+			"Figma",
+			"VS Code",
+			"Node.js",
+			"Vite",
+			"Prisma",
+			"Supabase",
+			"PostgreSQL",
+		],
+		lifestyle:
+			"Nel tempo libero porto avanti progetti personali e continuo a sperimentare: tra letture, musica, serie TV e qualche avventura videoludica.",
 	},
 };
 

@@ -5,6 +5,7 @@ precision highp float;
 uniform vec2 uResolution;
 uniform sampler2D uTexture;
 uniform float uAlpha;
+uniform vec3 uGlyphColor;
 
 out vec4 fragColor;
 
@@ -22,9 +23,9 @@ float character(int n, vec2 p) {
 
 void main() {
   vec2 pix = gl_FragCoord.xy;
-  vec3 col = texture(uTexture, floor(pix / 16.0f) * 16.0f / uResolution.xy).rgb;
+  vec3 sourceColor = texture(uTexture, floor(pix / 16.0f) * 16.0f / uResolution.xy).rgb;
 
-  float gray = 0.3f * col.r + 0.59f * col.g + 0.11f * col.b;
+  float gray = 0.3f * sourceColor.r + 0.59f * sourceColor.g + 0.11f * sourceColor.b;
 
   int n = 4096;
 
@@ -44,6 +45,8 @@ void main() {
     n = 11512810; // #
 
   vec2 p = mod(pix / 8.0f, 2.0f) - vec2(1.0f);
-  col = col * character(n, p);
-  fragColor = vec4(col, col.r * uAlpha);
+  float glyph = character(n, p);
+  vec3 glyphColor = uGlyphColor * glyph;
+
+  fragColor = vec4(glyphColor, sourceColor.r * glyph * uAlpha);
 }

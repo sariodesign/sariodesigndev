@@ -16,6 +16,11 @@ const en: Dictionary = {
 			title: "Works | SarioDesign",
 			description: "Selected projects and case studies.",
 		},
+		services: {
+			title: "Services | SarioDesign",
+			description:
+				"Profile and services by Rosario Russo: front-end development, UI engineering, and preferred stack.",
+		},
 	},
 	navigation: {
 		works: "Works",
@@ -36,7 +41,7 @@ const en: Dictionary = {
 		summary:
 			"I help teams turn ideas into reliable websites and web apps with polished UI, strong performance, and accessibility built in.",
 		ctaWorks: "View works",
-		ctaEmail: "Email me",
+		ctaEmail: "Learn more",
 	},
 	blog: {
 		heading: "Building thoughtful digital products.",
@@ -184,6 +189,39 @@ const en: Dictionary = {
 				],
 			},
 		],
+	},
+	services: {
+		heading: "Services",
+		intro:
+			"I have been working in digital products for about ten years. I started in design, then moved step by step into code, mainly across publishing projects.",
+		background:
+			"Today I help teams and companies with front-end development and UI engineering, with a strong focus on performance, accessibility, and maintainable code.",
+		stackTitle: "Languages and frameworks",
+		stackItems: [
+			"HTML",
+			"CSS / SCSS",
+			"JavaScript (ES6+)",
+			"TypeScript",
+			"React",
+			"Vue",
+			"Svelte",
+			"Next.js",
+			"Nuxt",
+			"Astro",
+		],
+		toolingTitle: "Tools I use",
+		toolingItems: [
+			"Git and GitHub",
+			"Figma",
+			"VS Code",
+			"Node.js",
+			"Vite",
+			"Prisma",
+			"Supabase",
+			"PostgreSQL",
+		],
+		lifestyle:
+			"In my free time I keep personal projects alive and keep exploring new ecosystems, together with books, music, TV series, and video game adventures.",
 	},
 };
 

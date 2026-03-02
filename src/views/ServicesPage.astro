@@ -1,0 +1,189 @@
+---
+import type { Dictionary } from "../i18n";
+
+interface Props {
+	dict: Dictionary;
+}
+
+const { dict } = Astro.props;
+---
+
+<main class="services-page">
+	<section class="services-content">
+		<h1>
+			<span class="services-title-wrap">
+				<span class="services-title-line js-services-title"
+					>{dict.services.heading}</span
+				>
+			</span>
+		</h1>
+		<div class="services-body">
+			<p class="services-paragraph js-services-item">{dict.services.intro}</p>
+			<p class="services-paragraph js-services-item">
+				{dict.services.background}
+			</p>
+			<section class="services-block js-services-item">
+				<h2>{dict.services.stackTitle}</h2>
+				<ul class="services-chip-list">
+					{
+						dict.services.stackItems.map((item) => (
+							<li class="services-chip">{item}</li>
+						))
+					}
+				</ul>
+			</section>
+			<section class="services-block js-services-item">
+				<h2>{dict.services.toolingTitle}</h2>
+				<ul class="services-chip-list">
+					{
+						dict.services.toolingItems.map((item) => (
+							<li class="services-chip">{item}</li>
+						))
+					}
+				</ul>
+			</section>
+			<p class="services-paragraph js-services-item">{dict.services.lifestyle}</p>
+		</div>
+	</section>
+</main>
+
+<script>
+	import { gsap } from "gsap";
+
+	const reduceMotion = window.matchMedia(
+		"(prefers-reduced-motion: reduce)",
+	).matches;
+	const titleLine = document.querySelector(".js-services-title");
+	const revealItems = [...document.querySelectorAll(".js-services-item")];
+
+	if (!reduceMotion) {
+		const tl = gsap.timeline({ delay: 0.1 });
+		if (titleLine) {
+			tl.fromTo(
+				titleLine,
+				{
+					yPercent: 120,
+					rotateX: -18,
+					filter: "blur(8px)",
+					opacity: 0,
+				},
+				{
+					yPercent: 0,
+					rotateX: 0,
+					filter: "blur(0px)",
+					opacity: 1,
+					duration: 1,
+					ease: "power4.out",
+				},
+			);
+		}
+		tl.fromTo(
+			revealItems,
+			{ y: 22, opacity: 0 },
+			{
+				y: 0,
+				opacity: 1,
+				duration: 0.5,
+				stagger: 0.08,
+				ease: "power3.out",
+			},
+			"-=0.55",
+		);
+	}
+</script>
+
+<style lang="scss">
+	.services-page {
+		--services-text: var(--dark-black);
+		--services-muted: #5f6571;
+		--services-border: rgba(16, 32, 32, 0.16);
+		display: block;
+		min-height: 100vh;
+		padding: clamp(88px, 10vh, 126px) 16px 132px;
+		position: relative;
+		z-index: 2;
+	}
+
+	.services-content {
+		margin: 0 auto;
+		max-width: 1440px;
+		width: 100%;
+	}
+
+	.services-content h1 {
+		margin: 0 0 34px;
+	}
+
+	.services-title-wrap {
+		display: block;
+		overflow: hidden;
+	}
+
+	.services-title-line {
+		color: var(--services-text);
+		display: block;
+		font-family: var(--base-font-family-serif);
+		font-size: clamp(2rem, 7vw, 5.1rem);
+		font-weight: 700;
+		transform-origin: 50% 100%;
+		will-change: transform, filter, opacity;
+	}
+
+	.services-body {
+		display: grid;
+		gap: 18px;
+		max-width: 860px;
+	}
+
+	.services-paragraph {
+		color: var(--services-muted);
+		line-height: 1.7;
+		margin: 0;
+	}
+
+	.services-block {
+		border-top: 1px solid var(--services-border);
+		padding-top: 16px;
+	}
+
+	.services-block h2 {
+		color: var(--services-text);
+		font-family: var(--base-font-family-serif);
+		font-size: clamp(1.2rem, 2.4vw, 1.75rem);
+		line-height: 1.1;
+		margin: 0 0 10px;
+	}
+
+	.services-chip-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.services-chip {
+		border: 1px solid var(--services-border);
+		border-radius: 999px;
+		color: var(--services-text);
+		font-size: 0.76rem;
+		font-weight: 700;
+		letter-spacing: 0.03em;
+		padding: 0.45rem 0.7rem;
+	}
+
+	@media screen and (min-width: 1024px) {
+		.services-page {
+			padding-inline: 24px;
+		}
+	}
+
+	@media (prefers-color-scheme: dark) {
+		.services-page {
+			--services-text: #ebebeb;
+			--services-muted: #c0c3cb;
+			--services-border: rgba(238, 238, 238, 0.14);
+		}
+	}
+</style>

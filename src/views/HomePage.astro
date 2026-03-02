@@ -12,6 +12,10 @@ interface Props {
 const { dict, locale } = Astro.props;
 const worksHref =
 	locale === defaultLocale ? "/works" : getLocalizedPath(locale, "/works");
+const servicesHref =
+	locale === defaultLocale
+		? "/services"
+		: getLocalizedPath(locale, "/services");
 ---
 
 <main transition:name="main" transition:animate={slide()}>
@@ -29,10 +33,14 @@ const worksHref =
 			/>
 		</div>
 		<div class="home-copy">
-			<p class="availability-badge" cursor-class="text">
+			<a
+				class="availability-badge"
+				href="mailto:hello@sariodesign.dev"
+				cursor-class="link"
+			>
 				<span class="availability-badge__dot" aria-hidden="true"></span>
 				<span>{dict.home.availability}</span>
-			</p>
+			</a>
 			<h1 cursor-class="text" id="intro">
 				<span class="intro-line-wrap">
 					<span class="intro-line">
@@ -58,7 +66,8 @@ const worksHref =
 					</a>
 					<a
 						class="home-cta__btn home-cta__btn--secondary"
-						href="mailto:hello@sariodesign.dev"
+						href={servicesHref}
+						data-astro-reload
 						cursor-class="link"
 					>
 						{dict.home.ctaEmail}
@@ -248,6 +257,7 @@ const worksHref =
 		margin: 0 0 1rem;
 		opacity: 0;
 		padding: 0.5rem 0.95rem;
+		text-decoration: none;
 		text-transform: uppercase;
 	}
 
