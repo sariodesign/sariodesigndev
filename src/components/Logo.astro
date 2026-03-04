@@ -28,7 +28,17 @@ const { locale } = Astro.props;
 		z-index: 1;
 
 		&__link {
+			align-items: center;
+			display: inline-flex;
+			min-height: 44px;
+			padding: 4px 0;
 			text-decoration: none;
+
+			&:focus-visible {
+				outline: 3px solid rgba(221, 122, 76, 0.7);
+				outline-offset: 4px;
+			}
+
 			@media (prefers-color-scheme: dark) {
 				color: var(--white);
 			}

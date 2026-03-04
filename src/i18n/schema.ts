@@ -33,6 +33,11 @@ export interface LocalizedProject {
 	detailBlocks: LocalizedProjectDetailBlock[];
 }
 
+export interface LocalizedHomeOffer {
+	title: string;
+	description: string;
+}
+
 export interface Dictionary {
 	meta: {
 		home: {
@@ -53,8 +58,12 @@ export interface Dictionary {
 		};
 	};
 	navigation: {
+		home: string;
 		works: string;
+		services: string;
 		blog: string;
+		menu: string;
+		openMenuAria: string;
 		switchLanguage: string;
 		closeMenuAria: string;
 	};
@@ -65,10 +74,16 @@ export interface Dictionary {
 	home: {
 		photoAlt: string;
 		availability: string;
-		headingLead: string;
-		headingHighlight: string;
-		headingTrail: string;
-		summary: string;
+		headingStart: string;
+		headingHighlightFast: string;
+		headingMiddle: string;
+		headingHighlightEasy: string;
+		headingEnd: string;
+		headingTags: string[];
+		valueEyebrow: string;
+		offers: LocalizedHomeOffer[];
+		stackLabel: string;
+		stackItems: string[];
 		ctaWorks: string;
 		ctaEmail: string;
 	};

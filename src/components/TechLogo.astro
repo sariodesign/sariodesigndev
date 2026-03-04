@@ -1,0 +1,31 @@
+---
+interface Props {
+	name: string;
+}
+
+const { name } = Astro.props;
+
+const iconSlugByName: Record<string, string> = {
+	TypeScript: "typescript",
+	"Next.js": "nextdotjs",
+	Nuxt: "nuxt",
+	Tailwind: "tailwindcss",
+	"Node.js": "nodedotjs",
+	Supabase: "supabase",
+};
+
+const slug = iconSlugByName[name];
+const src = slug
+	? `https://cdn.simpleicons.org/${slug}/102020/f3f4f8?viewbox=auto`
+	: null;
+---
+
+{
+	src ? (
+		<img class="tech-logo__img" src={src} alt={name} loading="eager" decoding="async" />
+	) : (
+		<span class="tech-logo__fallback" aria-label={name} title={name}>
+			{name.slice(0, 2)}
+		</span>
+	)
+}

@@ -23,8 +23,12 @@ const it: Dictionary = {
 		},
 	},
 	navigation: {
+		home: "Home",
 		works: "Works",
+		services: "Servizi",
 		blog: "Blog",
+		menu: "Menu",
+		openMenuAria: "Apri menu",
 		switchLanguage: "Passa a",
 		closeMenuAria: "Chiudi menu",
 	},
@@ -35,11 +39,39 @@ const it: Dictionary = {
 	home: {
 		photoAlt: "Ritratto di Rosario Russo",
 		availability: "Parlami del tuo progetto",
-		headingLead: "Progetto e sviluppo interfacce web",
-		headingHighlight: "veloci e intuitive",
-		headingTrail: "su misura.",
-		summary:
-			"Aiuto team e aziende a trasformare idee in siti e web app affidabili, con UI curate, performance solide e accessibilita integrata.",
+		headingStart: "Sviluppo interfacce web",
+		headingHighlightFast: "veloci",
+		headingMiddle: "e",
+		headingHighlightEasy: "facili",
+		headingEnd: "da usare",
+		headingTags: ["Web App", "Portali", "SaaS", "E-commerce"],
+		valueEyebrow: "Come posso aiutarti",
+		offers: [
+			{
+				title: "UI Development",
+				description:
+					"Interfacce front-end moderne, responsive e pronte per la produzione.",
+			},
+			{
+				title: "Design Systems",
+				description:
+					"Componenti riusabili e pattern coerenti per prodotti che devono scalare.",
+			},
+			{
+				title: "Performance & Accessibilita",
+				description:
+					"Ottimizzazioni concrete su velocita, semantica e qualita dell'esperienza.",
+			},
+		],
+		stackLabel: "Stack ricorrente",
+		stackItems: [
+			"TypeScript",
+			"Next.js",
+			"Nuxt",
+			"Tailwind",
+			"Node.js",
+			"Supabase",
+		],
 		ctaWorks: "Vedi i lavori",
 		ctaEmail: "Scopri di più",
 	},

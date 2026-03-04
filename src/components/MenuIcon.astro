@@ -1,46 +1,97 @@
+---
+import { getDictionary } from "../i18n";
+import { type Locale } from "../i18n/config";
 
+interface Props {
+	locale: Locale;
+}
 
-<div class="menu-icon js-menu-icon">
-	<svg width="40" height="40" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-		<rect x="16" y="16" width="32" height="6" rx="2" />
-		<rect x="12" y="29" width="40" height="6" rx="2" />
-		<rect x="16" y="42" width="32" height="6" rx="2" />
-	</svg>
-</div>
+const { locale } = Astro.props;
+const dict = getDictionary(locale);
+---
 
-<style>
-	.menu-icon {
-		display: flex;
+<button
+	type="button"
+	class="menu-trigger js-menu-trigger"
+	aria-label={dict.navigation.openMenuAria}
+	aria-controls="mobile-navigation"
+	aria-expanded="false"
+>
+	<span class="menu-trigger__label">{dict.navigation.menu}</span>
+	<span class="menu-trigger__icon" aria-hidden="true">
+		<span></span>
+		<span></span>
+	</span>
+</button>
+
+<style lang="scss">
+	.menu-trigger {
 		align-items: center;
+		backdrop-filter: blur(12px);
+		border-radius: 999px;
+		border: 1px solid rgba(16, 32, 32, 0.12);
+		bottom: calc(16px + env(safe-area-inset-bottom));
+		box-shadow: 0 20px 45px -28px rgba(0, 0, 0, 0.35);
+		display: inline-flex;
+		gap: 12px;
+		height: 56px;
 		justify-content: center;
-		margin-left: auto;
-		z-index: 1;
-	}
+		left: 50%;
+		padding: 0 18px;
+		position: fixed;
+		transform: translateX(-50%);
+		transition:
+			transform 0.25s ease,
+			opacity 0.2s ease,
+			background-color 0.2s ease,
+			border-color 0.2s ease;
+		z-index: 8;
 
-	@media screen and (min-width: 1024px) {
-		svg {
+		@media screen and (min-width: 1024px) {
 			display: none;
 		}
-	}
 
-	@media (prefers-color-scheme: dark) {
-		svg {
-			fill: var(--light-gray) 
+		@media (prefers-color-scheme: dark) {
+			background-color: rgba(16, 32, 32, 0.78);
+			color: var(--white);
+		}
+
+		@media (prefers-color-scheme: light) {
+			background-color: rgba(255, 255, 255, 0.88);
+			color: var(--dark-black);
 		}
 	}
 
-	@media (prefers-color-scheme: light) {
-		svg {
-			fill: var(--dark-black) 
-		}
+	.menu-trigger.is-opened {
+		opacity: 0;
+		pointer-events: none;
+		transform: translate(-50%, 12px);
+	}
+
+	.menu-trigger__label {
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		line-height: 1;
+		text-transform: uppercase;
+	}
+
+	.menu-trigger__icon {
+		display: grid;
+		gap: 5px;
+		width: 18px;
+	}
+
+	.menu-trigger__icon span {
+		background-color: currentColor;
+		border-radius: 999px;
+		display: block;
+		height: 2px;
+		width: 18px;
+	}
+
+	.menu-trigger:focus-visible {
+		outline: 3px solid rgba(221, 122, 76, 0.7);
+		outline-offset: 3px;
 	}
 </style>
-
-<script>
-	const menu = document.querySelector('.js-menu');
-	const btnIconMenu = document.querySelector('.js-menu-icon');
-	
-	btnIconMenu.addEventListener('click', () => {
-		menu.classList.add('is-opened')
-	})
-</script>

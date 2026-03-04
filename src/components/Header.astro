@@ -14,23 +14,28 @@ const { locale, currentPagePath } = Astro.props;
 
 <header class="header">
 	<Logo locale={locale} />
-	<MenuIcon />
+	<MenuIcon locale={locale} />
 	<Navigation locale={locale} currentPagePath={currentPagePath} />
-	<div class="backdrop"></div>
 </header>
 
-<style>
+<style lang="scss">
 	.header {
 		align-items: center;
 		background-color: transparent;
 		display: flex;
 		justify-content: space-between;
 		left: 0;
-		padding: 8px 16px;
+		padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
 		position: fixed;
 		top: 0;
 		width: 100%;
 		z-index: 3;
+	}
+
+	:global(body) {
+		@media screen and (max-width: 1023px) {
+			padding-bottom: calc(92px + env(safe-area-inset-bottom));
+		}
 	}
 
 	@media screen and (min-width: 1024px) {

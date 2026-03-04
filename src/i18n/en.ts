@@ -23,8 +23,12 @@ const en: Dictionary = {
 		},
 	},
 	navigation: {
+		home: "Home",
 		works: "Works",
+		services: "Services",
 		blog: "Blog",
+		menu: "Menu",
+		openMenuAria: "Open menu",
 		switchLanguage: "Switch to",
 		closeMenuAria: "Close menu",
 	},
@@ -35,11 +39,39 @@ const en: Dictionary = {
 	home: {
 		photoAlt: "Portrait of Rosario Russo",
 		availability: "Available for freelance",
-		headingLead: "I design and build fast,",
-		headingHighlight: "easy-to-use",
-		headingTrail: "web interfaces.",
-		summary:
-			"I help teams turn ideas into reliable websites and web apps with polished UI, strong performance, and accessibility built in.",
+		headingStart: "I build web interfaces that are",
+		headingHighlightFast: "fast",
+		headingMiddle: "and",
+		headingHighlightEasy: "easy",
+		headingEnd: "to use",
+		headingTags: ["Web Apps", "Portals", "SaaS", "E-commerce"],
+		valueEyebrow: "How I can help",
+		offers: [
+			{
+				title: "UI Development",
+				description:
+					"Modern, responsive front-end interfaces built to ship and last.",
+			},
+			{
+				title: "Design Systems",
+				description:
+					"Reusable components and clear patterns for products that need to scale.",
+			},
+			{
+				title: "Performance & Accessibility",
+				description:
+					"Practical improvements across speed, semantics, and inclusive UX.",
+			},
+		],
+		stackLabel: "Frequently used stack",
+		stackItems: [
+			"TypeScript",
+			"Next.js",
+			"Nuxt",
+			"Tailwind",
+			"Node.js",
+			"Supabase",
+		],
 		ctaWorks: "View works",
 		ctaEmail: "Learn more",
 	},

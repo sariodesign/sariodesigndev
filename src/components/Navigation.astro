@@ -11,6 +11,7 @@ import {
 interface Link {
 	label: string;
 	url: string;
+	mobileOnly?: boolean;
 }
 
 interface Props {
@@ -24,13 +25,23 @@ const targetLocale = getOppositeLocale(locale);
 
 const navigationLinks: Link[] = [
 	{
+		label: dict.navigation.home,
+		url: getLocalizedPath(locale, "/"),
+		mobileOnly: true,
+	},
+	{
 		label: dict.navigation.works,
 		url: getLocalizedPath(locale, "/works"),
 	},
-	// {
-	// 	label: dict.navigation.blog,
-	// 	url: getLocalizedPath(locale, "/blog"),
-	// },
+	{
+		label: dict.navigation.services,
+		url: getLocalizedPath(locale, "/services"),
+		mobileOnly: true,
+	},
+	{
+		label: dict.navigation.blog,
+		url: getLocalizedPath(locale, "/blog"),
+	},
 ];
 
 const languageSwitchHref = getLocalizedPath(targetLocale, currentPagePath);
@@ -38,193 +49,505 @@ const languageSwitchLabel = localeLabels[targetLocale];
 const languageSwitchName = localeNames[targetLocale];
 ---
 
-<nav class="js-menu">
-	<div class="nav-menu">
-		<button
-			type="button"
-			class="nav-menu-close js-close-menu"
-			aria-label={dict.navigation.closeMenuAria}
-		>
-			<svg width="48" height="48" viewBox="0 0 24 24">
-				<path
-					d="M18.984 6.422l-5.578 5.578 5.578 5.578-1.406 1.406-5.578-5.578-5.578 5.578-1.406-1.406 5.578-5.578-5.578-5.578 1.406-1.406 5.578 5.578 5.578-5.578z"
-				></path>
-			</svg>
-		</button>
-		{
-			navigationLinks.map((link) => (
-				<a cursor-class="link" class="link" href={link.url} data-astro-reload>
-					{link.label}
+<nav class="site-nav js-menu" aria-label={dict.navigation.menu}>
+	<div class="nav-overlay js-menu-overlay" aria-hidden="true"></div>
+	<div class="nav-menu js-nav-panel" id="mobile-navigation" aria-hidden="true">
+		<div class="nav-menu__handle" aria-hidden="true"></div>
+		<div class="nav-menu__top">
+			<p class="nav-menu__eyebrow">{dict.navigation.menu}</p>
+			<button
+				type="button"
+				class="nav-menu-close js-close-menu"
+				aria-label={dict.navigation.closeMenuAria}
+			>
+				<span class="nav-menu-close__icon" aria-hidden="true"></span>
+				<span class="nav-menu-close__label">{dict.navigation.closeMenuAria}</span>
+			</button>
+		</div>
+		<div class="nav-menu__links">
+			{
+				navigationLinks.map((link) => (
+					<a
+						cursor-class="link"
+						class:list={[
+							"nav-link",
+							"js-nav-link",
+							link.mobileOnly && "nav-link--mobile-only",
+						]}
+						href={link.url}
+						data-astro-reload
+					>
+						{link.label}
+					</a>
+				))
+			}
+		</div>
+		<div class="nav-menu__meta">
+			<a
+				class="lang-switch"
+				cursor-class="link"
+				href={languageSwitchHref}
+				data-astro-reload
+				aria-label={`${dict.navigation.switchLanguage} ${languageSwitchName}`}
+			>
+				<span class="lang-switch__label">{dict.navigation.switchLanguage}</span>
+				<span class="lang-switch__value">{languageSwitchLabel}</span>
+			</a>
+			<div class="nav-menu-contact">
+				<a
+					class="contact-link"
+					cursor-class="link"
+					href="https://www.linkedin.com/in/sariodesign/"
+					target="_blank"
+					rel="noreferrer"
+				>
+					<svg width="24" viewBox="0 0 24 28" aria-hidden="true">
+						<path
+							d="M3.703 22.094h3.609v-10.844h-3.609v10.844zM7.547 7.906c-0.016-1.062-0.781-1.875-2.016-1.875s-2.047 0.812-2.047 1.875c0 1.031 0.781 1.875 2 1.875h0.016c1.266 0 2.047-0.844 2.047-1.875zM16.688 22.094h3.609v-6.219c0-3.328-1.781-4.875-4.156-4.875-1.937 0-2.797 1.078-3.266 1.828h0.031v-1.578h-3.609s0.047 1.016 0 10.844v0h3.609v-6.062c0-0.313 0.016-0.641 0.109-0.875 0.266-0.641 0.859-1.313 1.859-1.313 1.297 0 1.813 0.984 1.813 2.453v5.797zM24 6.5v15c0 2.484-2.016 4.5-4.5 4.5h-15c-2.484 0-4.5-2.016-4.5-4.5v-15c0-2.484 2.016-4.5 4.5-4.5h15c2.484 0 4.5 2.016 4.5 4.5z"
+						></path>
+					</svg>
+					<span>{dict.footer.linkedin}</span>
 				</a>
-			))
-		}
-		<a
-			class="lang-switch"
-			cursor-class="link"
-			href={languageSwitchHref}
-			data-astro-reload
-			aria-label={`${dict.navigation.switchLanguage} ${languageSwitchName}`}
-		>
-			{languageSwitchLabel}
-		</a>
-		<div class="nav-menu-contact">
-			<a
-				class="contact-link"
-				cursor-class="link"
-				href="https://www.linkedin.com/in/sariodesign/"
-				target="_blank"
-				rel="noreferrer"
-			>
-				<svg width="32" viewBox="0 0 24 28">
-					<path
-						d="M3.703 22.094h3.609v-10.844h-3.609v10.844zM7.547 7.906c-0.016-1.062-0.781-1.875-2.016-1.875s-2.047 0.812-2.047 1.875c0 1.031 0.781 1.875 2 1.875h0.016c1.266 0 2.047-0.844 2.047-1.875zM16.688 22.094h3.609v-6.219c0-3.328-1.781-4.875-4.156-4.875-1.937 0-2.797 1.078-3.266 1.828h0.031v-1.578h-3.609s0.047 1.016 0 10.844v0h3.609v-6.062c0-0.313 0.016-0.641 0.109-0.875 0.266-0.641 0.859-1.313 1.859-1.313 1.297 0 1.813 0.984 1.813 2.453v5.797zM24 6.5v15c0 2.484-2.016 4.5-4.5 4.5h-15c-2.484 0-4.5-2.016-4.5-4.5v-15c0-2.484 2.016-4.5 4.5-4.5h15c2.484 0 4.5 2.016 4.5 4.5z"
-					></path>
-				</svg>
-				<span>{dict.footer.linkedin}</span>
-			</a>
-			<a
-				class="contact-link"
-				cursor-class="link"
-				href="https://github.com/sariodesign"
-				target="_blank"
-				rel="noreferrer"
-			>
-				<svg width="32" viewBox="0 0 24 28">
-					<path
-						d="M8.109 18.75v0c0.031-0.047 0.016-0.141-0.047-0.203-0.078-0.063-0.172-0.078-0.219-0.031-0.031 0.047-0.016 0.141 0.047 0.203 0.078 0.063 0.172 0.078 0.219 0.031zM7.672 18.109c-0.047-0.063-0.125-0.094-0.187-0.063-0.047 0.031-0.047 0.125 0 0.187 0.063 0.078 0.141 0.109 0.187 0.078v0c0.047-0.031 0.047-0.125 0-0.203zM7.031 17.484v0c0.016-0.031-0.016-0.094-0.078-0.125-0.047-0.016-0.109-0.016-0.125 0.031-0.031 0.047 0 0.094 0.063 0.125 0.063 0.016 0.125 0.016 0.141-0.031zM7.359 17.844v0c0.031-0.031 0.031-0.109-0.031-0.156-0.047-0.063-0.125-0.078-0.156-0.047-0.047 0.047-0.031 0.109 0.016 0.172 0.047 0.047 0.125 0.078 0.172 0.031zM8.703 19.016v0c0.016-0.063-0.047-0.141-0.141-0.172s-0.172 0-0.203 0.063c-0.016 0.063 0.047 0.141 0.141 0.172s0.172 0 0.203-0.063zM9.359 19.063v0c0-0.063-0.078-0.125-0.187-0.125-0.094 0-0.156 0.063-0.156 0.125s0.078 0.125 0.172 0.125 0.172-0.063 0.172-0.125zM9.969 18.953v0c-0.016-0.063-0.109-0.094-0.203-0.078s-0.156 0.078-0.141 0.141 0.094 0.109 0.187 0.094 0.156-0.094 0.156-0.156zM20 14c0-4.422-3.578-8-8-8s-8 3.578-8 8c0 3.531 2.297 6.531 5.469 7.594 0.406 0.078 0.547-0.172 0.547-0.391 0-0.187 0-0.812-0.016-1.484 0 0-2.219 0.484-2.688-0.953 0 0-0.359-0.922-0.891-1.156 0 0-0.719-0.5 0.063-0.5 0 0 0.781 0.063 1.219 0.828 0.703 1.234 1.875 0.875 2.328 0.672 0.078-0.516 0.281-0.875 0.516-1.078-1.781-0.203-3.656-0.891-3.656-3.953 0-0.875 0.313-1.578 0.828-2.141-0.078-0.203-0.359-1.016 0.078-2.125 0.672-0.203 2.203 0.828 2.203 0.828 0.641-0.187 1.313-0.266 2-0.266s1.359 0.078 2 0.266c0 0 1.531-1.031 2.203-0.828 0.438 1.109 0.156 1.922 0.078 2.125 0.516 0.562 0.828 1.266 0.828 2.141 0 3.078-1.875 3.75-3.656 3.953 0.281 0.25 0.547 0.734 0.547 1.484 0 1.062-0.016 1.922-0.016 2.188 0 0.219 0.141 0.469 0.547 0.391 3.172-1.062 5.469-4.062 5.469-7.594zM24 6.5v15c0 2.484-2.016 4.5-4.5 4.5h-15c-2.484 0-4.5-2.016-4.5-4.5v-15c0-2.484 2.016-4.5 4.5-4.5h15c2.484 0 4.5 2.016 4.5 4.5z"
-					></path>
-				</svg>
-				<span>{dict.footer.github}</span>
-			</a>
+				<a
+					class="contact-link"
+					cursor-class="link"
+					href="https://github.com/sariodesign"
+					target="_blank"
+					rel="noreferrer"
+				>
+					<svg width="24" viewBox="0 0 24 28" aria-hidden="true">
+						<path
+							d="M8.109 18.75v0c0.031-0.047 0.016-0.141-0.047-0.203-0.078-0.063-0.172-0.078-0.219-0.031-0.031 0.047-0.016 0.141 0.047 0.203 0.078 0.063 0.172 0.078 0.219 0.031zM7.672 18.109c-0.047-0.063-0.125-0.094-0.187-0.063-0.047 0.031-0.047 0.125 0 0.187 0.063 0.078 0.141 0.109 0.187 0.078v0c0.047-0.031 0.047-0.125 0-0.203zM7.031 17.484v0c0.016-0.031-0.016-0.094-0.078-0.125-0.047-0.016-0.109-0.016-0.125 0.031-0.031 0.047 0 0.094 0.063 0.125 0.063 0.016 0.125 0.016 0.141-0.031zM7.359 17.844v0c0.031-0.031 0.031-0.109-0.031-0.156-0.047-0.063-0.125-0.078-0.156-0.047-0.047 0.047-0.031 0.109 0.016 0.172 0.047 0.047 0.125 0.078 0.172 0.031zM8.703 19.016v0c0.016-0.063-0.047-0.141-0.141-0.172s-0.172 0-0.203 0.063c-0.016 0.063 0.047 0.141 0.141 0.172s0.172 0 0.203-0.063zM9.359 19.063v0c0-0.063-0.078-0.125-0.187-0.125-0.094 0-0.156 0.063-0.156 0.125s0.078 0.125 0.172 0.125 0.172-0.063 0.172-0.125zM9.969 18.953v0c-0.016-0.063-0.109-0.094-0.203-0.078s-0.156 0.078-0.141 0.141 0.094 0.109 0.187 0.094 0.156-0.094 0.156-0.156zM20 14c0-4.422-3.578-8-8-8s-8 3.578-8 8c0 3.531 2.297 6.531 5.469 7.594 0.406 0.078 0.547-0.172 0.547-0.391 0-0.187 0-0.812-0.016-1.484 0 0-2.219 0.484-2.688-0.953 0 0-0.359-0.922-0.891-1.156 0 0-0.719-0.5 0.063-0.5 0 0 0.781 0.063 1.219 0.828 0.703 1.234 1.875 0.875 2.328 0.672 0.078-0.516 0.281-0.875 0.516-1.078-1.781-0.203-3.656-0.891-3.656-3.953 0-0.875 0.313-1.578 0.828-2.141-0.078-0.203-0.359-1.016 0.078-2.125 0.672-0.203 2.203 0.828 2.203 0.828 0.641-0.187 1.313-0.266 2-0.266s1.359 0.078 2 0.266c0 0 1.531-1.031 2.203-0.828 0.438 1.109 0.156 1.922 0.078 2.125 0.516 0.562 0.828 1.266 0.828 2.141 0 3.078-1.875 3.75-3.656 3.953 0.281 0.25 0.547 0.734 0.547 1.484 0 1.062-0.016 1.922-0.016 2.188 0 0.219 0.141 0.469 0.547 0.391 3.172-1.062 5.469-4.062 5.469-7.594zM24 6.5v15c0 2.484-2.016 4.5-4.5 4.5h-15c-2.484 0-4.5-2.016-4.5-4.5v-15c0-2.484 2.016-4.5 4.5-4.5h15c2.484 0 4.5 2.016 4.5 4.5z"
+						></path>
+					</svg>
+					<span>{dict.footer.github}</span>
+				</a>
+			</div>
 		</div>
 	</div>
 </nav>
 
 <script>
 	const menu = document.querySelector(".js-menu");
-	const btnIconMenu = document.querySelector(".js-close-menu");
+	const panel = document.querySelector(".js-nav-panel");
+	const menuTrigger = document.querySelector(".js-menu-trigger");
+	const closeButton = document.querySelector(".js-close-menu");
+	const overlay = document.querySelector(".js-menu-overlay");
+	const navLinks = [...document.querySelectorAll(".js-nav-link")];
+	const mobileMedia = window.matchMedia("(max-width: 1023px)");
+	const FOCUSABLE_SELECTOR =
+		'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-	if (menu && btnIconMenu) {
-		btnIconMenu.addEventListener("click", () => {
-			menu.classList.remove("is-opened");
+	let lastFocusedElement = null;
+
+	const syncAccessibilityState = () => {
+		if (!panel || !menuTrigger) return;
+		const isMobile = mobileMedia.matches;
+		const isOpen = menu?.classList.contains("is-opened");
+
+		if (!isMobile) {
+			panel.removeAttribute("inert");
+			panel.setAttribute("aria-hidden", "false");
+			menuTrigger.setAttribute("aria-expanded", "false");
+			menuTrigger.classList.remove("is-opened");
+			document.documentElement.classList.remove("is-locked");
+			document.body.classList.remove("is-locked");
+			menu?.classList.remove("is-opened");
+			return;
+		}
+
+		panel.setAttribute("aria-hidden", isOpen ? "false" : "true");
+		if (isOpen) {
+			panel.removeAttribute("inert");
+		} else {
+			panel.setAttribute("inert", "");
+		}
+		menuTrigger.setAttribute("aria-expanded", isOpen ? "true" : "false");
+		menuTrigger.classList.toggle("is-opened", Boolean(isOpen));
+		document.documentElement.classList.toggle("is-locked", Boolean(isOpen));
+		document.body.classList.toggle("is-locked", Boolean(isOpen));
+	};
+
+	const setMenuState = (nextOpen, { restoreFocus = true } = {}) => {
+		if (!menu || !panel || !menuTrigger || !mobileMedia.matches) return;
+
+		menu.classList.toggle("is-opened", nextOpen);
+		syncAccessibilityState();
+
+		if (nextOpen) {
+			lastFocusedElement = document.activeElement;
+			window.setTimeout(() => closeButton?.focus(), 50);
+		} else if (
+			restoreFocus &&
+			lastFocusedElement instanceof HTMLElement
+		) {
+			lastFocusedElement.focus();
+		}
+	};
+
+	const trapFocus = (event) => {
+		if (
+			!mobileMedia.matches ||
+			!menu?.classList.contains("is-opened") ||
+			!panel ||
+			event.key !== "Tab"
+		) {
+			return;
+		}
+
+		const focusableElements = [...panel.querySelectorAll(FOCUSABLE_SELECTOR)];
+		if (focusableElements.length === 0) return;
+
+		const firstElement = focusableElements[0];
+		const lastElement = focusableElements[focusableElements.length - 1];
+
+		if (event.shiftKey && document.activeElement === firstElement) {
+			event.preventDefault();
+			lastElement.focus();
+		} else if (!event.shiftKey && document.activeElement === lastElement) {
+			event.preventDefault();
+			firstElement.focus();
+		}
+	};
+
+	if (menu && panel && menuTrigger && closeButton && overlay) {
+		syncAccessibilityState();
+
+		menuTrigger.addEventListener("click", () => {
+			setMenuState(true, { restoreFocus: false });
+		});
+
+		closeButton.addEventListener("click", () => {
+			setMenuState(false);
+		});
+
+		overlay.addEventListener("click", () => {
+			setMenuState(false);
+		});
+
+		navLinks.forEach((link) => {
+			link.addEventListener("click", () => {
+				setMenuState(false, { restoreFocus: false });
+			});
+		});
+
+		document.addEventListener("keydown", (event) => {
+			if (
+				event.key === "Escape" &&
+				menu.classList.contains("is-opened") &&
+				mobileMedia.matches
+			) {
+				setMenuState(false);
+			}
+
+			trapFocus(event);
+		});
+
+		mobileMedia.addEventListener("change", () => {
+			setMenuState(false, { restoreFocus: false });
+			syncAccessibilityState();
 		});
 	}
 </script>
 
 <style lang="scss">
-	nav {
-		&:after {
-			background-color: rgba(0, 0, 0, 0.75);
-			content: "";
-			left: 0;
-			height: 100vh;
-			position: absolute;
-			top: 0;
-			width: 100%;
-			transition:
-				opacity 2s ease-in,
-				visibility 0.25s linear 0.125s;
-			visibility: hidden;
-			z-index: 0;
+	.site-nav {
+		display: flex;
+	}
 
-			@media screen and (min-width: 1024px) {
-				display: none;
+	.nav-overlay {
+		@media screen and (min-width: 1024px) {
+			display: none;
+		}
+	}
+
+	.nav-menu {
+		@media screen and (max-width: 1023px) {
+			backdrop-filter: blur(16px);
+			border-radius: 28px 28px 0 0;
+			bottom: 0;
+			display: grid;
+			gap: 18px;
+			left: 10px;
+			max-height: min(78vh, 720px);
+			opacity: 0;
+			overflow-y: auto;
+			padding: 10px 18px calc(24px + env(safe-area-inset-bottom));
+			position: fixed;
+			right: 10px;
+			transform: translateY(calc(100% + 24px));
+			transition:
+				transform 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+				opacity 0.2s ease,
+				visibility 0.2s ease;
+			visibility: hidden;
+			z-index: 7;
+
+			@media (prefers-color-scheme: dark) {
+				background:
+					linear-gradient(180deg, rgba(21, 37, 37, 0.98), rgba(16, 32, 32, 0.98));
+				border: 1px solid rgba(255, 255, 255, 0.1);
+				box-shadow: 0 -24px 60px -40px rgba(0, 0, 0, 0.65);
+			}
+
+			@media (prefers-color-scheme: light) {
+				background:
+					linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(242, 242, 242, 0.98));
+				border: 1px solid rgba(16, 32, 32, 0.1);
+				box-shadow: 0 -24px 60px -42px rgba(16, 32, 32, 0.35);
+			}
+
+			.is-opened & {
+				opacity: 1;
+				transform: translateY(0);
+				visibility: visible;
 			}
 		}
 
-		&.is-opened {
-			&:after {
+		@media screen and (min-width: 1024px) {
+			align-items: center;
+			display: flex;
+			gap: 20px;
+			position: relative;
+		}
+	}
+
+	.nav-overlay {
+		@media screen and (max-width: 1023px) {
+			background: rgba(7, 14, 14, 0.42);
+			backdrop-filter: blur(10px);
+			inset: 0;
+			opacity: 0;
+			pointer-events: none;
+			position: fixed;
+			transition: opacity 0.22s ease, visibility 0.22s ease;
+			visibility: hidden;
+			z-index: 6;
+
+			.is-opened & {
 				opacity: 1;
+				pointer-events: auto;
 				visibility: visible;
 			}
 		}
 	}
 
-	.nav-menu {
-		background-color: var(--white);
-		display: flex;
-		gap: 24px;
-		flex-direction: column;
-		height: 100vh;
-		opacity: 0;
-		padding: 32px 16px;
-		padding-right: calc(10% + 32px);
-		padding-bottom: 0;
-		position: absolute;
-		right: 0;
-		top: 0;
-		transition:
-			transform 0.35s linear 0.125s,
-			opacity 0.25s ease-in,
-			visibility 0.5s linear;
-		transform: translateX(100%);
-		visibility: hidden;
-		width: 100%;
-		z-index: 2;
-
-		.is-opened & {
-			opacity: 1;
-			transform: translateX(10%);
-			visibility: visible;
-		}
-
-		@media screen and (min-width: 1024px) {
-			background-color: transparent;
-			display: flex;
-			align-items: center;
-			column-gap: 24px;
-			flex-direction: row;
-			height: auto;
-			opacity: 1;
-			padding: 0;
-			position: relative;
-			transform: none;
-			visibility: visible;
-		}
-	}
-
-	@media (prefers-color-scheme: dark) {
-		.nav-menu {
-			background-color: rgba(16, 32, 32, 0.96);
-
-			@media screen and (min-width: 1024px) {
-				background-color: transparent;
-			}
-		}
-	}
-
-	.nav-menu-close {
-		background: transparent;
-		border: 0;
-		color: inherit;
-		cursor: pointer;
-		margin-left: auto;
-		padding: 0;
+	.nav-menu__handle {
+		background-color: rgba(128, 128, 128, 0.38);
+		border-radius: 999px;
+		height: 4px;
+		margin: 0 auto;
+		width: 42px;
 
 		@media screen and (min-width: 1024px) {
 			display: none;
 		}
 	}
 
-	.lang-switch {
-		align-self: flex-start;
-		border: 1px solid currentColor;
+	.nav-menu__top {
+		align-items: center;
+		display: flex;
+		justify-content: space-between;
+		gap: 12px;
+
+		@media screen and (min-width: 1024px) {
+			display: none;
+		}
+	}
+
+	.nav-menu__eyebrow {
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		margin: 0;
+		text-transform: uppercase;
+
+		@media (prefers-color-scheme: dark) {
+			color: #c0c3cb;
+		}
+
+		@media (prefers-color-scheme: light) {
+			color: #5f6571;
+		}
+	}
+
+	.nav-menu-close {
+		align-items: center;
+		background: transparent;
 		border-radius: 999px;
-		color: inherit;
+		border: 1px solid rgba(128, 128, 128, 0.22);
 		display: inline-flex;
-		font-size: 0.78rem;
+		gap: 10px;
+		min-height: 44px;
+		padding: 0 14px;
+
+		@media screen and (min-width: 1024px) {
+			display: none;
+		}
+	}
+
+	.nav-menu-close__icon {
+		display: block;
+		height: 14px;
+		position: relative;
+		width: 14px;
+	}
+
+	.nav-menu-close__icon::before,
+	.nav-menu-close__icon::after {
+		background-color: currentColor;
+		border-radius: 999px;
+		content: "";
+		height: 2px;
+		left: 0;
+		position: absolute;
+		top: 50%;
+		width: 14px;
+	}
+
+	.nav-menu-close__icon::before {
+		transform: translateY(-50%) rotate(45deg);
+	}
+
+	.nav-menu-close__icon::after {
+		transform: translateY(-50%) rotate(-45deg);
+	}
+
+	.nav-menu-close__label {
+		font-size: 0.76rem;
 		font-weight: 700;
 		letter-spacing: 0.08em;
 		line-height: 1;
-		padding: 0.42rem 0.62rem;
+		text-transform: uppercase;
+	}
+
+	.nav-menu__links {
+		display: grid;
+		gap: 8px;
+
+		@media screen and (min-width: 1024px) {
+			align-items: center;
+			display: flex;
+			gap: 20px;
+		}
+	}
+
+	.nav-link {
+		display: inline-flex;
+		text-decoration: none;
+		transition:
+			transform 0.2s ease,
+			opacity 0.2s ease,
+			border-color 0.2s ease,
+			background-color 0.2s ease;
+
+		@media screen and (max-width: 1023px) {
+			align-items: center;
+			border-radius: 18px;
+			font-family: var(--base-font-family-serif);
+			font-size: clamp(1.55rem, 7.2vw, 2.5rem);
+			justify-content: space-between;
+			letter-spacing: -0.03em;
+			line-height: 0.95;
+			min-height: 64px;
+			padding: 4px 2px;
+		}
+
+		@media screen and (min-width: 1024px) {
+			align-items: center;
+			font-size: 0.92rem;
+			font-weight: 700;
+			letter-spacing: 0.04em;
+			min-height: 44px;
+			position: relative;
+			text-transform: uppercase;
+		}
+
+		@media (prefers-color-scheme: dark) {
+			color: var(--light-gray);
+		}
+
+		@media (prefers-color-scheme: light) {
+			color: var(--dark-black);
+		}
+	}
+
+	.nav-link--mobile-only {
+		@media screen and (min-width: 1024px) {
+			display: none;
+		}
+	}
+
+	.nav-link:hover {
+		opacity: 0.74;
+	}
+
+	.nav-link:focus-visible,
+	.nav-menu-close:focus-visible,
+	.lang-switch:focus-visible,
+	.contact-link:focus-visible {
+		outline: 3px solid rgba(221, 122, 76, 0.7);
+		outline-offset: 3px;
+	}
+
+	.nav-link::after {
+		@media screen and (min-width: 1024px) {
+			background-color: currentColor;
+			bottom: 7px;
+			content: "";
+			height: 2px;
+			left: 0;
+			position: absolute;
+			transform: scaleX(0);
+			transform-origin: left center;
+			transition: transform 0.22s ease;
+			width: 100%;
+		}
+	}
+
+	.nav-link:hover::after,
+	.nav-link:focus-visible::after {
+		@media screen and (min-width: 1024px) {
+			transform: scaleX(1);
+		}
+	}
+
+	.nav-menu__meta {
+		display: grid;
+		gap: 14px;
+
+		@media screen and (max-width: 1023px) {
+			border-top: 1px solid rgba(128, 128, 128, 0.18);
+			padding-top: 14px;
+		}
+
+		@media screen and (min-width: 1024px) {
+			align-items: center;
+			display: flex;
+			gap: 16px;
+		}
+	}
+
+	.lang-switch {
+		align-items: center;
+		border-radius: 999px;
+		border: 1px solid currentColor;
+		display: inline-flex;
+		gap: 12px;
+		justify-content: space-between;
+		min-height: 44px;
+		padding: 0.42rem 0.75rem;
 		text-decoration: none;
 		transition:
 			background-color 0.2s ease,
 			border-color 0.2s ease,
 			color 0.2s ease;
 
+		@media screen and (max-width: 1023px) {
+			width: 100%;
+		}
+
 		@media screen and (min-width: 1024px) {
-			align-self: center;
 			font-size: 0.68rem;
 			margin-left: 4px;
 		}
@@ -242,10 +565,61 @@ const languageSwitchName = localeNames[targetLocale];
 		}
 	}
 
-	.nav-menu-contact {
-		margin-top: auto;
+	.lang-switch__label,
+	.lang-switch__value {
+		font-size: 0.78rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		line-height: 1;
+		text-transform: uppercase;
+	}
+
+	.lang-switch__label {
 		@media screen and (min-width: 1024px) {
 			display: none;
 		}
+	}
+
+	.nav-menu-contact {
+		display: grid;
+		gap: 10px;
+
+		@media screen and (min-width: 1024px) {
+			display: none;
+		}
+	}
+
+	.contact-link {
+		align-items: center;
+		border-radius: 16px;
+		display: inline-flex;
+		gap: 10px;
+		min-height: 52px;
+		padding: 0 14px;
+		text-decoration: none;
+
+		@media (prefers-color-scheme: dark) {
+			background-color: rgba(255, 255, 255, 0.05);
+			border: 1px solid rgba(255, 255, 255, 0.12);
+			color: var(--white);
+		}
+
+		@media (prefers-color-scheme: light) {
+			background-color: rgba(16, 32, 32, 0.04);
+			border: 1px solid rgba(16, 32, 32, 0.1);
+			color: var(--dark-black);
+		}
+	}
+
+	.contact-link svg {
+		fill: currentColor;
+		flex: 0 0 auto;
+	}
+
+	.contact-link span {
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
 	}
 </style>
