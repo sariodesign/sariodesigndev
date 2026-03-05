@@ -1,11 +1,14 @@
 ---
+import PageCta from "../components/PageCta.astro";
 import type { Dictionary } from "../i18n";
+import type { Locale } from "../i18n/config";
 
 interface Props {
 	dict: Dictionary;
+	locale: Locale;
 }
 
-const { dict } = Astro.props;
+const { dict, locale } = Astro.props;
 const posts = dict.blog.posts;
 ---
 
@@ -40,6 +43,9 @@ const posts = dict.blog.posts;
 			}
 		</ul>
 	</section>
+	<div class="blog-page-cta js-blog-reveal">
+		<PageCta dict={dict} locale={locale} />
+	</div>
 </main>
 
 <script>
@@ -129,6 +135,12 @@ const posts = dict.blog.posts;
 		width: 100%;
 		max-width: 1440px;
 		margin: 0 auto;
+	}
+
+	.blog-page-cta {
+		margin: 34px auto 0;
+		max-width: 1440px;
+		width: 100%;
 	}
 
 	.blog-list-section h1 {

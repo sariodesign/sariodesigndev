@@ -21,12 +21,18 @@ const it: Dictionary = {
 			description:
 				"Profilo e servizi di Rosario Russo: front-end development, UI engineering e stack utilizzato.",
 		},
+		about: {
+			title: "About | SarioDesign",
+			description:
+				"Chi sono, come lavoro e quali principi applico nello sviluppo di prodotti digitali.",
+		},
 	},
 	navigation: {
 		home: "Home",
 		works: "Works",
 		services: "Servizi",
 		blog: "Blog",
+		about: "About",
 		menu: "Menu",
 		openMenuAria: "Apri menu",
 		switchLanguage: "Passa a",
@@ -228,6 +234,55 @@ const it: Dictionary = {
 			"Lavoro nel digitale da circa dieci anni. Ho iniziato dal design e, progetto dopo progetto, mi sono spostato sempre di piu sul codice, lavorando soprattutto in ambito publishing.",
 		background:
 			"Oggi supporto team e aziende su front-end development e UI engineering, con attenzione a performance, accessibilita e qualita del codice.",
+		valueEyebrow: "Come posso supportarti",
+		offers: [
+			{
+				title: "UI Development",
+				description:
+					"Interfacce moderne, responsive e solide, pensate per una produzione reale e per evolvere nel tempo.",
+			},
+			{
+				title: "Design System e componenti",
+				description:
+					"Costruzione di librerie UI riusabili e coerenti, utili a ridurre frizioni tra design e sviluppo.",
+			},
+			{
+				title: "Refactoring front-end",
+				description:
+					"Interventi su codice esistente per migliorare leggibilita, performance e manutenibilita senza bloccare il rilascio.",
+			},
+		],
+		processTitle: "Metodo di lavoro",
+		processItems: [
+			{
+				title: "Allineamento iniziale",
+				description:
+					"Definiamo obiettivi, vincoli, priorita e KPI per evitare ambiguita fin dall'inizio.",
+			},
+			{
+				title: "Design tecnico",
+				description:
+					"Traduco requisiti e mockup in una strategia front-end pragmatica con milestone chiare.",
+			},
+			{
+				title: "Implementazione iterativa",
+				description:
+					"Rilasci incrementali, feedback continuo e attenzione a qualita del codice durante tutta la delivery.",
+			},
+			{
+				title: "QA e handoff",
+				description:
+					"Test funzionali, controlli accessibilita e documentazione essenziale per un passaggio pulito al team.",
+			},
+		],
+		deliverablesTitle: "Output concreti",
+		deliverablesItems: [
+			"Analisi tecnica con priorita e quick wins",
+			"Componenti riusabili e pattern UI consistenti",
+			"Ottimizzazioni su performance e accessibilita",
+			"Linee guida operative per onboarding e manutenzione",
+			"Supporto su deploy e monitoraggio post-rilascio",
+		],
 		stackTitle: "Linguaggi e framework",
 		stackItems: [
 			"HTML",
@@ -253,7 +308,62 @@ const it: Dictionary = {
 			"PostgreSQL",
 		],
 		lifestyle:
-			"Nel tempo libero porto avanti progetti personali e continuo a sperimentare: tra letture, musica, serie TV e qualche avventura videoludica.",
+			"Collaboro in modo flessibile con freelance, team interni e agenzie: da consulenze mirate a supporti continuativi su prodotto.",
+		ctaTitle: "Hai un prodotto da far evolvere?",
+		ctaDescription:
+			"Se stai avviando un nuovo progetto o vuoi migliorare una base esistente, possiamo impostare un piano tecnico concreto e sostenibile.",
+		ctaPrimary: "Scrivimi",
+		ctaSecondary: "Vedi i lavori",
+	},
+	about: {
+		heading: "About",
+		intro:
+			"Sono Rosario Russo e progetto interfacce web da oltre dieci anni, unendo cultura visuale e sviluppo front-end.",
+		paragraphs: [
+			"Nel tempo ho lavorato su contesti diversi, dal publishing ai prodotti SaaS, con l'obiettivo di costruire esperienze veloci, solide e facili da usare.",
+			"Mi interessa la qualita dell'interfaccia ma anche la qualita del codice: componenti ben strutturati, naming chiaro, accessibilita e performance come standard, non come extra.",
+		],
+		focusTitle: "Cosa porto nei progetti",
+		focusItems: [
+			{
+				title: "Approccio prodotto",
+				description:
+					"Parto dagli obiettivi reali del business e trasformo i requisiti in una direzione tecnica sostenibile.",
+			},
+			{
+				title: "Collaborazione trasversale",
+				description:
+					"Mi muovo tra design, sviluppo e stakeholder con un linguaggio comune e decisioni verificabili.",
+			},
+			{
+				title: "Qualita operativa",
+				description:
+					"Preferisco rilasci iterativi e leggibili, con attenzione continua a manutenzione e stabilita.",
+			},
+		],
+		timelineTitle: "Percorso",
+		timelineItems: [
+			{
+				year: "2015",
+				title: "Dai primi lavori tra grafica e web",
+				description:
+					"Ho iniziato dal design visuale, imparando a costruire interfacce centrate su gerarchia e leggibilita.",
+			},
+			{
+				year: "2019",
+				title: "Transizione completa al front-end",
+				description:
+					"Ho spostato il focus sull'implementazione: componenti, architetture UI e processi di rilascio.",
+			},
+			{
+				year: "Oggi",
+				title: "UI engineering per team e aziende",
+				description:
+					"Collaboro su nuovi prodotti e refactoring di piattaforme esistenti, con un approccio pragmatico.",
+			},
+		],
+		closing:
+			"Quando non lavoro al codice, continuo a sperimentare su side project personali e studio nuovi workflow per migliorare la delivery.",
 	},
 };
 

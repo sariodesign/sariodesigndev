@@ -1,4 +1,5 @@
 ---
+import PageCta from "../components/PageCta.astro";
 import type { Dictionary } from "../i18n";
 import { getLocalizedPath, type Locale } from "../i18n/config";
 
@@ -49,6 +50,9 @@ const projects = dict.works.projects;
 			))
 		}
 	</section>
+	<div class="work-page-cta js-work-row">
+		<PageCta dict={dict} locale={locale} />
+	</div>
 </main>
 
 <script>
@@ -193,6 +197,13 @@ const projects = dict.works.projects;
 		max-width: 1440px;
 		width: 100%;
 		margin: 0 auto;
+	}
+
+	.work-page-cta {
+		margin: 32px auto 0;
+		max-width: 1440px;
+		padding-inline: 16px;
+		width: 100%;
 	}
 
 	.work-row {
@@ -362,6 +373,10 @@ const projects = dict.works.projects;
 		.work-title,
 		.work-row-link {
 			padding: 24px 0 24px 24px;
+		}
+
+		.work-page-cta {
+			padding-inline: 24px;
 		}
 
 		.work-row:hover {

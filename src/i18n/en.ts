@@ -21,12 +21,18 @@ const en: Dictionary = {
 			description:
 				"Profile and services by Rosario Russo: front-end development, UI engineering, and preferred stack.",
 		},
+		about: {
+			title: "About | SarioDesign",
+			description:
+				"Who I am, how I work, and the principles I apply while building digital products.",
+		},
 	},
 	navigation: {
 		home: "Home",
 		works: "Works",
 		services: "Services",
 		blog: "Blog",
+		about: "About",
 		menu: "Menu",
 		openMenuAria: "Open menu",
 		switchLanguage: "Switch to",
@@ -228,6 +234,55 @@ const en: Dictionary = {
 			"I have been working in digital products for about ten years. I started in design, then moved step by step into code, mainly across publishing projects.",
 		background:
 			"Today I help teams and companies with front-end development and UI engineering, with a strong focus on performance, accessibility, and maintainable code.",
+		valueEyebrow: "How I can support you",
+		offers: [
+			{
+				title: "UI Development",
+				description:
+					"Modern, responsive interfaces built for real production environments and long-term product growth.",
+			},
+			{
+				title: "Design Systems and Components",
+				description:
+					"Reusable UI libraries and consistent patterns that reduce friction between design and engineering.",
+			},
+			{
+				title: "Front-end Refactoring",
+				description:
+					"Improvements on existing codebases to raise clarity, performance, and maintainability without stopping delivery.",
+			},
+		],
+		processTitle: "How we work",
+		processItems: [
+			{
+				title: "Initial alignment",
+				description:
+					"We define goals, constraints, priorities, and KPIs to keep the execution path clear from day one.",
+			},
+			{
+				title: "Technical direction",
+				description:
+					"I translate requirements and mockups into a practical front-end plan with clear milestones.",
+			},
+			{
+				title: "Iterative implementation",
+				description:
+					"Incremental releases, fast feedback loops, and steady code quality throughout delivery.",
+			},
+			{
+				title: "QA and handoff",
+				description:
+					"Functional checks, accessibility validation, and lightweight documentation for clean team handover.",
+			},
+		],
+		deliverablesTitle: "What you can expect",
+		deliverablesItems: [
+			"Technical audit with priorities and quick wins",
+			"Reusable components and consistent UI patterns",
+			"Performance and accessibility improvements",
+			"Operational guidelines for onboarding and maintenance",
+			"Support on deployment and post-release monitoring",
+		],
 		stackTitle: "Languages and frameworks",
 		stackItems: [
 			"HTML",
@@ -253,7 +308,62 @@ const en: Dictionary = {
 			"PostgreSQL",
 		],
 		lifestyle:
-			"In my free time I keep personal projects alive and keep exploring new ecosystems, together with books, music, TV series, and video game adventures.",
+			"I collaborate flexibly with freelancers, in-house teams, and agencies, from focused consulting to ongoing product support.",
+		ctaTitle: "Have a product that needs to evolve?",
+		ctaDescription:
+			"If you are starting from scratch or improving an existing platform, we can define a practical and sustainable technical roadmap.",
+		ctaPrimary: "Send me an email",
+		ctaSecondary: "View works",
+	},
+	about: {
+		heading: "About",
+		intro:
+			"I am Rosario Russo, and I have been designing web interfaces for over ten years, combining visual culture and front-end engineering.",
+		paragraphs: [
+			"Over time I worked across different contexts, from publishing to SaaS products, always aiming for experiences that are fast, reliable, and easy to use.",
+			"I care about interface quality, but also code quality: well-structured components, clear naming, accessibility, and performance as baseline standards.",
+		],
+		focusTitle: "What I bring to projects",
+		focusItems: [
+			{
+				title: "Product mindset",
+				description:
+					"I start from real business goals and convert requirements into a sustainable technical direction.",
+			},
+			{
+				title: "Cross-team collaboration",
+				description:
+					"I work between design, engineering, and stakeholders with shared language and verifiable decisions.",
+			},
+			{
+				title: "Operational quality",
+				description:
+					"I prefer iterative, readable delivery with continuous focus on maintainability and stability.",
+			},
+		],
+		timelineTitle: "Journey",
+		timelineItems: [
+			{
+				year: "2015",
+				title: "Starting point: design and web",
+				description:
+					"I started from visual design, learning how to build interfaces around hierarchy and readability.",
+			},
+			{
+				year: "2019",
+				title: "Full transition to front-end",
+				description:
+					"My focus moved fully into implementation: components, UI architecture, and release workflows.",
+			},
+			{
+				year: "Today",
+				title: "UI engineering for teams and companies",
+				description:
+					"I collaborate on new products and refactoring existing platforms with a pragmatic approach.",
+			},
+		],
+		closing:
+			"When I am not coding client work, I keep experimenting on personal side projects and studying new workflows to improve delivery.",
 	},
 };
 

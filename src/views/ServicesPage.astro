@@ -1,49 +1,114 @@
 ---
+import PageCta from "../components/PageCta.astro";
+import type { Locale } from "../i18n/config";
 import type { Dictionary } from "../i18n";
 
 interface Props {
 	dict: Dictionary;
+	locale: Locale;
 }
 
-const { dict } = Astro.props;
+const { dict, locale } = Astro.props;
 ---
 
 <main class="services-page">
 	<section class="services-content">
-		<h1>
-			<span class="services-title-wrap">
-				<span class="services-title-line js-services-title"
-					>{dict.services.heading}</span
-				>
-			</span>
-		</h1>
-		<div class="services-body">
-			<p class="services-paragraph js-services-item">{dict.services.intro}</p>
-			<p class="services-paragraph js-services-item">
-				{dict.services.background}
-			</p>
-			<section class="services-block js-services-item">
-				<h2>{dict.services.stackTitle}</h2>
-				<ul class="services-chip-list">
-					{
-						dict.services.stackItems.map((item) => (
-							<li class="services-chip">{item}</li>
-						))
-					}
-				</ul>
-			</section>
-			<section class="services-block js-services-item">
-				<h2>{dict.services.toolingTitle}</h2>
-				<ul class="services-chip-list">
-					{
-						dict.services.toolingItems.map((item) => (
-							<li class="services-chip">{item}</li>
-						))
-					}
-				</ul>
-			</section>
-			<p class="services-paragraph js-services-item">{dict.services.lifestyle}</p>
-		</div>
+		<header class="services-hero">
+			<h1>
+				<span class="services-title-wrap">
+					<span class="services-title-line js-services-title"
+						>{dict.services.heading}</span
+					>
+				</span>
+			</h1>
+			<div class="services-lead">
+				<p class="services-paragraph js-services-item">{dict.services.intro}</p>
+				<p class="services-paragraph js-services-item">
+					{dict.services.background}
+				</p>
+			</div>
+		</header>
+
+		<section class="services-section services-section--offers js-services-item">
+			<p class="services-section-eyebrow">{dict.services.valueEyebrow}</p>
+			<div class="services-card-grid">
+				{
+					dict.services.offers.map((offer, index) => (
+						<article class="services-card">
+							<span class="services-card__badge">{`0${index + 1}`}</span>
+							<h2 class="services-card__title">{offer.title}</h2>
+							<p class="services-card__description">{offer.description}</p>
+						</article>
+					))
+				}
+			</div>
+		</section>
+
+		<section class="services-section services-section--process js-services-item">
+			<h2 class="services-section-title">{dict.services.processTitle}</h2>
+			<ol class="services-process-list">
+				{
+					dict.services.processItems.map((item, index) => (
+						<li class="services-process-item">
+							<span class="services-process-item__index">
+								{`${index + 1}`.padStart(2, "0")}
+							</span>
+							<div class="services-process-item__copy">
+								<h3>{item.title}</h3>
+								<p>{item.description}</p>
+							</div>
+						</li>
+					))
+				}
+			</ol>
+		</section>
+
+		<section
+			class="services-section services-section--deliverables js-services-item"
+		>
+			<h2 class="services-section-title">{dict.services.deliverablesTitle}</h2>
+			<ul class="services-deliverables-list">
+				{
+					dict.services.deliverablesItems.map((item) => (
+						<li class="services-deliverable-item">
+							<span aria-hidden="true">+</span>
+							<span>{item}</span>
+						</li>
+					))
+				}
+			</ul>
+		</section>
+
+		<section class="services-section services-section--tools js-services-item">
+			<div class="services-tech-grid">
+				<section class="services-block">
+					<h2 class="services-section-title">{dict.services.stackTitle}</h2>
+					<ul class="services-chip-list">
+						{
+							dict.services.stackItems.map((item) => (
+								<li class="services-chip">{item}</li>
+							))
+						}
+					</ul>
+				</section>
+				<section class="services-block">
+					<h2 class="services-section-title">{dict.services.toolingTitle}</h2>
+					<ul class="services-chip-list">
+						{
+							dict.services.toolingItems.map((item) => (
+								<li class="services-chip">{item}</li>
+							))
+						}
+					</ul>
+				</section>
+			</div>
+		</section>
+
+		<p class="services-paragraph services-paragraph--closing js-services-item">
+			{dict.services.lifestyle}
+		</p>
+
+		<PageCta dict={dict} locale={locale} className="js-services-item" />
 	</section>
 </main>
 
@@ -97,6 +162,8 @@ const { dict } = Astro.props;
 		--services-text: var(--dark-black);
 		--services-muted: #5f6571;
 		--services-border: rgba(16, 32, 32, 0.16);
+		--services-surface: rgba(255, 255, 255, 0.74);
+		--services-glow: rgba(221, 122, 76, 0.13);
 		display: block;
 		min-height: 100vh;
 		padding: clamp(88px, 10vh, 126px) 16px 132px;
@@ -105,13 +172,20 @@ const { dict } = Astro.props;
 	}
 
 	.services-content {
+		display: grid;
+		gap: 26px;
 		margin: 0 auto;
-		max-width: 1440px;
+		max-width: 1220px;
 		width: 100%;
 	}
 
+	.services-hero {
+		display: grid;
+		gap: 20px;
+	}
+
 	.services-content h1 {
-		margin: 0 0 34px;
+		margin: 0;
 	}
 
 	.services-title-wrap {
@@ -129,9 +203,9 @@ const { dict } = Astro.props;
 		will-change: transform, filter, opacity;
 	}
 
-	.services-body {
+	.services-lead {
 		display: grid;
-		gap: 18px;
+		gap: 12px;
 		max-width: 860px;
 	}
 
@@ -141,17 +215,134 @@ const { dict } = Astro.props;
 		margin: 0;
 	}
 
-	.services-block {
+	.services-section {
 		border-top: 1px solid var(--services-border);
-		padding-top: 16px;
+		padding-top: 22px;
 	}
 
-	.services-block h2 {
+	.services-section-eyebrow {
+		color: var(--orange);
+		font-size: 0.76rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		margin: 0 0 14px;
+		text-transform: uppercase;
+	}
+
+	.services-section-title {
 		color: var(--services-text);
 		font-family: var(--base-font-family-serif);
 		font-size: clamp(1.2rem, 2.4vw, 1.75rem);
 		line-height: 1.1;
-		margin: 0 0 10px;
+		margin: 0 0 14px;
+	}
+
+	.services-card-grid {
+		display: grid;
+		gap: 12px;
+	}
+
+	.services-card {
+		background:
+			radial-gradient(circle at top right, var(--services-glow), transparent 58%),
+			var(--services-surface);
+		border: 1px solid var(--services-border);
+		border-radius: 18px;
+		display: grid;
+		gap: 10px;
+		padding: 18px 16px;
+	}
+
+	.services-card__badge {
+		color: var(--orange);
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.09em;
+	}
+
+	.services-card__title {
+		color: var(--services-text);
+		font-family: var(--base-font-family-serif);
+		font-size: 1.1rem;
+		line-height: 1.2;
+		margin: 0;
+	}
+
+	.services-card__description {
+		color: var(--services-muted);
+		line-height: 1.55;
+		margin: 0;
+	}
+
+	.services-process-list {
+		display: grid;
+		gap: 12px;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.services-process-item {
+		border: 1px solid var(--services-border);
+		border-radius: 16px;
+		display: grid;
+		gap: 8px;
+		padding: 14px;
+	}
+
+	.services-process-item__index {
+		color: var(--orange);
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+	}
+
+	.services-process-item__copy h3 {
+		color: var(--services-text);
+		font-size: 0.96rem;
+		margin: 0 0 6px;
+	}
+
+	.services-process-item__copy p {
+		color: var(--services-muted);
+		line-height: 1.55;
+		margin: 0;
+	}
+
+	.services-deliverables-list {
+		display: grid;
+		gap: 10px;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.services-deliverable-item {
+		align-items: baseline;
+		border: 1px solid var(--services-border);
+		border-radius: 999px;
+		color: var(--services-text);
+		display: inline-flex;
+		font-size: 0.86rem;
+		gap: 8px;
+		line-height: 1.4;
+		padding: 0.55rem 0.85rem;
+	}
+
+	.services-deliverable-item span[aria-hidden="true"] {
+		color: var(--orange);
+		font-weight: 700;
+	}
+
+	.services-tech-grid {
+		display: grid;
+		gap: 16px;
+	}
+
+	.services-block {
+		border: 1px solid var(--services-border);
+		border-radius: 18px;
+		padding: 16px;
 	}
 
 	.services-chip-list {
@@ -167,15 +358,39 @@ const { dict } = Astro.props;
 		border: 1px solid var(--services-border);
 		border-radius: 999px;
 		color: var(--services-text);
-		font-size: 0.76rem;
+		font-size: 0.74rem;
 		font-weight: 700;
 		letter-spacing: 0.03em;
 		padding: 0.45rem 0.7rem;
 	}
 
+	.services-paragraph--closing {
+		max-width: 880px;
+	}
+
+	@media screen and (min-width: 768px) {
+		.services-card-grid {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+
+		.services-process-item {
+			gap: 14px;
+			grid-template-columns: auto minmax(0, 1fr);
+			padding: 16px;
+		}
+
+		.services-deliverables-list {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
 	@media screen and (min-width: 1024px) {
 		.services-page {
 			padding-inline: 24px;
+		}
+
+		.services-tech-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
 		}
 	}
 
@@ -184,6 +399,8 @@ const { dict } = Astro.props;
 			--services-text: #ebebeb;
 			--services-muted: #c0c3cb;
 			--services-border: rgba(238, 238, 238, 0.14);
+			--services-surface: rgba(26, 37, 37, 0.42);
+			--services-glow: rgba(221, 122, 76, 0.1);
 		}
 	}
 </style>

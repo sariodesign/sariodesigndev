@@ -38,6 +38,17 @@ export interface LocalizedHomeOffer {
 	description: string;
 }
 
+export interface LocalizedServiceItem {
+	title: string;
+	description: string;
+}
+
+export interface LocalizedAboutTimelineItem {
+	year: string;
+	title: string;
+	description: string;
+}
+
 export interface Dictionary {
 	meta: {
 		home: {
@@ -56,12 +67,17 @@ export interface Dictionary {
 			title: string;
 			description: string;
 		};
+		about: {
+			title: string;
+			description: string;
+		};
 	};
 	navigation: {
 		home: string;
 		works: string;
 		services: string;
 		blog: string;
+		about: string;
 		menu: string;
 		openMenuAria: string;
 		switchLanguage: string;
@@ -105,10 +121,30 @@ export interface Dictionary {
 		heading: string;
 		intro: string;
 		background: string;
+		valueEyebrow: string;
+		offers: LocalizedServiceItem[];
+		processTitle: string;
+		processItems: LocalizedServiceItem[];
+		deliverablesTitle: string;
+		deliverablesItems: string[];
 		stackTitle: string;
 		stackItems: string[];
 		toolingTitle: string;
 		toolingItems: string[];
 		lifestyle: string;
+		ctaTitle: string;
+		ctaDescription: string;
+		ctaPrimary: string;
+		ctaSecondary: string;
+	};
+	about: {
+		heading: string;
+		intro: string;
+		paragraphs: string[];
+		focusTitle: string;
+		focusItems: LocalizedServiceItem[];
+		timelineTitle: string;
+		timelineItems: LocalizedAboutTimelineItem[];
+		closing: string;
 	};
 }

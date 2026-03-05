@@ -7,7 +7,7 @@ import {
 	type Locale,
 } from "../../i18n/config";
 import Layout from "../../layouts/Layout.astro";
-import BlogPage from "../../views/BlogPage.astro";
+import AboutPage from "../../views/AboutPage.astro";
 
 export function getStaticPaths() {
 	return locales.map((locale) => ({ params: { locale } }));
@@ -23,10 +23,10 @@ const dict = getDictionary(locale);
 ---
 
 <Layout
-	title={dict.meta.blog.title}
-	metaDescription={dict.meta.blog.description}
+	title={dict.meta.about.title}
+	metaDescription={dict.meta.about.description}
 	locale={locale}
-	pagePath="/blog"
+	pagePath="/about"
 >
-	<BlogPage dict={dict} locale={locale} />
+	<AboutPage dict={dict} locale={locale} />
 </Layout>

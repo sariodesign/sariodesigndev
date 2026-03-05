@@ -1,0 +1,274 @@
+---
+import PageCta from "../components/PageCta.astro";
+import type { Dictionary } from "../i18n";
+import type { Locale } from "../i18n/config";
+
+interface Props {
+	dict: Dictionary;
+	locale: Locale;
+}
+
+const { dict, locale } = Astro.props;
+---
+
+<main class="about-page">
+	<section class="about-wrap">
+		<header class="about-hero">
+			<h1>
+				<span class="about-title-wrap">
+					<span class="about-title-line js-about-title">{dict.about.heading}</span>
+				</span>
+			</h1>
+			<p class="about-intro js-about-item">{dict.about.intro}</p>
+		</header>
+
+		<section class="about-story js-about-item">
+			{
+				dict.about.paragraphs.map((paragraph) => (
+					<p class="about-paragraph">{paragraph}</p>
+				))
+			}
+		</section>
+
+		<section class="about-focus js-about-item">
+			<h2 class="about-section-title">{dict.about.focusTitle}</h2>
+			<div class="about-focus-grid">
+				{
+					dict.about.focusItems.map((item, index) => (
+						<article class="about-focus-card">
+							<span class="about-focus-card__badge">{`0${index + 1}`}</span>
+							<h3>{item.title}</h3>
+							<p>{item.description}</p>
+						</article>
+					))
+				}
+			</div>
+		</section>
+
+		<section class="about-timeline js-about-item">
+			<h2 class="about-section-title">{dict.about.timelineTitle}</h2>
+			<ol class="about-timeline-list">
+				{
+					dict.about.timelineItems.map((item) => (
+						<li class="about-timeline-item">
+							<span class="about-timeline-item__year">{item.year}</span>
+							<div class="about-timeline-item__copy">
+								<h3>{item.title}</h3>
+								<p>{item.description}</p>
+							</div>
+						</li>
+					))
+				}
+			</ol>
+		</section>
+
+		<p class="about-paragraph about-paragraph--closing js-about-item">
+			{dict.about.closing}
+		</p>
+
+		<PageCta dict={dict} locale={locale} className="js-about-item" />
+	</section>
+</main>
+
+<script>
+	import { gsap } from "gsap";
+
+	const reduceMotion = window.matchMedia(
+		"(prefers-reduced-motion: reduce)",
+	).matches;
+	const titleLine = document.querySelector(".js-about-title");
+	const revealItems = [...document.querySelectorAll(".js-about-item")];
+
+	if (!reduceMotion) {
+		const tl = gsap.timeline({ delay: 0.1 });
+		if (titleLine) {
+			tl.fromTo(
+				titleLine,
+				{
+					yPercent: 120,
+					rotateX: -18,
+					filter: "blur(8px)",
+					opacity: 0,
+				},
+				{
+					yPercent: 0,
+					rotateX: 0,
+					filter: "blur(0px)",
+					opacity: 1,
+					duration: 1,
+					ease: "power4.out",
+				},
+			);
+		}
+		tl.fromTo(
+			revealItems,
+			{ y: 22, opacity: 0 },
+			{
+				y: 0,
+				opacity: 1,
+				duration: 0.5,
+				stagger: 0.08,
+				ease: "power3.out",
+			},
+			"-=0.55",
+		);
+	}
+</script>
+
+<style lang="scss">
+	.about-page {
+		--about-text: var(--dark-black);
+		--about-muted: #5f6571;
+		--about-border: rgba(16, 32, 32, 0.16);
+		--about-surface: #f1eeea;
+		display: block;
+		min-height: 100vh;
+		padding: clamp(88px, 10vh, 126px) 16px 132px;
+		position: relative;
+		z-index: 2;
+	}
+
+	.about-wrap {
+		display: grid;
+		gap: 26px;
+		margin: 0 auto;
+		max-width: 1220px;
+		width: 100%;
+	}
+
+	.about-hero {
+		display: grid;
+		gap: 16px;
+	}
+
+	.about-title-wrap {
+		display: block;
+		overflow: hidden;
+	}
+
+	.about-title-line {
+		color: var(--about-text);
+		display: block;
+		font-family: var(--base-font-family-serif);
+		font-size: clamp(2rem, 7vw, 5.1rem);
+		font-weight: 700;
+		transform-origin: 50% 100%;
+		will-change: transform, filter, opacity;
+	}
+
+	.about-intro,
+	.about-paragraph {
+		color: var(--about-muted);
+		line-height: 1.7;
+		margin: 0;
+		max-width: 900px;
+	}
+
+	.about-story {
+		display: grid;
+		gap: 12px;
+	}
+
+	.about-section-title {
+		color: var(--about-text);
+		font-family: var(--base-font-family-serif);
+		font-size: clamp(1.2rem, 2.4vw, 1.75rem);
+		line-height: 1.1;
+		margin: 0 0 14px;
+	}
+
+	.about-focus,
+	.about-timeline {
+		border-top: 1px solid var(--about-border);
+		padding-top: 22px;
+	}
+
+	.about-focus-grid {
+		display: grid;
+		gap: 12px;
+	}
+
+	.about-focus-card {
+		background: var(--about-surface);
+		border: 1px solid var(--about-border);
+		border-radius: 18px;
+		display: grid;
+		gap: 8px;
+		padding: 16px;
+	}
+
+	.about-focus-card__badge {
+		color: var(--orange);
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.09em;
+	}
+
+	.about-focus-card h3,
+	.about-timeline-item__copy h3 {
+		color: var(--about-text);
+		font-size: 1rem;
+		margin: 0;
+	}
+
+	.about-focus-card p,
+	.about-timeline-item__copy p {
+		color: var(--about-muted);
+		line-height: 1.55;
+		margin: 0;
+	}
+
+	.about-timeline-list {
+		display: grid;
+		gap: 12px;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.about-timeline-item {
+		border: 1px solid var(--about-border);
+		border-radius: 16px;
+		display: grid;
+		gap: 8px;
+		padding: 14px;
+	}
+
+	.about-timeline-item__year {
+		color: var(--orange);
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+	}
+
+	.about-paragraph--closing {
+		max-width: 880px;
+	}
+
+	@media screen and (min-width: 768px) {
+		.about-focus-grid {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+
+		.about-timeline-item {
+			gap: 14px;
+			grid-template-columns: auto minmax(0, 1fr);
+			padding: 16px;
+		}
+	}
+
+	@media screen and (min-width: 1024px) {
+		.about-page {
+			padding-inline: 24px;
+		}
+	}
+
+	@media (prefers-color-scheme: dark) {
+		.about-page {
+			--about-text: #ebebeb;
+			--about-muted: #c0c3cb;
+			--about-border: rgba(238, 238, 238, 0.14);
+			--about-surface: #1b2a2a;
+		}
+	}
+</style>

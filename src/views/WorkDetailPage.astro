@@ -1,4 +1,5 @@
 ---
+import PageCta from "../components/PageCta.astro";
 import type { Dictionary, LocalizedProject } from "../i18n";
 import { getLocalizedPath, type Locale } from "../i18n/config";
 
@@ -55,6 +56,10 @@ const { dict, project, locale } = Astro.props;
 					)
 				}
 			</article>
+		</div>
+
+		<div class="work-detail-cta js-detail-reveal">
+			<PageCta dict={dict} locale={locale} />
 		</div>
 	</section>
 </main>
@@ -171,6 +176,10 @@ const { dict, project, locale } = Astro.props;
 		font-size: 1rem;
 		line-height: 1.55;
 		margin: 0;
+	}
+
+	.work-detail-cta {
+		margin-top: clamp(24px, 4vw, 44px);
 	}
 
 	@media (prefers-color-scheme: dark) {

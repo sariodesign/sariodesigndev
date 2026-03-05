@@ -303,7 +303,11 @@ const servicesHref =
 	}
 
 	.home-value-card {
-		backdrop-filter: blur(8px);
+		--home-card-surface: #f1eeea;
+		--home-card-glow: rgba(221, 122, 76, 0.13);
+		background:
+			radial-gradient(circle at top right, var(--home-card-glow), transparent 58%),
+			var(--home-card-surface);
 		border-radius: 18px;
 		display: grid;
 		gap: 10px;
@@ -486,7 +490,8 @@ const servicesHref =
 		}
 
 		.home-value-card {
-			background-color: rgba(255, 255, 255, 0.06);
+			--home-card-surface: #1b2a2a;
+			--home-card-glow: rgba(221, 122, 76, 0.1);
 			border: 1px solid rgba(255, 255, 255, 0.14);
 		}
 
@@ -542,7 +547,8 @@ const servicesHref =
 		}
 
 		.home-value-card {
-			background-color: rgba(255, 255, 255, 0.46);
+			--home-card-surface: #f1eeea;
+			--home-card-glow: rgba(221, 122, 76, 0.13);
 			border: 1px solid rgba(16, 32, 32, 0.12);
 			box-shadow: 0 18px 38px -34px rgba(16, 32, 32, 0.3);
 		}
