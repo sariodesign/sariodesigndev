@@ -29,10 +29,10 @@ const it: Dictionary = {
 	},
 	navigation: {
 		home: "Home",
-		works: "Works",
+		works: "Lavori",
 		services: "Servizi",
 		blog: "Blog",
-		about: "About",
+		about: "Chi sono",
 		menu: "Menu",
 		openMenuAria: "Apri menu",
 		switchLanguage: "Passa a",
@@ -231,25 +231,25 @@ const it: Dictionary = {
 	services: {
 		heading: "Servizi",
 		intro:
-			"Lavoro nel digitale da circa dieci anni. Ho iniziato dal design e, progetto dopo progetto, mi sono spostato sempre di piu sul codice, lavorando soprattutto in ambito publishing.",
+			"Aiuto team e aziende a progettare e sviluppare interfacce web affidabili, performanti e facili da mantenere.",
 		background:
-			"Oggi supporto team e aziende su front-end development e UI engineering, con attenzione a performance, accessibilita e qualita del codice.",
+			"Mi concentro su UI engineering e front-end architecture per prodotti digitali dove la qualita tecnica ha un impatto diretto su business, tempi di rilascio e soddisfazione utente.",
 		valueEyebrow: "Come posso supportarti",
 		offers: [
 			{
-				title: "UI Development",
+				title: "Interfacce per SaaS e piattaforme complesse",
 				description:
-					"Interfacce moderne, responsive e solide, pensate per una produzione reale e per evolvere nel tempo.",
+					"Sviluppo front-end per dashboard, aree riservate e flussi articolati con attenzione a chiarezza e scalabilita.",
 			},
 			{
-				title: "Design System e componenti",
+				title: "Design system operativi",
 				description:
-					"Costruzione di librerie UI riusabili e coerenti, utili a ridurre frizioni tra design e sviluppo.",
+					"Costruisco librerie di componenti e regole condivise per ridurre tempi, inconsistenze e debito tecnico.",
 			},
 			{
-				title: "Refactoring front-end",
+				title: "Refactoring e stabilizzazione",
 				description:
-					"Interventi su codice esistente per migliorare leggibilita, performance e manutenibilita senza bloccare il rilascio.",
+					"Intervengo su codice esistente per migliorare manutenibilita, performance e qualita dei rilasci senza fermare il prodotto.",
 			},
 		],
 		processTitle: "Metodo di lavoro",
@@ -277,11 +277,11 @@ const it: Dictionary = {
 		],
 		deliverablesTitle: "Output concreti",
 		deliverablesItems: [
-			"Analisi tecnica con priorita e quick wins",
-			"Componenti riusabili e pattern UI consistenti",
-			"Ottimizzazioni su performance e accessibilita",
-			"Linee guida operative per onboarding e manutenzione",
-			"Supporto su deploy e monitoraggio post-rilascio",
+			"Analisi tecnica con priorita, rischi e quick wins",
+			"Componenti riusabili e pattern UI documentati",
+			"Interventi su Core Web Vitals e accessibilita",
+			"Linee guida pratiche per onboarding e manutenzione",
+			"Supporto su rilascio, QA e monitoraggio post-go-live",
 		],
 		stackTitle: "Linguaggi e framework",
 		stackItems: [
@@ -308,7 +308,7 @@ const it: Dictionary = {
 			"PostgreSQL",
 		],
 		lifestyle:
-			"Collaboro in modo flessibile con freelance, team interni e agenzie: da consulenze mirate a supporti continuativi su prodotto.",
+			"Collaboro con team interni, agenzie e freelance in formule flessibili: da audit mirati a supporti continuativi su roadmap prodotto.",
 		ctaTitle: "Hai un prodotto da far evolvere?",
 		ctaDescription:
 			"Se stai avviando un nuovo progetto o vuoi migliorare una base esistente, possiamo impostare un piano tecnico concreto e sostenibile.",
@@ -316,54 +316,58 @@ const it: Dictionary = {
 		ctaSecondary: "Vedi i lavori",
 	},
 	about: {
-		heading: "About",
+		heading: "Chi sono",
 		intro:
-			"Sono Rosario Russo e progetto interfacce web da oltre dieci anni, unendo cultura visuale e sviluppo front-end.",
+			"Sono Rosario Russo: negli ultimi 15 anni ho attraversato il web passando da design, contenuti e front-end engineering. Questo percorso mi ha insegnato a guardare i prodotti digitali da piu prospettive, con un approccio pratico che tiene insieme visione, dettaglio e responsabilita tecnica.",
 		paragraphs: [
-			"Nel tempo ho lavorato su contesti diversi, dal publishing ai prodotti SaaS, con l'obiettivo di costruire esperienze veloci, solide e facili da usare.",
-			"Mi interessa la qualita dell'interfaccia ma anche la qualita del codice: componenti ben strutturati, naming chiaro, accessibilita e performance come standard, non come extra.",
+			"Mi piace lavorare su prodotti digitali che devono essere utili davvero: chiari per gli utenti e sostenibili per i team che li mantengono.",
+			"Negli anni ho imparato a tenere insieme estetica, performance e pragmatismo, senza perdere il lato umano del lavoro.",
 		],
-		focusTitle: "Cosa porto nei progetti",
-		focusItems: [
-			{
-				title: "Approccio prodotto",
-				description:
-					"Parto dagli obiettivi reali del business e trasformo i requisiti in una direzione tecnica sostenibile.",
-			},
-			{
-				title: "Collaborazione trasversale",
-				description:
-					"Mi muovo tra design, sviluppo e stakeholder con un linguaggio comune e decisioni verificabili.",
-			},
-			{
-				title: "Qualita operativa",
-				description:
-					"Preferisco rilasci iterativi e leggibili, con attenzione continua a manutenzione e stabilita.",
-			},
-		],
-		timelineTitle: "Percorso",
+		timelineTitle: "Percorso professionale",
 		timelineItems: [
 			{
-				year: "2015",
-				title: "Dai primi lavori tra grafica e web",
+				year: "2023 - Oggi",
+				title: "Freelance",
 				description:
-					"Ho iniziato dal design visuale, imparando a costruire interfacce centrate su gerarchia e leggibilita.",
+					"Sviluppo soluzioni web per travel, agenzie e aziende: siti corporate, booking tool e sistemi gestionali custom.",
 			},
 			{
-				year: "2019",
-				title: "Transizione completa al front-end",
+				year: "2020 - 2023",
+				title: "Ciaopeople",
 				description:
-					"Ho spostato il focus sull'implementazione: componenti, architetture UI e processi di rilascio.",
+					"Senior Front-end Developer: progettazione e consolidamento di design system cross-brand, con focus su accessibilita e scalabilita.",
 			},
 			{
-				year: "Oggi",
-				title: "UI engineering per team e aziende",
+				year: "2018 - 2020",
+				title: "IT Hub",
 				description:
-					"Collaboro su nuovi prodotti e refactoring di piattaforme esistenti, con un approccio pragmatico.",
+					"Front-end Developer: miglioramento UI e performance per progetti editoriali internazionali come blastingnews.com e supermoney.eu.",
+			},
+			{
+				year: "2015 - 2018",
+				title: "Citynews",
+				description:
+					"Web Designer: collaborazione sul design system e sviluppo del sito corporate citynews.it.",
+			},
+			{
+				year: "2012 - 2015",
+				title: "Ringmaster / Gi Group Qbit Division",
+				description:
+					"Web Designer e Web Content Manager: gestione portali corporate nel settore gaming, pubblicazione contenuti e pagine prodotto.",
 			},
 		],
+		passionsTitle: "Fuori dal lavoro",
+		passionsIntro:
+			"Quando chiudo editor e terminale, torno comunque alla creativita ma con ritmi diversi.",
+		passionsItems: [
+			"Musica e chitarra",
+			"Lettura e scrittura di appunti",
+			"Serie TV e cinema",
+			"Gaming narrativo e indie",
+			"Sperimentazione su side project personali",
+		],
 		closing:
-			"Quando non lavoro al codice, continuo a sperimentare su side project personali e studio nuovi workflow per migliorare la delivery.",
+			"Questa parte piu personale mi tiene creativo e curioso, e finisce sempre per migliorare anche il mio modo di lavorare.",
 	},
 };
 

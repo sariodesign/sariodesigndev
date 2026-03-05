@@ -32,7 +32,7 @@ const en: Dictionary = {
 		works: "Works",
 		services: "Services",
 		blog: "Blog",
-		about: "About",
+		about: "About me",
 		menu: "Menu",
 		openMenuAria: "Open menu",
 		switchLanguage: "Switch to",
@@ -231,25 +231,25 @@ const en: Dictionary = {
 	services: {
 		heading: "Services",
 		intro:
-			"I have been working in digital products for about ten years. I started in design, then moved step by step into code, mainly across publishing projects.",
+			"I help companies and product teams build web interfaces that are reliable, performant, and easy to maintain.",
 		background:
-			"Today I help teams and companies with front-end development and UI engineering, with a strong focus on performance, accessibility, and maintainable code.",
+			"My focus is UI engineering and front-end architecture for digital products where technical quality directly impacts business outcomes and release speed.",
 		valueEyebrow: "How I can support you",
 		offers: [
 			{
-				title: "UI Development",
+				title: "Interfaces for SaaS and complex platforms",
 				description:
-					"Modern, responsive interfaces built for real production environments and long-term product growth.",
+					"Front-end implementation for dashboards, private areas, and structured flows with strong focus on clarity and scalability.",
 			},
 			{
-				title: "Design Systems and Components",
+				title: "Operational design systems",
 				description:
-					"Reusable UI libraries and consistent patterns that reduce friction between design and engineering.",
+					"I build component libraries and shared rules to reduce delivery time, inconsistency, and technical debt.",
 			},
 			{
-				title: "Front-end Refactoring",
+				title: "Refactoring and stabilization",
 				description:
-					"Improvements on existing codebases to raise clarity, performance, and maintainability without stopping delivery.",
+					"I improve existing codebases to raise maintainability, performance, and release quality without blocking product progress.",
 			},
 		],
 		processTitle: "How we work",
@@ -277,11 +277,11 @@ const en: Dictionary = {
 		],
 		deliverablesTitle: "What you can expect",
 		deliverablesItems: [
-			"Technical audit with priorities and quick wins",
-			"Reusable components and consistent UI patterns",
-			"Performance and accessibility improvements",
-			"Operational guidelines for onboarding and maintenance",
-			"Support on deployment and post-release monitoring",
+			"Technical audit with priorities, risks, and quick wins",
+			"Reusable components and documented UI patterns",
+			"Core Web Vitals and accessibility improvements",
+			"Practical guidelines for onboarding and maintenance",
+			"Support on release, QA, and post-go-live monitoring",
 		],
 		stackTitle: "Languages and frameworks",
 		stackItems: [
@@ -308,7 +308,7 @@ const en: Dictionary = {
 			"PostgreSQL",
 		],
 		lifestyle:
-			"I collaborate flexibly with freelancers, in-house teams, and agencies, from focused consulting to ongoing product support.",
+			"I work with in-house teams, agencies, and freelancers through flexible setups, from focused audits to ongoing product support.",
 		ctaTitle: "Have a product that needs to evolve?",
 		ctaDescription:
 			"If you are starting from scratch or improving an existing platform, we can define a practical and sustainable technical roadmap.",
@@ -316,54 +316,58 @@ const en: Dictionary = {
 		ctaSecondary: "View works",
 	},
 	about: {
-		heading: "About",
+		heading: "About me",
 		intro:
-			"I am Rosario Russo, and I have been designing web interfaces for over ten years, combining visual culture and front-end engineering.",
+			"I am Rosario Russo. Over the last 15 years I moved across design, content, and front-end engineering. This path taught me to look at digital products from different angles, with a practical mindset that keeps vision, detail, and technical responsibility together.",
 		paragraphs: [
-			"Over time I worked across different contexts, from publishing to SaaS products, always aiming for experiences that are fast, reliable, and easy to use.",
-			"I care about interface quality, but also code quality: well-structured components, clear naming, accessibility, and performance as baseline standards.",
+			"I enjoy building digital products that are genuinely useful: clear for users and sustainable for the teams who maintain them.",
+			"Over time I learned how to keep aesthetics, performance, and pragmatism together without losing the human side of the work.",
 		],
-		focusTitle: "What I bring to projects",
-		focusItems: [
-			{
-				title: "Product mindset",
-				description:
-					"I start from real business goals and convert requirements into a sustainable technical direction.",
-			},
-			{
-				title: "Cross-team collaboration",
-				description:
-					"I work between design, engineering, and stakeholders with shared language and verifiable decisions.",
-			},
-			{
-				title: "Operational quality",
-				description:
-					"I prefer iterative, readable delivery with continuous focus on maintainability and stability.",
-			},
-		],
-		timelineTitle: "Journey",
+		timelineTitle: "Professional journey",
 		timelineItems: [
 			{
-				year: "2015",
-				title: "Starting point: design and web",
+				year: "2023 - Today",
+				title: "Freelance",
 				description:
-					"I started from visual design, learning how to build interfaces around hierarchy and readability.",
+					"I build web solutions for travel, agencies, and commercial clients: corporate websites, booking tools, and custom management systems.",
 			},
 			{
-				year: "2019",
-				title: "Full transition to front-end",
+				year: "2020 - 2023",
+				title: "Ciaopeople",
 				description:
-					"My focus moved fully into implementation: components, UI architecture, and release workflows.",
+					"Senior Front-end Developer: designed and scaled a cross-brand design system with strong focus on accessibility and consistency.",
 			},
 			{
-				year: "Today",
-				title: "UI engineering for teams and companies",
+				year: "2018 - 2020",
+				title: "IT Hub",
 				description:
-					"I collaborate on new products and refactoring existing platforms with a pragmatic approach.",
+					"Front-end Developer: improved UI and performance for editorial products such as blastingnews.com and supermoney.eu.",
+			},
+			{
+				year: "2015 - 2018",
+				title: "Citynews",
+				description:
+					"Web Designer: collaborated on the design system and on the company website citynews.it.",
+			},
+			{
+				year: "2012 - 2015",
+				title: "Ringmaster / Gi Group Qbit Division",
+				description:
+					"Web Designer and Web Content Manager: managed corporate portals in the gaming sector and delivered product pages and content.",
 			},
 		],
+		passionsTitle: "Outside work",
+		passionsIntro:
+			"When I close the editor and terminal, I still stay close to creativity, just with a different pace.",
+		passionsItems: [
+			"Music and guitar",
+			"Reading and note writing",
+			"TV series and cinema",
+			"Narrative and indie gaming",
+			"Experimenting on personal side projects",
+		],
 		closing:
-			"When I am not coding client work, I keep experimenting on personal side projects and studying new workflows to improve delivery.",
+			"This personal side keeps me creative and curious, and it consistently improves how I approach professional projects.",
 	},
 };
 

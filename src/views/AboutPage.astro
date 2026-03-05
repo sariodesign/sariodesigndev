@@ -30,21 +30,6 @@ const { dict, locale } = Astro.props;
 			}
 		</section>
 
-		<section class="about-focus js-about-item">
-			<h2 class="about-section-title">{dict.about.focusTitle}</h2>
-			<div class="about-focus-grid">
-				{
-					dict.about.focusItems.map((item, index) => (
-						<article class="about-focus-card">
-							<span class="about-focus-card__badge">{`0${index + 1}`}</span>
-							<h3>{item.title}</h3>
-							<p>{item.description}</p>
-						</article>
-					))
-				}
-			</div>
-		</section>
-
 		<section class="about-timeline js-about-item">
 			<h2 class="about-section-title">{dict.about.timelineTitle}</h2>
 			<ol class="about-timeline-list">
@@ -60,6 +45,18 @@ const { dict, locale } = Astro.props;
 					))
 				}
 			</ol>
+		</section>
+
+		<section class="about-passions js-about-item">
+			<h2 class="about-section-title">{dict.about.passionsTitle}</h2>
+			<p class="about-passions-intro">{dict.about.passionsIntro}</p>
+			<ul class="about-passions-list">
+				{
+					dict.about.passionsItems.map((item) => (
+						<li class="about-passion-chip">{item}</li>
+					))
+				}
+			</ul>
 		</section>
 
 		<p class="about-paragraph about-paragraph--closing js-about-item">
@@ -161,7 +158,6 @@ const { dict, locale } = Astro.props;
 		color: var(--about-muted);
 		line-height: 1.7;
 		margin: 0;
-		max-width: 900px;
 	}
 
 	.about-story {
@@ -177,41 +173,18 @@ const { dict, locale } = Astro.props;
 		margin: 0 0 14px;
 	}
 
-	.about-focus,
-	.about-timeline {
+	.about-timeline,
+	.about-passions {
 		border-top: 1px solid var(--about-border);
 		padding-top: 22px;
 	}
 
-	.about-focus-grid {
-		display: grid;
-		gap: 12px;
-	}
-
-	.about-focus-card {
-		background: var(--about-surface);
-		border: 1px solid var(--about-border);
-		border-radius: 18px;
-		display: grid;
-		gap: 8px;
-		padding: 16px;
-	}
-
-	.about-focus-card__badge {
-		color: var(--orange);
-		font-size: 0.72rem;
-		font-weight: 700;
-		letter-spacing: 0.09em;
-	}
-
-	.about-focus-card h3,
 	.about-timeline-item__copy h3 {
 		color: var(--about-text);
 		font-size: 1rem;
 		margin: 0;
 	}
 
-	.about-focus-card p,
 	.about-timeline-item__copy p {
 		color: var(--about-muted);
 		line-height: 1.55;
@@ -219,41 +192,79 @@ const { dict, locale } = Astro.props;
 	}
 
 	.about-timeline-list {
-		display: grid;
-		gap: 12px;
 		list-style: none;
 		margin: 0;
 		padding: 0;
 	}
 
 	.about-timeline-item {
-		border: 1px solid var(--about-border);
-		border-radius: 16px;
 		display: grid;
-		gap: 8px;
-		padding: 14px;
+		grid-template-columns: minmax(110px, 150px) minmax(0, 1fr);
+		gap: 12px 18px;
+		padding: 16px 0;
+		border-top: 1px solid var(--about-border);
+	}
+
+	.about-timeline-item:last-child {
+		border-bottom: 1px solid var(--about-border);
 	}
 
 	.about-timeline-item__year {
 		color: var(--orange);
-		font-size: 0.75rem;
+		display: inline-flex;
+		font-size: 0.7rem;
 		font-weight: 700;
-		letter-spacing: 0.08em;
+		letter-spacing: 0.09em;
+		padding-top: 0.2rem;
+		text-transform: uppercase;
 	}
 
-	.about-paragraph--closing {
-		max-width: 880px;
+	.about-timeline-item__copy {
+		border-left: 1px solid var(--about-border);
+		padding-left: 16px;
+		position: relative;
+	}
+
+	.about-timeline-item__copy::before {
+		background-color: var(--orange);
+		border-radius: 50%;
+		content: "";
+		height: 8px;
+		left: -4px;
+		position: absolute;
+		top: 0.45rem;
+		width: 8px;
+	}
+
+	.about-passions-intro {
+		color: var(--about-muted);
+		line-height: 1.65;
+		margin: 0 0 12px;
+	}
+
+	.about-passions-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.about-passion-chip {
+		background: var(--about-surface);
+		border: 1px solid var(--about-border);
+		border-radius: 999px;
+		color: var(--about-text);
+		font-size: 0.76rem;
+		font-weight: 700;
+		letter-spacing: 0.04em;
+		padding: 0.48rem 0.76rem;
 	}
 
 	@media screen and (min-width: 768px) {
-		.about-focus-grid {
-			grid-template-columns: repeat(3, minmax(0, 1fr));
-		}
-
 		.about-timeline-item {
-			gap: 14px;
-			grid-template-columns: auto minmax(0, 1fr);
-			padding: 16px;
+			grid-template-columns: minmax(140px, 180px) minmax(0, 1fr);
 		}
 	}
 

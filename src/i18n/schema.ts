@@ -141,10 +141,11 @@ export interface Dictionary {
 		heading: string;
 		intro: string;
 		paragraphs: string[];
-		focusTitle: string;
-		focusItems: LocalizedServiceItem[];
 		timelineTitle: string;
 		timelineItems: LocalizedAboutTimelineItem[];
+		passionsTitle: string;
+		passionsIntro: string;
+		passionsItems: string[];
 		closing: string;
 	};
 }
