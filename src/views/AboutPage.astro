@@ -69,24 +69,45 @@ const { dict, locale } = Astro.props;
 
 <script>
 	import { gsap } from "gsap";
+	import { onPageRevealReady } from "../assets/js/pageReveal.js";
 
 	const reduceMotion = window.matchMedia(
 		"(prefers-reduced-motion: reduce)",
 	).matches;
 	const titleLine = document.querySelector(".js-about-title");
+	const titleHeading = titleLine?.closest("h1");
 	const revealItems = [...document.querySelectorAll(".js-about-item")];
 
 	if (!reduceMotion) {
-		const tl = gsap.timeline({ delay: 0.1 });
+		if (titleHeading) {
+			gsap.set(titleHeading, { autoAlpha: 1 });
+		}
 		if (titleLine) {
-			tl.fromTo(
+			gsap.set(titleLine, {
+				yPercent: 120,
+				rotateX: -18,
+				filter: "blur(8px)",
+				opacity: 0,
+			});
+		}
+		if (revealItems.length > 0) {
+			gsap.set(revealItems, { y: 22, opacity: 0 });
+		}
+	}
+
+	onPageRevealReady(() => {
+		if (titleHeading) {
+			gsap.set(titleHeading, { autoAlpha: 1 });
+		}
+
+		if (reduceMotion) {
+			return;
+		}
+
+		const tl = gsap.timeline();
+		if (titleLine) {
+			tl.to(
 				titleLine,
-				{
-					yPercent: 120,
-					rotateX: -18,
-					filter: "blur(8px)",
-					opacity: 0,
-				},
 				{
 					yPercent: 0,
 					rotateX: 0,
@@ -97,9 +118,8 @@ const { dict, locale } = Astro.props;
 				},
 			);
 		}
-		tl.fromTo(
+		tl.to(
 			revealItems,
-			{ y: 22, opacity: 0 },
 			{
 				y: 0,
 				opacity: 1,
@@ -109,7 +129,7 @@ const { dict, locale } = Astro.props;
 			},
 			"-=0.55",
 		);
-	}
+	});
 </script>
 
 <style lang="scss">

@@ -66,24 +66,32 @@ const { dict, project, locale } = Astro.props;
 
 <script>
 	import { gsap } from "gsap";
+	import { onPageRevealReady } from "../assets/js/pageReveal.js";
 
 	const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 	const revealItems = [...document.querySelectorAll(".js-detail-reveal")];
 
-	if (!reduceMotion) {
-		gsap.fromTo(
+	if (!reduceMotion && revealItems.length > 0) {
+		gsap.set(revealItems, { y: 28, autoAlpha: 0 });
+	}
+
+	onPageRevealReady(() => {
+		if (reduceMotion) {
+			gsap.set(revealItems, { autoAlpha: 1 });
+			return;
+		}
+
+		gsap.to(
 			revealItems,
-			{ y: 28, autoAlpha: 0 },
 			{
 				y: 0,
 				autoAlpha: 1,
 				duration: 0.55,
 				stagger: 0.08,
 				ease: "power3.out",
-				delay: 0.08,
 			},
 		);
-	}
+	});
 </script>
 
 <style lang="scss">

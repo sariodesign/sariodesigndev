@@ -1,3 +1,5 @@
+import { PAGE_REVEAL_EVENT } from './pageReveal.js';
+
 const DEFAULT_BRAND_TEXT = '<sario/design>';
 const SHUFFLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>/*+-_';
 const CHAR_STAGGER_MS = 52;
@@ -5,6 +7,39 @@ const CHAR_SWAP_MS = 68;
 const CHAR_SWAP_COUNT = 3;
 const FINAL_HOLD_MS = 380;
 const RELOAD_NAV_DELAY_MS = 180;
+const TRANSITION_FALLBACK_BUFFER_MS = 32;
+
+const parseTimeToMs = (value) => {
+	const trimmedValue = value.trim();
+
+	if (!trimmedValue) {
+		return 0;
+	}
+
+	if (trimmedValue.endsWith('ms')) {
+		return Number.parseFloat(trimmedValue);
+	}
+
+	return Number.parseFloat(trimmedValue) * 1000;
+};
+
+const getTransitionFallbackMs = (element) => {
+	const computedStyles = window.getComputedStyle(element);
+	const durations = computedStyles.transitionDuration
+		.split(',')
+		.map(parseTimeToMs);
+	const delays = computedStyles.transitionDelay.split(',').map(parseTimeToMs);
+	const entries = Math.max(durations.length, delays.length);
+	let maxTransitionMs = 0;
+
+	for (let index = 0; index < entries; index += 1) {
+		const duration = durations[index] ?? durations[durations.length - 1] ?? 0;
+		const delay = delays[index] ?? delays[delays.length - 1] ?? 0;
+		maxTransitionMs = Math.max(maxTransitionMs, duration + delay);
+	}
+
+	return maxTransitionMs + TRANSITION_FALLBACK_BUFFER_MS;
+};
 
 const isInternalHref = (href) => {
 	if (!href) {
@@ -127,16 +162,59 @@ export function initPageLoader() {
 
 	let shownAt = Date.now();
 	let hideTimer = null;
+	let hideTransitionTimer = null;
+	let hideTransitionHandler = null;
+	let pageRevealReady = false;
 	const brandAnimator = loaderBrand ? createBrandAnimator(loaderBrand) : null;
 	const minVisibleMs = brandAnimator?.minVisibleMs ?? FINAL_HOLD_MS;
 
-	const showLoader = () => {
-		shownAt = Date.now();
+	const clearPendingHide = () => {
 		if (hideTimer) {
 			window.clearTimeout(hideTimer);
 			hideTimer = null;
 		}
 
+		if (hideTransitionTimer) {
+			window.clearTimeout(hideTransitionTimer);
+			hideTransitionTimer = null;
+		}
+
+		if (hideTransitionHandler) {
+			loader.removeEventListener('transitionend', hideTransitionHandler);
+			hideTransitionHandler = null;
+		}
+	};
+
+	const dispatchPageRevealReady = () => {
+		if (pageRevealReady) {
+			return;
+		}
+
+		pageRevealReady = true;
+		document.documentElement.dataset.pageRevealReady = 'true';
+		document.dispatchEvent(new CustomEvent(PAGE_REVEAL_EVENT));
+	};
+
+	const finalizeHide = () => {
+		if (hideTransitionTimer) {
+			window.clearTimeout(hideTransitionTimer);
+			hideTransitionTimer = null;
+		}
+
+		if (hideTransitionHandler) {
+			loader.removeEventListener('transitionend', hideTransitionHandler);
+			hideTransitionHandler = null;
+		}
+
+		dispatchPageRevealReady();
+	};
+
+	const showLoader = () => {
+		shownAt = Date.now();
+		clearPendingHide();
+
+		pageRevealReady = false;
+		document.documentElement.dataset.pageRevealReady = 'false';
 		document.documentElement.classList.add('is-loading-page');
 		loader.classList.remove('is-hidden');
 		brandAnimator?.play();
@@ -146,13 +224,26 @@ export function initPageLoader() {
 		const elapsed = Date.now() - shownAt;
 		const wait = Math.max(minVisibleMs - elapsed, 0);
 
-		if (hideTimer) {
-			window.clearTimeout(hideTimer);
-		}
+		clearPendingHide();
 
 		hideTimer = window.setTimeout(() => {
+			hideTransitionHandler = (event) => {
+				if (event.target !== loader || event.propertyName !== 'opacity') {
+					return;
+				}
+
+				finalizeHide();
+			};
+
+			loader.addEventListener('transitionend', hideTransitionHandler);
+			hideTransitionTimer = window.setTimeout(
+				finalizeHide,
+				getTransitionFallbackMs(loader)
+			);
 			loader.classList.add('is-hidden');
 			document.documentElement.classList.remove('is-loading-page');
+
+			hideTimer = null;
 		}, wait);
 	};
 

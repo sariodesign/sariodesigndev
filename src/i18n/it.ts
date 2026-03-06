@@ -200,7 +200,7 @@ const it: Dictionary = {
 				services: "Next.js, Tailwind, Motion, Sanity",
 				description:
 					"Sito portfolio bilingue per l'artista e fotografo Marco Iannaccone (aka Scarlet Lovejoy), pensato per raccontare il suo universo creativo in modo chiaro.",
-				image: "/work-placeholder.svg",
+				image: "/works/marco-iannaccone-01.png",
 				client: "Marco Iannaccone",
 				techStack: "Next.js, Tailwind, Framer Motion, Sanity CMS",
 				detailBlocks: [

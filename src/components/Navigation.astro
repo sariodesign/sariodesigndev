@@ -30,12 +30,12 @@ const navigationLinks: Link[] = [
 		mobileOnly: true,
 	},
 	{
-		label: dict.navigation.works,
-		url: getLocalizedPath(locale, "/works"),
-	},
-	{
 		label: dict.navigation.about,
 		url: getLocalizedPath(locale, "/about"),
+	},
+	{
+		label: dict.navigation.works,
+		url: getLocalizedPath(locale, "/works"),
 	},
 	{
 		label: dict.navigation.services,
@@ -50,7 +50,11 @@ const languageSwitchName = localeNames[targetLocale];
 
 <nav class="site-nav js-menu" aria-label={dict.navigation.menu}>
 	<div class="nav-overlay js-menu-overlay" aria-hidden="true"></div>
-	<div class="nav-menu js-nav-panel" id="mobile-navigation" aria-hidden="true">
+	<div
+		class="nav-menu js-nav-panel"
+		id="mobile-navigation"
+		aria-hidden="true"
+	>
 		<div class="nav-menu__handle" aria-hidden="true"></div>
 		<div class="nav-menu__top">
 			<p class="nav-menu__eyebrow">{dict.navigation.menu}</p>
@@ -60,7 +64,9 @@ const languageSwitchName = localeNames[targetLocale];
 				aria-label={dict.navigation.closeMenuAria}
 			>
 				<span class="nav-menu-close__icon" aria-hidden="true"></span>
-				<span class="nav-menu-close__label">{dict.navigation.closeMenuAria}</span>
+				<span class="nav-menu-close__label"
+					>{dict.navigation.closeMenuAria}</span
+				>
 			</button>
 		</div>
 		<div class="nav-menu__links">
@@ -89,7 +95,9 @@ const languageSwitchName = localeNames[targetLocale];
 				data-astro-reload
 				aria-label={`${dict.navigation.switchLanguage} ${languageSwitchName}`}
 			>
-				<span class="lang-switch__label">{dict.navigation.switchLanguage}</span>
+				<span class="lang-switch__label"
+					>{dict.navigation.switchLanguage}</span
+				>
 				<span class="lang-switch__value">{languageSwitchLabel}</span>
 			</a>
 			<div class="nav-menu-contact">
@@ -176,10 +184,7 @@ const languageSwitchName = localeNames[targetLocale];
 		if (nextOpen) {
 			lastFocusedElement = document.activeElement;
 			window.setTimeout(() => closeButton?.focus(), 50);
-		} else if (
-			restoreFocus &&
-			lastFocusedElement instanceof HTMLElement
-		) {
+		} else if (restoreFocus && lastFocusedElement instanceof HTMLElement) {
 			lastFocusedElement.focus();
 		}
 	};
@@ -194,7 +199,9 @@ const languageSwitchName = localeNames[targetLocale];
 			return;
 		}
 
-		const focusableElements = [...panel.querySelectorAll(FOCUSABLE_SELECTOR)];
+		const focusableElements = [
+			...panel.querySelectorAll(FOCUSABLE_SELECTOR),
+		];
 		if (focusableElements.length === 0) return;
 
 		const firstElement = focusableElements[0];
@@ -283,15 +290,21 @@ const languageSwitchName = localeNames[targetLocale];
 			z-index: 7;
 
 			@media (prefers-color-scheme: dark) {
-				background:
-					linear-gradient(180deg, rgba(21, 37, 37, 0.98), rgba(16, 32, 32, 0.98));
+				background: linear-gradient(
+					180deg,
+					rgba(21, 37, 37, 0.98),
+					rgba(16, 32, 32, 0.98)
+				);
 				border: 1px solid rgba(255, 255, 255, 0.1);
 				box-shadow: 0 -24px 60px -40px rgba(0, 0, 0, 0.65);
 			}
 
 			@media (prefers-color-scheme: light) {
-				background:
-					linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(242, 242, 242, 0.98));
+				background: linear-gradient(
+					180deg,
+					rgba(255, 255, 255, 0.97),
+					rgba(242, 242, 242, 0.98)
+				);
 				border: 1px solid rgba(16, 32, 32, 0.1);
 				box-shadow: 0 -24px 60px -42px rgba(16, 32, 32, 0.35);
 			}
@@ -319,7 +332,9 @@ const languageSwitchName = localeNames[targetLocale];
 			opacity: 0;
 			pointer-events: none;
 			position: fixed;
-			transition: opacity 0.22s ease, visibility 0.22s ease;
+			transition:
+				opacity 0.22s ease,
+				visibility 0.22s ease;
 			visibility: hidden;
 			z-index: 6;
 

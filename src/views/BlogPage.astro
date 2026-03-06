@@ -50,24 +50,51 @@ const posts = dict.blog.posts;
 
 <script>
 	import { gsap } from "gsap";
+	import { onPageRevealReady } from "../assets/js/pageReveal.js";
 
 	const reduceMotion = window.matchMedia(
 		"(prefers-reduced-motion: reduce)",
 	).matches;
 	const titleLine = document.querySelector(".js-blog-title");
-	const revealItems = [...document.querySelectorAll(".js-blog-reveal")];
+	const titleHeading = titleLine?.closest("h1");
+	const revealItems = [
+		document.querySelector(".blog-list"),
+		document.querySelector(".blog-page-cta"),
+	].filter(Boolean);
 	const cards = [...document.querySelectorAll(".js-blog-item")];
 
-	if (!reduceMotion && titleLine) {
-		gsap.timeline({ delay: 0.1 })
-			.fromTo(
+	if (!reduceMotion) {
+		if (titleHeading) {
+			gsap.set(titleHeading, { autoAlpha: 1 });
+		}
+		if (titleLine) {
+			gsap.set(titleLine, {
+				yPercent: 120,
+				rotateX: -18,
+				filter: "blur(8px)",
+				opacity: 0,
+			});
+		}
+		if (revealItems.length > 0) {
+			gsap.set(revealItems, { y: 20, opacity: 0 });
+		}
+		if (cards.length > 0) {
+			gsap.set(cards, { y: 24, opacity: 0 });
+		}
+	}
+
+	onPageRevealReady(() => {
+		if (titleHeading) {
+			gsap.set(titleHeading, { autoAlpha: 1 });
+		}
+
+		if (reduceMotion || !titleLine) {
+			return;
+		}
+
+		gsap.timeline()
+			.to(
 				titleLine,
-				{
-					yPercent: 120,
-					rotateX: -18,
-					filter: "blur(8px)",
-					opacity: 0,
-				},
 				{
 					yPercent: 0,
 					rotateX: 0,
@@ -77,9 +104,8 @@ const posts = dict.blog.posts;
 					ease: "power4.out",
 				},
 			)
-			.fromTo(
+			.to(
 				revealItems,
-				{ y: 20, opacity: 0 },
 				{
 					y: 0,
 					opacity: 1,
@@ -89,9 +115,8 @@ const posts = dict.blog.posts;
 				},
 				"-=0.55",
 			)
-			.fromTo(
+			.to(
 				cards,
-				{ y: 24, opacity: 0 },
 				{
 					y: 0,
 					opacity: 1,
@@ -101,7 +126,7 @@ const posts = dict.blog.posts;
 				},
 				"-=0.35",
 			);
-	}
+	});
 </script>
 
 <style lang="scss" is:global>

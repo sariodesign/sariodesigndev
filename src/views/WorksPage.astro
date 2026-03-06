@@ -57,6 +57,7 @@ const projects = dict.works.projects;
 
 <script>
 	import { gsap } from "gsap";
+	import { onPageRevealReady } from "../assets/js/pageReveal.js";
 
 	const reduceMotion = window.matchMedia(
 		"(prefers-reduced-motion: reduce)",
@@ -65,16 +66,31 @@ const projects = dict.works.projects;
 	const rows = [...document.querySelectorAll(".js-work-row")];
 
 	if (!reduceMotion) {
-		const tl = gsap.timeline({ delay: 0.1 });
 		if (title) {
-			tl.fromTo(
+			gsap.set(title, {
+				yPercent: 120,
+				rotateX: -14,
+				filter: "blur(8px)",
+				autoAlpha: 0,
+			});
+		}
+		if (rows.length > 0) {
+			gsap.set(rows, { y: 28, autoAlpha: 0 });
+		}
+	}
+
+	onPageRevealReady(() => {
+		if (reduceMotion) {
+			if (title) {
+				gsap.set(title, { autoAlpha: 1 });
+			}
+			return;
+		}
+
+		const tl = gsap.timeline();
+		if (title) {
+			tl.to(
 				title,
-				{
-					yPercent: 120,
-					rotateX: -14,
-					filter: "blur(8px)",
-					autoAlpha: 0,
-				},
 				{
 					yPercent: 0,
 					rotateX: 0,
@@ -85,9 +101,8 @@ const projects = dict.works.projects;
 				},
 			);
 		}
-		tl.fromTo(
+		tl.to(
 			rows,
-			{ y: 28, autoAlpha: 0 },
 			{
 				y: 0,
 				autoAlpha: 1,
@@ -97,7 +112,7 @@ const projects = dict.works.projects;
 			},
 			"-=0.35",
 		);
-	}
+	});
 
 	const canHover = window.matchMedia(
 		"(hover: hover) and (pointer: fine)",

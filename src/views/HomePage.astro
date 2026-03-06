@@ -117,7 +117,11 @@ const servicesHref =
 
 <script>
 	import { gsap } from "gsap";
+	import { onPageRevealReady } from "../assets/js/pageReveal.js";
 
+	const reduceMotion = window.matchMedia(
+		"(prefers-reduced-motion: reduce)",
+	).matches;
 	const intro = document.querySelector("#intro");
 	const introLines = document.querySelectorAll(".intro-line");
 	const availabilityBadge = document.querySelector(".availability-badge");
@@ -125,106 +129,129 @@ const servicesHref =
 	const homeValue = document.querySelector(".js-home-value");
 	const homeCta = document.querySelector(".home-cta");
 
-	if (intro) {
-		gsap.set(intro, { autoAlpha: 1 });
-	}
-	if (homePhoto) {
-		gsap.set(homePhoto, { autoAlpha: 0 });
-	}
-
-	const introTimeline = gsap.timeline({ delay: 0.15 });
-	if (homePhoto) {
-		introTimeline.fromTo(
-			homePhoto,
-			{
+	if (!reduceMotion) {
+		if (intro) {
+			gsap.set(intro, { autoAlpha: 1 });
+		}
+		if (availabilityBadge) {
+			gsap.set(availabilityBadge, { y: 14, opacity: 0 });
+		}
+		if (homePhoto) {
+			gsap.set(homePhoto, {
 				y: 28,
 				scale: 0.94,
 				rotate: -2.5,
 				autoAlpha: 0,
-			},
-			{
-				y: 0,
-				scale: 1,
-				rotate: 0,
-				autoAlpha: 1,
-				duration: 0.95,
-				ease: "power3.out",
-			},
-			0,
-		);
-	}
-	if (availabilityBadge) {
-		introTimeline.fromTo(
-			availabilityBadge,
-			{
-				y: 14,
+			});
+		}
+		if (introLines.length > 0) {
+			gsap.set(introLines, {
+				yPercent: 120,
+				rotateX: -22,
 				opacity: 0,
-			},
-			{
-				y: 0,
-				opacity: 1,
-				duration: 0.55,
-				ease: "power3.out",
-			},
-			0.05,
-		);
-	}
-	introTimeline.fromTo(
-		introLines,
-		{
-			yPercent: 120,
-			rotateX: -22,
-			opacity: 0,
-		},
-		{
-			yPercent: 0,
-			rotateX: 0,
-			opacity: 1,
-			stagger: 0.13,
-			duration: 1.05,
-			ease: "power4.out",
-		},
-		0.1,
-	);
-	if (homeValue) {
-		introTimeline.fromTo(
-			homeValue,
-			{
-				y: 18,
-				opacity: 0,
-			},
-			{
-				y: 0,
-				opacity: 1,
-				duration: 0.55,
-				ease: "power3.out",
-			},
-			0.28,
-		);
-	}
-	if (homeCta) {
-		introTimeline.fromTo(
-			homeCta,
-			{
-				y: 12,
-				opacity: 0,
-			},
-			{
-				y: 0,
-				opacity: 1,
-				duration: 0.55,
-				ease: "power2.out",
-			},
-			0.42,
-		);
+			});
+		}
+		if (homeValue) {
+			gsap.set(homeValue, { y: 18, opacity: 0 });
+		}
+		if (homeCta) {
+			gsap.set(homeCta, { y: 12, opacity: 0 });
+		}
 	}
 
-	gsap.to(".footer", {
-		y: 0,
-		opacity: 1,
-		stagger: 0.05,
-		delay: 0.2,
-		duration: 0.5,
+	onPageRevealReady(() => {
+		if (reduceMotion) {
+			if (intro) {
+				gsap.set(intro, { autoAlpha: 1 });
+			}
+			if (availabilityBadge) {
+				gsap.set(availabilityBadge, { opacity: 1, y: 0 });
+			}
+			if (homePhoto) {
+				gsap.set(homePhoto, {
+					autoAlpha: 1,
+					y: 0,
+					scale: 1,
+					rotate: 0,
+				});
+			}
+			if (homeCta) {
+				gsap.set(homeCta, { opacity: 1, y: 0 });
+			}
+			gsap.set(".footer", { y: 0, opacity: 1 });
+			return;
+		}
+
+		const introTimeline = gsap.timeline();
+		if (homePhoto) {
+			introTimeline.to(
+				homePhoto,
+				{
+					y: 0,
+					scale: 1,
+					rotate: 0,
+					autoAlpha: 1,
+					duration: 0.95,
+					ease: "power3.out",
+				},
+				0,
+			);
+		}
+		if (availabilityBadge) {
+			introTimeline.to(
+				availabilityBadge,
+				{
+					y: 0,
+					opacity: 1,
+					duration: 0.55,
+					ease: "power3.out",
+				},
+				0.05,
+			);
+		}
+		introTimeline.to(
+			introLines,
+			{
+				yPercent: 0,
+				rotateX: 0,
+				opacity: 1,
+				stagger: 0.13,
+				duration: 1.05,
+				ease: "power4.out",
+			},
+			0.1,
+		);
+		if (homeValue) {
+			introTimeline.to(
+				homeValue,
+				{
+					y: 0,
+					opacity: 1,
+					duration: 0.55,
+					ease: "power3.out",
+				},
+				0.28,
+			);
+		}
+		if (homeCta) {
+			introTimeline.to(
+				homeCta,
+				{
+					y: 0,
+					opacity: 1,
+					duration: 0.55,
+					ease: "power2.out",
+				},
+				0.42,
+			);
+		}
+
+		gsap.to(".footer", {
+			y: 0,
+			opacity: 1,
+			stagger: 0.05,
+			duration: 0.5,
+		});
 	});
 </script>
 
@@ -232,7 +259,7 @@ const servicesHref =
 	h1 {
 		color: #fff;
 		font-size: clamp(1.25rem, 4vw, 2.75rem);
-		line-height: 1.08;
+		line-height: 1.16;
 		margin: 0;
 		opacity: 0;
 		perspective: 1000px;
