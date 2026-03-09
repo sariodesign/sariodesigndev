@@ -141,7 +141,7 @@ const it: Dictionary = {
 					{
 						type: "text",
 						value:
-							"Ho definito l'architettura del prodotto partendo da processi reali: onboarding utenti, gestione ruoli e tracciamento operativo. L'obiettivo era avere una base chiara e scalabile da estendere modulo per modulo.",
+							"Trasformare l'operatività di un fornitore di sistemi di stampa partendo dai problemi reali: attraverso interviste mirate ai reparti, ho mappato ogni inefficienza per convertire i bisogni aziendali in un flusso digitale fluido. L'obiettivo era superare i limiti dei software standard, creando una soluzione che rispecchiasse fedelmente le dinamiche del business.",
 					},
 					{
 						type: "image",
@@ -151,7 +151,7 @@ const it: Dictionary = {
 					{
 						type: "text",
 						value:
-							"Ho progettato e implementato API tipizzate, modello dati e interfaccia operativa, con attenzione a performance e coerenza UI nei flussi quotidiani.",
+							"La risposta è un prodotto sartoriale, un ecosistema API-first con frontend dedicato, progettato per aderire perfettamente ai processi del cliente. Superando la rigidità dei gestionali preconfigurati, ho sviluppato uno strumento snello e scalabile, cucito attorno alle necessità uniche di chi lo utilizza ogni giorno.",
 					},
 					{
 						type: "image",
@@ -161,7 +161,17 @@ const it: Dictionary = {
 					{
 						type: "text",
 						value:
-							"Ho progettato e implementato API tipizzate, modello dati e interfaccia operativa, con attenzione a performance e coerenza UI nei flussi quotidiani.",
+							"La solidità tecnica poggia su uno stack d'avanguardia: Hono e TypeScript garantiscono un backend ultra-veloce, mentre PostgreSQL e Drizzle assicurano la massima integrità del dato. L’interfaccia in Vue.js offre un'esperienza utente reattiva e intuitiva, semplificando la gestione di volumi complessi di informazioni con naturalezza.",
+					},
+					{
+						type: "text",
+						value:
+							"Il sistema centralizza l'intera catena del valore: dalla dashboard strategica alla gestione documentale di ordini e DDT. Moduli per il monitoraggio del parco macchine, ticketing e un calendario eventi personalizzato permettono di dominare logistica e assistenza tecnica, il tutto protetto da una gestione granulare dei ruoli utente."
+					},
+					{
+						type: "text",
+						value:
+							"Il risultato è un asset digitale che ha azzerato le dispersioni informative, elevando drasticamente l'efficienza aziendale. Questo case study dimostra come l'unione tra ascolto attivo e ingegneria del software possa generare una soluzione d'eccellenza: solida nel codice, elegante nel funzionamento e d'impatto sul business."
 					},
 					{
 						type: "image",

@@ -141,7 +141,7 @@ const en: Dictionary = {
 					{
 						type: "text",
 						value:
-							"I planned the product architecture around real operational workflows: onboarding, role management, and daily process tracking. The goal was a clean and scalable foundation.",
+							"Revolutionizing operations for a printing systems provider began with a deep dive into daily inefficiencies. Through targeted interviews across departments, I mapped every bottleneck to convert real-world business needs into a fluid digital workflow. The goal was to move beyond the constraints of off-the-shelf software to create a solution that faithfully reflects the company's unique dynamics.",
 					},
 					{
 						type: "image",
@@ -151,13 +151,28 @@ const en: Dictionary = {
 					{
 						type: "text",
 						value:
-							"I designed and implemented typed APIs, data model, and back-office UI with strong focus on performance and long-term maintainability.",
+							"The answer is a sartorial product: a bespoke API-first ecosystem with a dedicated frontend, designed to fit the client’s processes like a glove. By bypassing the rigidity of pre-configured management tools, I developed a lean and scalable solution stitched around the specific needs of its daily users, ensuring the software evolves alongside the business.",
 					},
 					{
 						type: "image",
 						src: "/work-detail-placeholder-2.svg",
 						alt: "Second Custom SaaS project detail placeholder",
 					},
+					{
+						type: "text",
+						value:
+							"Technical stability is powered by a cutting-edge stack: Hono and TypeScript deliver an ultra-fast backend, while PostgreSQL and Drizzle ensure absolute data integrity. On the surface, a Vue.js interface provides a reactive and intuitive experience, simplifying the management of complex information volumes with natural ease and high performance.",
+					},
+					{
+						type: "text",
+						value:
+							"The system centralizes the entire value chain—from a strategic dashboard to the full lifecycle of orders, quotes, and delivery notes (DDT). Dedicated modules for fleet monitoring, technical ticketing, and a custom events calendar allow for total control over logistics and support, all secured by a granular role-based access system to protect sensitive data."
+					},
+					{
+						type: "text",
+						value:
+							"The final result is a high-impact digital asset that has eliminated information gaps and drastically boosted operational efficiency. This case study bridges the gap between active listening and software engineering, proving how a bespoke approach can generate excellence: solid in code, elegant in function, and transformative for the business."
+					}
 				],
 			},
 			{
