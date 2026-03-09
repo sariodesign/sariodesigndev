@@ -28,14 +28,16 @@ const { locale, currentPagePath } = Astro.props;
 		padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
 		position: fixed;
 		top: 0;
+		transition: opacity 0.2s ease, visibility 0.2s ease;
 		width: 100%;
 		z-index: 3;
 	}
 
-	:global(body) {
-		@media screen and (max-width: 1023px) {
-			padding-bottom: calc(92px + env(safe-area-inset-bottom));
-		}
+	:global(html.is-lightbox-open) .header,
+	:global(body.is-lightbox-open) .header {
+		opacity: 0;
+		pointer-events: none;
+		visibility: hidden;
 	}
 
 	@media screen and (min-width: 1024px) {

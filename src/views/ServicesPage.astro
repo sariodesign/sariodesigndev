@@ -22,14 +22,18 @@ const { dict, locale } = Astro.props;
 				</span>
 			</h1>
 			<div class="services-lead">
-				<p class="services-paragraph js-services-item">{dict.services.intro}</p>
+				<p class="services-paragraph js-services-item">
+					{dict.services.intro}
+				</p>
 				<p class="services-paragraph js-services-item">
 					{dict.services.background}
 				</p>
 			</div>
 		</header>
 
-		<section class="services-section services-section--offers js-services-item">
+		<section
+			class="services-section services-section--offers js-services-item"
+		>
 			<p class="services-section-eyebrow">{dict.services.valueEyebrow}</p>
 			<div class="services-card-grid">
 				{
@@ -37,14 +41,18 @@ const { dict, locale } = Astro.props;
 						<article class="services-card">
 							<span class="services-card__badge">{`0${index + 1}`}</span>
 							<h2 class="services-card__title">{offer.title}</h2>
-							<p class="services-card__description">{offer.description}</p>
+							<p class="services-card__description">
+								{offer.description}
+							</p>
 						</article>
 					))
 				}
 			</div>
 		</section>
 
-		<section class="services-section services-section--process js-services-item">
+		<section
+			class="services-section services-section--process js-services-item"
+		>
 			<h2 class="services-section-title">{dict.services.processTitle}</h2>
 			<ol class="services-process-list">
 				{
@@ -66,7 +74,9 @@ const { dict, locale } = Astro.props;
 		<section
 			class="services-section services-section--deliverables js-services-item"
 		>
-			<h2 class="services-section-title">{dict.services.deliverablesTitle}</h2>
+			<h2 class="services-section-title">
+				{dict.services.deliverablesTitle}
+			</h2>
 			<ul class="services-deliverables-list">
 				{
 					dict.services.deliverablesItems.map((item) => (
@@ -79,10 +89,14 @@ const { dict, locale } = Astro.props;
 			</ul>
 		</section>
 
-		<section class="services-section services-section--tools js-services-item">
+		<section
+			class="services-section services-section--tools js-services-item"
+		>
 			<div class="services-tech-grid">
 				<section class="services-block">
-					<h2 class="services-section-title">{dict.services.stackTitle}</h2>
+					<h2 class="services-section-title">
+						{dict.services.stackTitle}
+					</h2>
 					<ul class="services-chip-list">
 						{
 							dict.services.stackItems.map((item) => (
@@ -92,7 +106,9 @@ const { dict, locale } = Astro.props;
 					</ul>
 				</section>
 				<section class="services-block">
-					<h2 class="services-section-title">{dict.services.toolingTitle}</h2>
+					<h2 class="services-section-title">
+						{dict.services.toolingTitle}
+					</h2>
 					<ul class="services-chip-list">
 						{
 							dict.services.toolingItems.map((item) => (
@@ -104,7 +120,9 @@ const { dict, locale } = Astro.props;
 			</div>
 		</section>
 
-		<p class="services-paragraph services-paragraph--closing js-services-item">
+		<p
+			class="services-paragraph services-paragraph--closing js-services-item"
+		>
 			{dict.services.lifestyle}
 		</p>
 
@@ -151,17 +169,14 @@ const { dict, locale } = Astro.props;
 
 		const tl = gsap.timeline();
 		if (titleLine) {
-			tl.to(
-				titleLine,
-				{
-					yPercent: 0,
-					rotateX: 0,
-					filter: "blur(0px)",
-					opacity: 1,
-					duration: 1,
-					ease: "power4.out",
-				},
-			);
+			tl.to(titleLine, {
+				yPercent: 0,
+				rotateX: 0,
+				filter: "blur(0px)",
+				opacity: 1,
+				duration: 1,
+				ease: "power4.out",
+			});
 		}
 		tl.to(
 			revealItems,
@@ -185,7 +200,7 @@ const { dict, locale } = Astro.props;
 		--services-surface: rgba(255, 255, 255, 0.74);
 		--services-glow: rgba(221, 122, 76, 0.13);
 		display: block;
-		min-height: 100vh;
+		min-height: auto;
 		padding: clamp(88px, 10vh, 126px) 16px 132px;
 		position: relative;
 		z-index: 2;
@@ -226,7 +241,6 @@ const { dict, locale } = Astro.props;
 	.services-lead {
 		display: grid;
 		gap: 12px;
-		max-width: 860px;
 	}
 
 	.services-paragraph {
@@ -264,7 +278,11 @@ const { dict, locale } = Astro.props;
 
 	.services-card {
 		background:
-			radial-gradient(circle at top right, var(--services-glow), transparent 58%),
+			radial-gradient(
+				circle at top right,
+				var(--services-glow),
+				transparent 58%
+			),
 			var(--services-surface);
 		border: 1px solid var(--services-border);
 		border-radius: 18px;
@@ -406,6 +424,7 @@ const { dict, locale } = Astro.props;
 
 	@media screen and (min-width: 1024px) {
 		.services-page {
+			min-height: 100vh;
 			padding-inline: 24px;
 		}
 

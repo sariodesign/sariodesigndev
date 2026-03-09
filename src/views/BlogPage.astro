@@ -135,7 +135,7 @@ const posts = dict.blog.posts;
 		--blog-muted: #6f6a66;
 		--blog-border: rgba(16, 32, 32, 0.16);
 		display: block;
-		min-height: 100vh;
+		min-height: auto;
 		padding: clamp(88px, 10vh, 126px) 16px 132px;
 		position: relative;
 		z-index: 2;
@@ -227,6 +227,7 @@ const posts = dict.blog.posts;
 
 	@media screen and (min-width: 1024px) {
 		.blog-page {
+			min-height: 100vh;
 			padding-inline: 24px;
 		}
 	}

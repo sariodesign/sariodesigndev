@@ -135,7 +135,7 @@ const it: Dictionary = {
 				description:
 					"Ho progettato e sviluppato un sistema SaaS modulare e scalabile per centralizzare operazioni, dati cliente e workflow interni.",
 				image: "/work-placeholder.svg",
-				client: "Cliente riservato",
+				client: "Firenze Ufficio",
 				techStack: "Hono, PostgreSQL, Drizzle, Zod, Vue.js, TypeScript",
 				detailBlocks: [
 					{
@@ -145,7 +145,7 @@ const it: Dictionary = {
 					},
 					{
 						type: "image",
-						src: "/work-detail-placeholder-1.svg",
+						src: "/works/gestionale-01.png",
 						alt: "Placeholder dettaglio progetto Custom SaaS",
 					},
 					{
@@ -155,9 +155,19 @@ const it: Dictionary = {
 					},
 					{
 						type: "image",
-						src: "/work-detail-placeholder-2.svg",
+						src: "/works/gestionale-02.png",
 						alt: "Placeholder secondo dettaglio progetto Custom SaaS",
 					},
+					{
+						type: "text",
+						value:
+							"Ho progettato e implementato API tipizzate, modello dati e interfaccia operativa, con attenzione a performance e coerenza UI nei flussi quotidiani.",
+					},
+					{
+						type: "image",
+						src: "/works/gestionale-03.png",
+						alt: "Placeholder secondo dettaglio progetto Custom SaaS",
+					}
 				],
 			},
 			{
@@ -360,9 +370,10 @@ const it: Dictionary = {
 		passionsIntro:
 			"Quando chiudo editor e terminale, torno comunque alla creativita ma con ritmi diversi.",
 		passionsItems: [
-			"Musica e chitarra",
+			"Musica e concerti",
 			"Lettura e scrittura di appunti",
 			"Serie TV e cinema",
+			"Anime e manga",
 			"Gaming narrativo e indie",
 			"Sperimentazione su side project personali",
 		],

@@ -363,6 +363,7 @@ const en: Dictionary = {
 			"Music and guitar",
 			"Reading and note writing",
 			"TV series and cinema",
+			"Anime and manga",
 			"Narrative and indie gaming",
 			"Experimenting on personal side projects",
 		],

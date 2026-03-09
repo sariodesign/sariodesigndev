@@ -187,7 +187,7 @@ const projects = dict.works.projects;
 		--work-border: rgba(16, 32, 32, 0.18);
 		--work-border-hover: rgba(16, 32, 32, 0.36);
 		display: block;
-		min-height: 100vh;
+		min-height: auto;
 		padding: clamp(82px, 11vh, 122px) 0 120px;
 		position: relative;
 		z-index: 2;
@@ -385,6 +385,10 @@ const projects = dict.works.projects;
 	}
 
 	@media screen and (min-width: 1024px) {
+		.work-page {
+			min-height: 100vh;
+		}
+
 		.work-title,
 		.work-row-link {
 			padding: 24px 0 24px 24px;

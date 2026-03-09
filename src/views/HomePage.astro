@@ -19,7 +19,7 @@ const servicesHref =
 		: getLocalizedPath(locale, "/services");
 ---
 
-<main transition:name="main" transition:animate={slide()}>
+<main class="home-page" transition:name="main" transition:animate={slide()}>
 	<div class="home-intro">
 		<div class="home-photo-wrap">
 			<img
@@ -607,10 +607,10 @@ const servicesHref =
 		color: var(--orange);
 	}
 
-	main {
+	.home-page {
 		justify-content: center;
 		align-items: center;
-		min-height: 100vh;
+		min-height: auto;
 		padding: calc(92px + env(safe-area-inset-top)) 16px 24px;
 	}
 
@@ -646,7 +646,8 @@ const servicesHref =
 	}
 
 	@media screen and (min-width: 1024px) {
-		main {
+		.home-page {
+			min-height: 100vh;
 			padding: 104px 24px 24px;
 		}
 

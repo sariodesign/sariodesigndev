@@ -144,8 +144,49 @@ const languageSwitchName = localeNames[targetLocale];
 	const mobileMedia = window.matchMedia("(max-width: 1023px)");
 	const FOCUSABLE_SELECTOR =
 		'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+	const MENU_TRIGGER_REVEAL_DELAY = 180;
 
 	let lastFocusedElement = null;
+	let scrollIdleTimeout = 0;
+
+	const clearScrollIdleTimeout = () => {
+		if (!scrollIdleTimeout) return;
+		window.clearTimeout(scrollIdleTimeout);
+		scrollIdleTimeout = 0;
+	};
+
+	const showMenuTrigger = () => {
+		if (!menuTrigger) return;
+		menuTrigger.classList.remove("is-scrolling");
+	};
+
+	const hideMenuTrigger = () => {
+		if (!menuTrigger) return;
+		menuTrigger.classList.add("is-scrolling");
+	};
+
+	const revealMenuTriggerWhenIdle = () => {
+		clearScrollIdleTimeout();
+		scrollIdleTimeout = window.setTimeout(() => {
+			if (!mobileMedia.matches || menu?.classList.contains("is-opened")) {
+				return;
+			}
+			showMenuTrigger();
+		}, MENU_TRIGGER_REVEAL_DELAY);
+	};
+
+	const handleScrollActivity = () => {
+		if (
+			!menuTrigger ||
+			!mobileMedia.matches ||
+			menu?.classList.contains("is-opened")
+		) {
+			return;
+		}
+
+		hideMenuTrigger();
+		revealMenuTriggerWhenIdle();
+	};
 
 	const syncAccessibilityState = () => {
 		if (!panel || !menuTrigger) return;
@@ -153,10 +194,12 @@ const languageSwitchName = localeNames[targetLocale];
 		const isOpen = menu?.classList.contains("is-opened");
 
 		if (!isMobile) {
+			clearScrollIdleTimeout();
 			panel.removeAttribute("inert");
 			panel.setAttribute("aria-hidden", "false");
 			menuTrigger.setAttribute("aria-expanded", "false");
 			menuTrigger.classList.remove("is-opened");
+			showMenuTrigger();
 			document.documentElement.classList.remove("is-locked");
 			document.body.classList.remove("is-locked");
 			menu?.classList.remove("is-opened");
@@ -171,6 +214,10 @@ const languageSwitchName = localeNames[targetLocale];
 		}
 		menuTrigger.setAttribute("aria-expanded", isOpen ? "true" : "false");
 		menuTrigger.classList.toggle("is-opened", Boolean(isOpen));
+		if (isOpen) {
+			clearScrollIdleTimeout();
+			showMenuTrigger();
+		}
 		document.documentElement.classList.toggle("is-locked", Boolean(isOpen));
 		document.body.classList.toggle("is-locked", Boolean(isOpen));
 	};
@@ -182,10 +229,14 @@ const languageSwitchName = localeNames[targetLocale];
 		syncAccessibilityState();
 
 		if (nextOpen) {
+			clearScrollIdleTimeout();
 			lastFocusedElement = document.activeElement;
 			window.setTimeout(() => closeButton?.focus(), 50);
-		} else if (restoreFocus && lastFocusedElement instanceof HTMLElement) {
-			lastFocusedElement.focus();
+		} else {
+			showMenuTrigger();
+			if (restoreFocus && lastFocusedElement instanceof HTMLElement) {
+				lastFocusedElement.focus();
+			}
 		}
 	};
 
@@ -249,7 +300,13 @@ const languageSwitchName = localeNames[targetLocale];
 			trapFocus(event);
 		});
 
+		window.addEventListener("scroll", handleScrollActivity, {
+			passive: true,
+		});
+
 		mobileMedia.addEventListener("change", () => {
+			clearScrollIdleTimeout();
+			showMenuTrigger();
 			setMenuState(false, { restoreFocus: false });
 			syncAccessibilityState();
 		});

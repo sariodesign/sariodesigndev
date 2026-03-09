@@ -2,6 +2,7 @@
 import PageCta from "../components/PageCta.astro";
 import type { Dictionary, LocalizedProject } from "../i18n";
 import { getLocalizedPath, type Locale } from "../i18n/config";
+import type { LocalizedProjectDetailBlock } from "../i18n/schema";
 
 interface Props {
 	dict: Dictionary;
@@ -10,6 +11,17 @@ interface Props {
 }
 
 const { dict, project, locale } = Astro.props;
+type ProjectTextBlock = Extract<LocalizedProjectDetailBlock, { type: "text" }>;
+type ProjectImageBlock = Extract<LocalizedProjectDetailBlock, { type: "image" }>;
+
+const detailTextBlocks = project.detailBlocks.filter(
+	(block): block is ProjectTextBlock => block.type === "text",
+);
+const detailImageBlocks = project.detailBlocks.filter(
+	(block): block is ProjectImageBlock => block.type === "image",
+);
+const closeZoomLabel =
+	locale === "it" ? "Chiudi immagine ingrandita" : "Close zoomed image";
 ---
 
 <main class="work-detail-page">
@@ -39,20 +51,36 @@ const { dict, project, locale } = Astro.props;
 
 			<article class="work-detail-story">
 				{
-					project.detailBlocks.map((block) =>
-						block.type === "text" ? (
-							<p class="work-detail-paragraph js-detail-reveal">{block.value}</p>
-						) : (
-							<figure class="work-detail-figure js-detail-reveal">
-								<img
-									class="work-detail-image"
-									src={block.src}
-									alt={block.alt}
-									loading="lazy"
-									decoding="async"
-								/>
-							</figure>
-						),
+					detailTextBlocks.length > 0 && (
+						<div class="work-detail-copy">
+							{detailTextBlocks.map((block) => (
+								<p class="work-detail-paragraph js-detail-reveal">{block.value}</p>
+							))}
+						</div>
+					)
+				}
+
+				{
+					detailImageBlocks.length > 0 && (
+						<div class="work-detail-gallery">
+							{detailImageBlocks.map((block) => (
+								<figure class="work-detail-figure js-detail-reveal">
+									<button
+										type="button"
+										class="work-detail-image-trigger js-work-detail-image-trigger"
+										aria-label={block.alt}
+									>
+										<img
+											class="work-detail-image"
+											src={block.src}
+											alt={block.alt}
+											loading="lazy"
+											decoding="async"
+										/>
+									</button>
+								</figure>
+							))}
+						</div>
 					)
 				}
 			</article>
@@ -62,6 +90,29 @@ const { dict, project, locale } = Astro.props;
 			<PageCta dict={dict} locale={locale} />
 		</div>
 	</section>
+
+	<div
+		class="work-detail-lightbox js-work-detail-lightbox"
+		role="dialog"
+		aria-modal="true"
+		aria-hidden="true"
+		hidden
+	>
+		<button
+			type="button"
+			class="work-detail-lightbox__close js-work-detail-lightbox-close"
+			aria-label={closeZoomLabel}
+		>
+			<span aria-hidden="true">&times;</span>
+		</button>
+		<figure class="work-detail-lightbox__figure">
+			<img
+				class="work-detail-lightbox__image js-work-detail-lightbox-image"
+				src=""
+				alt=""
+			/>
+		</figure>
+	</div>
 </main>
 
 <script>
@@ -70,6 +121,39 @@ const { dict, project, locale } = Astro.props;
 
 	const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 	const revealItems = [...document.querySelectorAll(".js-detail-reveal")];
+	let lastImageTrigger = null;
+
+	const getLightboxElements = () => {
+		const lightbox = document.querySelector(".js-work-detail-lightbox");
+		const lightboxImage = document.querySelector(".js-work-detail-lightbox-image");
+		const lightboxClose = document.querySelector(".js-work-detail-lightbox-close");
+
+		return { lightbox, lightboxImage, lightboxClose };
+	};
+
+	const openLightbox = (src, alt) => {
+		const { lightbox, lightboxImage, lightboxClose } = getLightboxElements();
+		if (!lightbox || !lightboxImage) return;
+		lightboxImage.src = src;
+		lightboxImage.alt = alt;
+		lightbox.hidden = false;
+		lightbox.setAttribute("aria-hidden", "false");
+		document.documentElement.classList.add("is-lightbox-open");
+		document.body.classList.add("is-lightbox-open");
+		window.setTimeout(() => lightboxClose?.focus(), 0);
+	};
+
+	const closeLightbox = () => {
+		const { lightbox, lightboxImage } = getLightboxElements();
+		if (!lightbox || !lightboxImage) return;
+		lightbox.hidden = true;
+		lightbox.setAttribute("aria-hidden", "true");
+		lightboxImage.src = "";
+		lightboxImage.alt = "";
+		document.documentElement.classList.remove("is-lightbox-open");
+		document.body.classList.remove("is-lightbox-open");
+		lastImageTrigger?.focus();
+	};
 
 	if (!reduceMotion && revealItems.length > 0) {
 		gsap.set(revealItems, { y: 28, autoAlpha: 0 });
@@ -92,14 +176,52 @@ const { dict, project, locale } = Astro.props;
 			},
 		);
 	});
+
+	document.addEventListener("click", (event) => {
+		const target = event.target;
+		if (!(target instanceof Element)) return;
+
+		const imageTrigger = target.closest(".js-work-detail-image-trigger");
+		if (imageTrigger instanceof HTMLElement) {
+			const image = imageTrigger.querySelector("img");
+			if (!image) return;
+			lastImageTrigger = imageTrigger;
+			openLightbox(image.currentSrc || image.src, image.alt);
+			return;
+		}
+
+		const lightboxClose = target.closest(".js-work-detail-lightbox-close");
+		if (lightboxClose) {
+			closeLightbox();
+			return;
+		}
+
+		const { lightbox } = getLightboxElements();
+		const clickedInsideLightbox = target.closest(".js-work-detail-lightbox");
+		if (clickedInsideLightbox && lightbox && !lightbox.hidden) {
+			closeLightbox();
+		}
+	});
+
+	document.addEventListener("keydown", (event) => {
+		const { lightbox } = getLightboxElements();
+		if (event.key === "Escape" && lightbox && !lightbox.hidden) {
+			closeLightbox();
+		}
+	});
 </script>
 
 <style lang="scss">
+	:global(html.is-lightbox-open),
+	:global(body.is-lightbox-open) {
+		overflow: hidden;
+	}
+
 	.work-detail-page {
 		--work-text: var(--dark-black);
 		--work-muted: #5f6571;
 		--work-border: rgba(16, 32, 32, 0.18);
-		min-height: 100vh;
+		min-height: auto;
 		padding: clamp(82px, 11vh, 122px) 16px 120px;
 		position: relative;
 		z-index: 2;
@@ -138,27 +260,134 @@ const { dict, project, locale } = Astro.props;
 	}
 
 	.work-detail-story {
+		display: grid;
+		gap: clamp(24px, 3vw, 36px);
 		min-width: 0;
+	}
+
+	.work-detail-copy {
+		display: grid;
+		gap: 1.25rem;
 	}
 
 	.work-detail-paragraph {
 		color: var(--work-text);
 		font-size: 1rem;
 		line-height: 1.6;
-		margin: 0 0 1.25rem;
+		margin: 0;
+	}
+
+	.work-detail-gallery {
+		display: grid;
+		gap: 12px;
+		grid-template-columns: 1fr;
 	}
 
 	.work-detail-figure {
+		background:
+			linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(241, 238, 234, 0.92));
 		border: 1px solid var(--work-border);
 		border-radius: 14px;
-		margin: 0 0 1.5rem;
+		box-shadow: 0 24px 50px -40px rgba(16, 32, 32, 0.28);
+		margin: 0;
 		overflow: hidden;
 	}
 
+	.work-detail-image-trigger {
+		background: transparent;
+		border: 0;
+		cursor: zoom-in;
+		display: block;
+		height: 100%;
+		padding: 0;
+		width: 100%;
+	}
+
 	.work-detail-image {
+		aspect-ratio: 16 / 9;
 		display: block;
 		height: auto;
+		object-fit: contain;
+		padding: 6px;
+		transition: transform 0.28s ease;
 		width: 100%;
+	}
+
+	.work-detail-image-trigger:hover .work-detail-image,
+	.work-detail-image-trigger:focus-visible .work-detail-image {
+		transform: scale(1.03);
+	}
+
+	.work-detail-image-trigger:focus-visible {
+		outline: 2px solid var(--orange);
+		outline-offset: -2px;
+	}
+
+	.work-detail-lightbox {
+		align-items: center;
+		background: rgba(7, 14, 14, 0.9);
+		backdrop-filter: blur(10px);
+		cursor: zoom-out;
+		display: flex;
+		inset: 0;
+		justify-content: center;
+		padding: 24px;
+		position: fixed;
+		z-index: 120;
+	}
+
+	.work-detail-lightbox[hidden] {
+		display: none;
+	}
+
+	.work-detail-lightbox__close {
+		align-items: center;
+		background: rgba(255, 255, 255, 0.92);
+		border: 0;
+		border-radius: 50%;
+		box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.45);
+		color: var(--dark-black);
+		cursor: pointer;
+		display: inline-flex;
+		font-family: var(--base-font-family);
+		font-size: 1.9rem;
+		font-weight: 400;
+		height: 48px;
+		justify-content: center;
+		line-height: 1;
+		padding: 0;
+		position: absolute;
+		right: calc(24px + env(safe-area-inset-right));
+		top: calc(24px + env(safe-area-inset-top));
+		width: 48px;
+		z-index: 1;
+	}
+
+	.work-detail-lightbox__figure {
+		margin: 0;
+		max-height: 100%;
+		max-width: min(1240px, 100%);
+		pointer-events: none;
+		width: 100%;
+	}
+
+	.work-detail-lightbox__image {
+		border-radius: 16px;
+		box-shadow: 0 30px 80px -40px rgba(0, 0, 0, 0.7);
+		cursor: zoom-out;
+		display: block;
+		height: auto;
+		margin: 0 auto;
+		max-height: calc(100vh - 96px);
+		max-width: 100%;
+		object-fit: contain;
+		width: auto;
+	}
+
+	@media screen and (min-width: 720px) {
+		.work-detail-gallery {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
 	}
 
 	.work-detail-meta {
@@ -200,7 +429,12 @@ const { dict, project, locale } = Astro.props;
 
 	@media screen and (min-width: 1024px) {
 		.work-detail-page {
+			min-height: 100vh;
 			padding-inline: 24px;
+		}
+
+		.work-detail-gallery {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
 		}
 	}
 
@@ -221,6 +455,38 @@ const { dict, project, locale } = Astro.props;
 
 		.work-detail-story {
 			order: 1;
+		}
+
+		.work-detail-gallery {
+			gap: 10px;
+		}
+
+		.work-detail-lightbox {
+			padding: 16px;
+		}
+
+		.work-detail-lightbox__close {
+			height: 42px;
+			right: calc(16px + env(safe-area-inset-right));
+			top: calc(16px + env(safe-area-inset-top));
+			width: 42px;
+		}
+
+		.work-detail-lightbox__image {
+			max-height: calc(100vh - 72px);
+		}
+	}
+
+	@media (prefers-color-scheme: dark) {
+		.work-detail-figure {
+			background:
+				linear-gradient(180deg, rgba(27, 42, 42, 0.96), rgba(16, 32, 32, 0.92));
+			box-shadow: 0 24px 50px -40px rgba(0, 0, 0, 0.6);
+		}
+
+		.work-detail-lightbox__close {
+			background: rgba(16, 32, 32, 0.92);
+			color: var(--white);
 		}
 	}
 </style>

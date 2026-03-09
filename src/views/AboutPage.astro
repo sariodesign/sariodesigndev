@@ -139,7 +139,7 @@ const { dict, locale } = Astro.props;
 		--about-border: rgba(16, 32, 32, 0.16);
 		--about-surface: #f1eeea;
 		display: block;
-		min-height: 100vh;
+		min-height: auto;
 		padding: clamp(88px, 10vh, 126px) 16px 132px;
 		position: relative;
 		z-index: 2;
@@ -290,6 +290,7 @@ const { dict, locale } = Astro.props;
 
 	@media screen and (min-width: 1024px) {
 		.about-page {
+			min-height: 100vh;
 			padding-inline: 24px;
 		}
 	}

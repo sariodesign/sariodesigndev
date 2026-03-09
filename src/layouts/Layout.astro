@@ -127,14 +127,23 @@ const toAbsoluteUrl = (path: string) => {
 		}
 	}
 	body {
+		display: flex;
+		flex-direction: column;
 		font-family: var(--base-font-family);
 		font-size: 16px;
 		margin: 0;
+		min-height: 100vh;
+		min-height: 100dvh;
 		overflow-x: hidden;
 
 		.is-locked & {
 			overflow-y: hidden;
 		}
+	}
+
+	body > main {
+		flex: 1 0 auto;
+		width: 100%;
 	}
 
 	body.is-home a:hover {
@@ -262,12 +271,6 @@ const toAbsoluteUrl = (path: string) => {
 	@media (prefers-color-scheme: light) {
 		html {
 			background-color: var(--light-gray);
-		}
-	}
-
-	@media screen and (min-width: 1024px) {
-		main {
-			min-height: 100vh;
 		}
 	}
 

@@ -30,16 +30,16 @@ const dict = getDictionary(locale);
 		backdrop-filter: blur(12px);
 		border-radius: 999px;
 		border: 1px solid rgba(16, 32, 32, 0.12);
-		bottom: calc(16px + env(safe-area-inset-bottom));
+		bottom: calc(64px + env(safe-area-inset-bottom));
 		box-shadow: 0 20px 45px -28px rgba(0, 0, 0, 0.35);
 		display: inline-flex;
 		gap: 12px;
 		height: 56px;
 		justify-content: center;
-		left: 50%;
 		padding: 0 18px;
 		position: fixed;
-		transform: translateX(-50%);
+		right: 16px;
+		transform: translateY(0);
 		transition:
 			transform 0.25s ease,
 			opacity 0.2s ease,
@@ -62,10 +62,11 @@ const dict = getDictionary(locale);
 		}
 	}
 
-	.menu-trigger.is-opened {
+	.menu-trigger.is-opened,
+	.menu-trigger.is-scrolling {
 		opacity: 0;
 		pointer-events: none;
-		transform: translate(-50%, 12px);
+		transform: translateY(12px);
 	}
 
 	.menu-trigger__label {
