@@ -6,9 +6,10 @@ interface Props {
 	dict: Dictionary;
 	locale: Locale;
 	className?: string;
+	showWorksCta?: boolean;
 }
 
-const { dict, locale, className } = Astro.props;
+const { dict, locale, className, showWorksCta = true } = Astro.props;
 const worksHref =
 	locale === defaultLocale ? "/works" : getLocalizedPath(locale, "/works");
 ---
@@ -26,14 +27,18 @@ const worksHref =
 		>
 			{dict.services.ctaPrimary}
 		</a>
-		<a
-			class="services-cta__btn services-cta__btn--secondary"
-			href={worksHref}
-			data-astro-reload
-			cursor-class="link"
-		>
-			{dict.services.ctaSecondary}
-		</a>
+		{
+			showWorksCta && (
+				<a
+					class="services-cta__btn services-cta__btn--secondary"
+					href={worksHref}
+					data-astro-reload
+					cursor-class="link"
+				>
+					{dict.services.ctaSecondary}
+				</a>
+			)
+		}
 	</div>
 </section>
 

@@ -14,7 +14,8 @@ const en: Dictionary = {
 		},
 		works: {
 			title: "Works | SarioDesign",
-			description: "Selected projects and case studies.",
+			description:
+				"Discover my case studies: tailor-made web solutions designed to solve real business problems. Custom software, e-commerce, and headless builds.",
 		},
 		services: {
 			title: "Services | SarioDesign",
@@ -135,7 +136,7 @@ const en: Dictionary = {
 				description:
 					"A custom API-first architecture for managing machinery and service operations.",
 				metaDescription:
-					"Case study of a custom API-first management platform for service operations and machinery tracking, built to streamline workflows, ticketing, and logistics.",
+					"Discover how I built a bespoke API-first management system (Vue.js, Hono) to centralize operations for an office automation company.",
 				image: "/work-placeholder.svg",
 				client: "Firenze ufficio",
 				techStack: "Hono, PostgreSQL, Drizzle, Zod, Vue.js, TypeScript",
@@ -146,19 +147,9 @@ const en: Dictionary = {
 							"Revolutionizing operations for a printing systems provider began with a deep dive into daily inefficiencies. Through targeted interviews across departments, I mapped every bottleneck to convert real-world business needs into a fluid digital workflow. The goal was to move beyond the constraints of off-the-shelf software to create a solution that faithfully reflects the company's unique dynamics.",
 					},
 					{
-						type: "image",
-						src: "/work-detail-placeholder-1.svg",
-						alt: "Custom SaaS project detail placeholder",
-					},
-					{
 						type: "text",
 						value:
 							"The answer is a sartorial product: a bespoke API-first ecosystem with a dedicated frontend, designed to fit the client’s processes like a glove. By bypassing the rigidity of pre-configured management tools, I developed a lean and scalable solution stitched around the specific needs of its daily users, ensuring the software evolves alongside the business.",
-					},
-					{
-						type: "image",
-						src: "/work-detail-placeholder-2.svg",
-						alt: "Second Custom SaaS project detail placeholder",
 					},
 					{
 						type: "text",
@@ -174,6 +165,21 @@ const en: Dictionary = {
 						type: "text",
 						value:
 							"The final result is a high-impact digital asset that has eliminated information gaps and drastically boosted operational efficiency. This case study bridges the gap between active listening and software engineering, proving how a bespoke approach can generate excellence: solid in code, elegant in function, and transformative for the business."
+					},
+					{
+						type: "image",
+						src: "/works/gestionale-01.png",
+						alt: "Placeholder dettaglio progetto Custom SaaS",
+					},
+					{
+						type: "image",
+						src: "/works/gestionale-02.png",
+						alt: "Placeholder secondo dettaglio progetto Custom SaaS",
+					},
+					{
+						type: "image",
+						src: "/works/gestionale-03.png",
+						alt: "Placeholder secondo dettaglio progetto Custom SaaS",
 					}
 				],
 			},
@@ -185,7 +191,7 @@ const en: Dictionary = {
 				description:
 					"A minimalist e-commerce designed for a friction-free shopping experience.",
 				metaDescription:
-					"Case study of a headless e-commerce for an emerging fashion brand, focused on minimal UX, guest checkout, PayPal payments, and order management.",
+					"Case study: developing a bespoke Nuxt e-commerce platform for a fashion brand launch. Seamless guest checkout for a premium digital debut.",
 				image: "/work-placeholder.svg",
 				client: "Ottaviano",
 				techStack: "Nuxt, Supabase, Prisma, PostgreSQL, PayPal API",
@@ -196,19 +202,9 @@ const en: Dictionary = {
 							"Launching a debut fashion line requires a digital presence that matches the exclusivity of the collection. Collaborating closely with a lead designer, I transformed a curated 10-piece vision into a high-performance web portal. The focus was on creating a minimalist yet impactful entry point for a brand making its first mark on the market, ensuring the digital experience felt as premium as the garments themselves.",
 					},
 					{
-						type: "image",
-						src: "/work-detail-placeholder-1.svg",
-						alt: "Headless E-commerce project detail placeholder",
-					},
-					{
 						type: "text",
 						value:
 							"We adopted a sartorial approach to the user experience, intentionally eliminating the friction of mandatory registration. By implementing a seamless guest checkout, we ensured that the journey from discovery to purchase remains uninterrupted. This 'guest-first' philosophy prioritizes the customer's immediate engagement, making the brand accessible and inviting from the very first click.",
-					},
-					{
-						type: "image",
-						src: "/work-detail-placeholder-2.svg",
-						alt: "Second Headless E-commerce project detail placeholder",
 					},
 					{
 						type: "text",
@@ -235,7 +231,7 @@ const en: Dictionary = {
 				description:
 					"Architectural and performance redesign for an artistic portfolio.",
 				metaDescription:
-					"Case study of a headless redesign for a photography portfolio: migration from WordPress to Next.js and Sanity for speed, SEO, and archive management.",
+					"Headless migration from WordPress to Next.js and Sanity CMS. Read the case study on building a high-performance portfolio for a fine art photographer.",
 				image: "/work-placeholder.svg",
 				client: "Marco Iannaccone",
 				techStack: "Next.js, Tailwind, Framer Motion, Sanity CMS",
@@ -244,11 +240,6 @@ const en: Dictionary = {
 						type: "text",
 						value:
 							"This project involved the radical transformation of a professional photographer's digital presence, migrating from a limited WordPress architecture to a modern Headless ecosystem. The challenge was twofold: to elevate the portfolio's visual performance and to simplify the archiving of a diverse body of work, ranging from international exhibitions and artistic performances to the author's bibliography.",
-					},
-					{
-						type: "image",
-						src: "/work-detail-placeholder-1.svg",
-						alt: "Marco Iannaccone project detail placeholder",
 					},
 					{
 						type: "text",

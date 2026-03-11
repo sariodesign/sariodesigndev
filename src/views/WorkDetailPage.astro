@@ -12,7 +12,10 @@ interface Props {
 
 const { dict, project, locale } = Astro.props;
 type ProjectTextBlock = Extract<LocalizedProjectDetailBlock, { type: "text" }>;
-type ProjectImageBlock = Extract<LocalizedProjectDetailBlock, { type: "image" }>;
+type ProjectImageBlock = Extract<
+	LocalizedProjectDetailBlock,
+	{ type: "image" }
+>;
 
 const detailTextBlocks = project.detailBlocks.filter(
 	(block): block is ProjectTextBlock => block.type === "text",
@@ -54,7 +57,9 @@ const closeZoomLabel =
 					detailTextBlocks.length > 0 && (
 						<div class="work-detail-copy">
 							{detailTextBlocks.map((block) => (
-								<p class="work-detail-paragraph js-detail-reveal">{block.value}</p>
+								<p class="work-detail-paragraph js-detail-reveal">
+									{block.value}
+								</p>
 							))}
 						</div>
 					)
@@ -119,20 +124,27 @@ const closeZoomLabel =
 	import { gsap } from "gsap";
 	import { onPageRevealReady } from "../assets/js/pageReveal.js";
 
-	const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+	const reduceMotion = window.matchMedia(
+		"(prefers-reduced-motion: reduce)",
+	).matches;
 	const revealItems = [...document.querySelectorAll(".js-detail-reveal")];
 	let lastImageTrigger = null;
 
 	const getLightboxElements = () => {
 		const lightbox = document.querySelector(".js-work-detail-lightbox");
-		const lightboxImage = document.querySelector(".js-work-detail-lightbox-image");
-		const lightboxClose = document.querySelector(".js-work-detail-lightbox-close");
+		const lightboxImage = document.querySelector(
+			".js-work-detail-lightbox-image",
+		);
+		const lightboxClose = document.querySelector(
+			".js-work-detail-lightbox-close",
+		);
 
 		return { lightbox, lightboxImage, lightboxClose };
 	};
 
 	const openLightbox = (src, alt) => {
-		const { lightbox, lightboxImage, lightboxClose } = getLightboxElements();
+		const { lightbox, lightboxImage, lightboxClose } =
+			getLightboxElements();
 		if (!lightbox || !lightboxImage) return;
 		lightboxImage.src = src;
 		lightboxImage.alt = alt;
@@ -165,16 +177,13 @@ const closeZoomLabel =
 			return;
 		}
 
-		gsap.to(
-			revealItems,
-			{
-				y: 0,
-				autoAlpha: 1,
-				duration: 0.55,
-				stagger: 0.08,
-				ease: "power3.out",
-			},
-		);
+		gsap.to(revealItems, {
+			y: 0,
+			autoAlpha: 1,
+			duration: 0.55,
+			stagger: 0.08,
+			ease: "power3.out",
+		});
 	});
 
 	document.addEventListener("click", (event) => {
@@ -197,7 +206,9 @@ const closeZoomLabel =
 		}
 
 		const { lightbox } = getLightboxElements();
-		const clickedInsideLightbox = target.closest(".js-work-detail-lightbox");
+		const clickedInsideLightbox = target.closest(
+			".js-work-detail-lightbox",
+		);
 		if (clickedInsideLightbox && lightbox && !lightbox.hidden) {
 			closeLightbox();
 		}
@@ -245,11 +256,11 @@ const closeZoomLabel =
 	.work-detail-title {
 		color: var(--work-text);
 		font-family: var(--base-font-family-serif);
-		font-size: clamp(2rem, 6vw, 4.6rem);
+		font-size: clamp(1rem, 6vw, 3.5rem);
 		font-weight: 700;
 		letter-spacing: -0.02em;
-		line-height: 0.94;
-		margin: 0 0 28px;
+		line-height: 120%;
+		margin: 0 0 16px;
 	}
 
 	.work-detail-grid {
@@ -284,8 +295,11 @@ const closeZoomLabel =
 	}
 
 	.work-detail-figure {
-		background:
-			linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(241, 238, 234, 0.92));
+		background: linear-gradient(
+			180deg,
+			rgba(255, 255, 255, 0.84),
+			rgba(241, 238, 234, 0.92)
+		);
 		border: 1px solid var(--work-border);
 		border-radius: 14px;
 		box-shadow: 0 24px 50px -40px rgba(16, 32, 32, 0.28);
@@ -416,7 +430,7 @@ const closeZoomLabel =
 	}
 
 	.work-detail-cta {
-		margin-top: clamp(24px, 4vw, 44px);
+		margin-top: clamp(64px, 4vw, 128px);
 	}
 
 	@media (prefers-color-scheme: dark) {
@@ -479,8 +493,11 @@ const closeZoomLabel =
 
 	@media (prefers-color-scheme: dark) {
 		.work-detail-figure {
-			background:
-				linear-gradient(180deg, rgba(27, 42, 42, 0.96), rgba(16, 32, 32, 0.92));
+			background: linear-gradient(
+				180deg,
+				rgba(27, 42, 42, 0.96),
+				rgba(16, 32, 32, 0.92)
+			);
 			box-shadow: 0 24px 50px -40px rgba(0, 0, 0, 0.6);
 		}
 

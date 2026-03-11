@@ -40,21 +40,21 @@ const projects = dict.works.projects;
 						<span class="work-row-arrow" aria-hidden="true">
 							↗
 						</span>
-						<img
+						{/* <img
 							class="work-row-preview"
 							src={project.image}
 							alt=""
 							aria-hidden="true"
 							loading="lazy"
 							decoding="async"
-						/>
+						/> */}
 					</a>
 				</article>
 			))
 		}
 	</section>
 	<div class="work-page-cta js-work-row">
-		<PageCta dict={dict} locale={locale} />
+		<PageCta dict={dict} locale={locale} showWorksCta={false} />
 	</div>
 </main>
 

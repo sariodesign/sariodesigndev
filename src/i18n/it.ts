@@ -14,7 +14,8 @@ const it: Dictionary = {
 		},
 		works: {
 			title: "Works | SarioDesign",
-			description: "Progetti selezionati e case study.",
+			description:
+				"Scopri i miei case study: soluzioni web su misura progettate per risolvere problemi reali. Sviluppo software, e-commerce e architetture headless.",
 		},
 		services: {
 			title: "Servizi | SarioDesign",
@@ -134,7 +135,7 @@ const it: Dictionary = {
 				services: "Hono, PostgreSQL, Drizzle, Vue.js",
 				description: "Un'architettura API-First su misura per la gestione del parco macchine e assistenza",
 				metaDescription:
-					"Case study di un gestionale custom API-first per assistenza tecnica e parco macchine, progettato per semplificare processi, ticketing e logistica.",
+					"Scopri come ho progettato un gestionale sartoriale API-first (Vue.js, Hono) per ottimizzare e centralizzare i flussi di un'azienda di office automation.",
 				image: "/work-placeholder.svg",
 				client: "Firenze Ufficio",
 				techStack: "Hono, PostgreSQL, Drizzle, Zod, Vue.js, TypeScript",
@@ -145,19 +146,9 @@ const it: Dictionary = {
 							"Trasformare l'operatività di un fornitore di sistemi di stampa partendo dai problemi reali: attraverso interviste mirate ai reparti, ho mappato ogni inefficienza per convertire i bisogni aziendali in un flusso digitale fluido. L'obiettivo era superare i limiti dei software standard, creando una soluzione che rispecchiasse fedelmente le dinamiche del business.",
 					},
 					{
-						type: "image",
-						src: "/works/gestionale-01.png",
-						alt: "Placeholder dettaglio progetto Custom SaaS",
-					},
-					{
 						type: "text",
 						value:
 							"La risposta è un prodotto sartoriale, un ecosistema API-first con frontend dedicato, progettato per aderire perfettamente ai processi del cliente. Superando la rigidità dei gestionali preconfigurati, ho sviluppato uno strumento snello e scalabile, cucito attorno alle necessità uniche di chi lo utilizza ogni giorno.",
-					},
-					{
-						type: "image",
-						src: "/works/gestionale-02.png",
-						alt: "Placeholder secondo dettaglio progetto Custom SaaS",
 					},
 					{
 						type: "text",
@@ -176,6 +167,16 @@ const it: Dictionary = {
 					},
 					{
 						type: "image",
+						src: "/works/gestionale-01.png",
+						alt: "Placeholder dettaglio progetto Custom SaaS",
+					},
+					{
+						type: "image",
+						src: "/works/gestionale-02.png",
+						alt: "Placeholder secondo dettaglio progetto Custom SaaS",
+					},
+					{
+						type: "image",
 						src: "/works/gestionale-03.png",
 						alt: "Placeholder secondo dettaglio progetto Custom SaaS",
 					}
@@ -189,7 +190,7 @@ const it: Dictionary = {
 				description:
 					"Un e-commerce minimalista progettato per un'esperienza d'acquisto senza attriti",
 				metaDescription:
-					"Case study e-commerce headless per un brand moda emergente: UX minimale, guest checkout, pagamenti PayPal e gestione ordini su stack Nuxt.",
+					"Case study: sviluppo di un e-commerce su misura in Nuxt per il lancio di un brand di moda. Checkout fluido senza registrazione per un debutto perfetto.",
 				image: "/work-placeholder.svg",
 				client: "Ottaviano",
 				techStack: "Nuxt, Supabase, Prisma, PostgreSQL, PayPal API",
@@ -200,19 +201,9 @@ const it: Dictionary = {
 							"Il lancio di una linea di abbigliamento di debutto richiede una presenza digitale all'altezza dell'esclusività della collezione. In stretta collaborazione con un lead designer, ho trasformato una visione curata di dieci capi in un portale web ad alte prestazioni. Il focus è stato creare un punto d'ingresso minimalista ma d'impatto per un brand che muove i suoi primi passi, garantendo un'esperienza digitale premium quanto i capi stessi.",
 					},
 					{
-						type: "image",
-						src: "/work-detail-placeholder-1.svg",
-						alt: "Placeholder dettaglio progetto Headless E-commerce",
-					},
-					{
 						type: "text",
 						value:
 							"Ho strutturato listing, scheda prodotto e checkout con particolare attenzione a UX, stato carrello e resilienza del flusso di pagamento.",
-					},
-					{
-						type: "image",
-						src: "/work-detail-placeholder-2.svg",
-						alt: "Placeholder secondo dettaglio progetto Headless E-commerce",
 					},
 					{
 						type: "text",
@@ -244,7 +235,7 @@ const it: Dictionary = {
 				description:
 					"Riprogettazione architetturale e di performance per un portfolio artistico",
 				metaDescription:
-					"Case study di redesign headless per portfolio fotografico: migrazione da WordPress a Next.js e Sanity per performance, SEO e gestione archivio.",
+					"Migrazione headless da WordPress a Next.js e Sanity CMS. Leggi il case study sul restyling tecnico e performante per il portfolio di un fotografo.",
 				image: "/works/marco-iannaccone-01.png",
 				client: "Marco Iannaccone",
 				techStack: "Next.js, Tailwind, Framer Motion, Sanity CMS",
@@ -255,19 +246,9 @@ const it: Dictionary = {
 							"Il progetto ha riguardato la trasformazione radicale della presenza digitale di un fotografo professionista, migrando da un'architettura WordPress limitata a un moderno ecosistema Headless. L'esigenza era duplice: elevare la performance visiva del portfolio e semplificare l'archiviazione di un corpo di lavoro eterogeneo, che spazia dalle esposizioni internazionali alle performance artistiche, fino alla bibliografia curata dall'autore",
 					},
 					{
-						type: "image",
-						src: "/work-detail-placeholder-1.svg",
-						alt: "Placeholder dettaglio progetto Marco Iannaccone",
-					},
-					{
 						type: "text",
 						value:
 							"La soluzione è un prodotto sartoriale basato su Next.js e Sanity CMS, dove la velocità di caricamento e la resa d'immagine sono diventate i pilastri dell'esperienza utente. Grazie a questo stack, ho costruito una struttura dati flessibile che permette al cliente di gestire in autonomia ogni contenuto, garantendo al contempo un'estetica minimalista e una fluidità di navigazione inarrivabile per i sistemi tradizionali.",
-					},
-					{
-						type: "image",
-						src: "/work-detail-placeholder-2.svg",
-						alt: "Placeholder secondo dettaglio progetto Marco Iannaccone",
 					},
 					{
 						type: "text",
