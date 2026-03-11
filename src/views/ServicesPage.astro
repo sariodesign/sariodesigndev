@@ -81,7 +81,7 @@ const { dict, locale } = Astro.props;
 				{
 					dict.services.deliverablesItems.map((item) => (
 						<li class="services-deliverable-item">
-							<span aria-hidden="true">+</span>
+							<span class="services-deliverable-square" />
 							<span>{item}</span>
 						</li>
 					))
@@ -95,11 +95,11 @@ const { dict, locale } = Astro.props;
 			<div class="services-tech-grid">
 				<section class="services-block">
 					<h2 class="services-section-title">
-						{dict.services.stackTitle}
+						{dict.services.stackFrontendTitle}
 					</h2>
 					<ul class="services-chip-list">
 						{
-							dict.services.stackItems.map((item) => (
+							dict.services.stackFrontendItems.map((item) => (
 								<li class="services-chip">{item}</li>
 							))
 						}
@@ -107,11 +107,35 @@ const { dict, locale } = Astro.props;
 				</section>
 				<section class="services-block">
 					<h2 class="services-section-title">
-						{dict.services.toolingTitle}
+						{dict.services.stackUITitle}
 					</h2>
 					<ul class="services-chip-list">
 						{
-							dict.services.toolingItems.map((item) => (
+							dict.services.stackUIText.map((item) => (
+								<li class="services-chip">{item}</li>
+							))
+						}
+					</ul>
+				</section>
+				<section class="services-block">
+					<h2 class="services-section-title">
+						{dict.services.stackToolTitle}
+					</h2>
+					<ul class="services-chip-list">
+						{
+							dict.services.stackToolText.map((item) => (
+								<li class="services-chip">{item}</li>
+							))
+						}
+					</ul>
+				</section>
+				<section class="services-block">
+					<h2 class="services-section-title">
+						{dict.services.stackBackendTitle}
+					</h2>
+					<ul class="services-chip-list">
+						{
+							dict.services.stackBackendItems.map((item) => (
 								<li class="services-chip">{item}</li>
 							))
 						}
@@ -201,7 +225,7 @@ const { dict, locale } = Astro.props;
 		--services-glow: rgba(221, 122, 76, 0.13);
 		display: block;
 		min-height: auto;
-		padding: clamp(88px, 10vh, 126px) 16px 132px;
+		padding: clamp(88px, 10vh, 126px) 16px 64px;
 		position: relative;
 		z-index: 2;
 	}
@@ -357,8 +381,6 @@ const { dict, locale } = Astro.props;
 
 	.services-deliverable-item {
 		align-items: baseline;
-		border: 1px solid var(--services-border);
-		border-radius: 999px;
 		color: var(--services-text);
 		display: inline-flex;
 		font-size: 0.86rem;
@@ -367,9 +389,12 @@ const { dict, locale } = Astro.props;
 		padding: 0.55rem 0.85rem;
 	}
 
-	.services-deliverable-item span[aria-hidden="true"] {
-		color: var(--orange);
-		font-weight: 700;
+	.services-deliverable-square {
+		border-radius: 50%;
+		height: 8px;
+		width: 8px;
+		flex: none;
+		background-color: var(--orange);
 	}
 
 	.services-tech-grid {

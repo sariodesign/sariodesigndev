@@ -27,6 +27,7 @@ export interface LocalizedProject {
 	year: string;
 	services: string;
 	description: string;
+	metaDescription: string;
 	image: string;
 	client: string;
 	techStack: string;
@@ -127,10 +128,14 @@ export interface Dictionary {
 		processItems: LocalizedServiceItem[];
 		deliverablesTitle: string;
 		deliverablesItems: string[];
-		stackTitle: string;
-		stackItems: string[];
-		toolingTitle: string;
-		toolingItems: string[];
+		stackFrontendTitle: string;
+		stackUITitle: string;
+		stackUIText: string[];
+		stackFrontendItems: string[];
+		stackToolTitle: string;
+		stackToolText: string[];
+		stackBackendTitle: string;
+		stackBackendItems: string[];
 		lifestyle: string;
 		ctaTitle: string;
 		ctaDescription: string;

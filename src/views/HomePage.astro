@@ -46,9 +46,13 @@ const servicesHref =
 				<span class="intro-line-wrap">
 					<span class="intro-line">
 						{dict.home.headingStart}{" "}
-						<span class="evidence">{dict.home.headingHighlightFast}</span>
+						<span class="evidence"
+							>{dict.home.headingHighlightFast}</span
+						>
 						{` ${dict.home.headingMiddle} `}
-						<span class="evidence">{dict.home.headingHighlightEasy}</span>
+						<span class="evidence"
+							>{dict.home.headingHighlightEasy}</span
+						>
 						{` ${dict.home.headingEnd}`}
 					</span>
 				</span>
@@ -58,7 +62,10 @@ const servicesHref =
 							dict.home.headingTags.map((tag, index) => (
 								<span class="intro-tag-item">
 									{index > 0 && (
-										<span class="intro-tag-dot" aria-hidden="true"></span>
+										<span
+											class="intro-tag-dot"
+											aria-hidden="true"
+										/>
 									)}
 									<span class="intro-tag">{tag}</span>
 								</span>
@@ -74,23 +81,31 @@ const servicesHref =
 						dict.home.offers.map((offer, index) => (
 							<article class="home-value-card">
 								<span class="home-value-card__badge">{`0${index + 1}`}</span>
-								<h2 class="home-value-card__title">{offer.title}</h2>
-								<p class="home-value-card__description">{offer.description}</p>
+								<h2 class="home-value-card__title">
+									{offer.title}
+								</h2>
+								<p class="home-value-card__description">
+									{offer.description}
+								</p>
 							</article>
 						))
 					}
 				</div>
 				<div class="home-stack">
-					<span class="home-stack__label">{dict.home.stackLabel}</span>
-						<ul class="home-stack__list" aria-label={dict.home.stackLabel}>
-							{
-								dict.home.stackItems.map((item) => (
-									<li class="home-stack__item">
-										<TechLogo name={item} />
-									</li>
-								))
-							}
-						</ul>
+					<span class="home-stack__label">{dict.home.stackLabel}</span
+					>
+					<ul
+						class="home-stack__list"
+						aria-label={dict.home.stackLabel}
+					>
+						{
+							dict.home.stackItems.map((item) => (
+								<li class="home-stack__item">
+									<TechLogo name={item} />
+								</li>
+							))
+						}
+					</ul>
 				</div>
 			</section>
 			<div class="home-cta">
@@ -111,9 +126,9 @@ const servicesHref =
 					{dict.home.ctaEmail}
 				</a>
 			</div>
-			</div>
 		</div>
-	</main>
+	</div>
+</main>
 
 <script>
 	import { gsap } from "gsap";
@@ -333,7 +348,11 @@ const servicesHref =
 		--home-card-surface: #f1eeea;
 		--home-card-glow: rgba(221, 122, 76, 0.13);
 		background:
-			radial-gradient(circle at top right, var(--home-card-glow), transparent 58%),
+			radial-gradient(
+				circle at top right,
+				var(--home-card-glow),
+				transparent 58%
+			),
 			var(--home-card-surface);
 		border-radius: 18px;
 		display: grid;
@@ -439,7 +458,9 @@ const servicesHref =
 		min-height: 48px;
 		padding: 0.65rem 1rem;
 		text-decoration: none;
-		transition: transform 0.2s ease, filter 0.2s ease;
+		transition:
+			transform 0.2s ease,
+			filter 0.2s ease;
 	}
 
 	.home-cta__btn:hover {
@@ -611,7 +632,7 @@ const servicesHref =
 		justify-content: center;
 		align-items: center;
 		min-height: auto;
-		padding: calc(92px + env(safe-area-inset-top)) 16px 24px;
+		padding: calc(92px + env(safe-area-inset-top)) 16px 64px;
 	}
 
 	.home-intro {

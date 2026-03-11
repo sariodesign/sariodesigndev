@@ -21,7 +21,10 @@ const projects = dict.works.projects;
 					<a
 						class="work-row-link"
 						cursor-class="link"
-						href={getLocalizedPath(locale, `/works/${project.slug}`)}
+						href={getLocalizedPath(
+							locale,
+							`/works/${project.slug}`,
+						)}
 						aria-label={`${dict.works.openProjectAria} ${project.name}`}
 					>
 						<div class="work-row-main">
@@ -89,17 +92,14 @@ const projects = dict.works.projects;
 
 		const tl = gsap.timeline();
 		if (title) {
-			tl.to(
-				title,
-				{
-					yPercent: 0,
-					rotateX: 0,
-					filter: "blur(0px)",
-					autoAlpha: 1,
-					duration: 0.9,
-					ease: "power4.out",
-				},
-			);
+			tl.to(title, {
+				yPercent: 0,
+				rotateX: 0,
+				filter: "blur(0px)",
+				autoAlpha: 1,
+				duration: 0.9,
+				ease: "power4.out",
+			});
 		}
 		tl.to(
 			rows,
@@ -188,7 +188,7 @@ const projects = dict.works.projects;
 		--work-border-hover: rgba(16, 32, 32, 0.36);
 		display: block;
 		min-height: auto;
-		padding: clamp(82px, 11vh, 122px) 0 120px;
+		padding: clamp(82px, 11vh, 122px) 0 64px;
 		position: relative;
 		z-index: 2;
 	}

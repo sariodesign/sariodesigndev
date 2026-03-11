@@ -129,11 +129,12 @@ const it: Dictionary = {
 		projects: [
 			{
 				slug: "custom-saas-management-system",
-				name: "Custom SaaS Management System",
+				name: "Ingegnerizzare i processi aziendali",
 				year: "2026",
 				services: "Hono, PostgreSQL, Drizzle, Vue.js",
-				description:
-					"Ho progettato e sviluppato un sistema SaaS modulare e scalabile per centralizzare operazioni, dati cliente e workflow interni.",
+				description: "Un'architettura API-First su misura per la gestione del parco macchine e assistenza",
+				metaDescription:
+					"Case study di un gestionale custom API-first per assistenza tecnica e parco macchine, progettato per semplificare processi, ticketing e logistica.",
 				image: "/work-placeholder.svg",
 				client: "Firenze Ufficio",
 				techStack: "Hono, PostgreSQL, Drizzle, Zod, Vue.js, TypeScript",
@@ -182,19 +183,21 @@ const it: Dictionary = {
 			},
 			{
 				slug: "headless-ecommerce",
-				name: "Headless E-commerce",
+				name: "Il debutto digitale di un brand di moda",
 				year: "2025",
 				services: "Nuxt, PayPal API, Supabase, Prisma",
 				description:
-					"E-commerce headless con frontend Nuxt, backend API-first e database gestito con Prisma, con focus su varianti prodotto, checkout, performance e SEO.",
+					"Un e-commerce minimalista progettato per un'esperienza d'acquisto senza attriti",
+				metaDescription:
+					"Case study e-commerce headless per un brand moda emergente: UX minimale, guest checkout, pagamenti PayPal e gestione ordini su stack Nuxt.",
 				image: "/work-placeholder.svg",
-				client: "Retail company",
+				client: "Ottaviano",
 				techStack: "Nuxt, Supabase, Prisma, PostgreSQL, PayPal API",
 				detailBlocks: [
 					{
 						type: "text",
 						value:
-							"Il progetto nasce per separare completamente esperienza frontend e logica business, mantenendo alta velocita di rilascio su campagne e aggiornamenti catalogo.",
+							"Il lancio di una linea di abbigliamento di debutto richiede una presenza digitale all'altezza dell'esclusività della collezione. In stretta collaborazione con un lead designer, ho trasformato una visione curata di dieci capi in un portale web ad alte prestazioni. Il focus è stato creare un punto d'ingresso minimalista ma d'impatto per un brand che muove i suoi primi passi, garantendo un'esperienza digitale premium quanto i capi stessi.",
 					},
 					{
 						type: "image",
@@ -211,15 +214,37 @@ const it: Dictionary = {
 						src: "/work-detail-placeholder-2.svg",
 						alt: "Placeholder secondo dettaglio progetto Headless E-commerce",
 					},
+					{
+						type: "text",
+						value:
+							"Abbiamo adottato un approccio sartoriale all'esperienza utente, eliminando intenzionalmente la frizione della registrazione obbligatoria. Implementando un sistema di guest checkout fluido, abbiamo assicurato che il percorso dalla scoperta all'acquisto rimanga ininterrotto. Questa filosofia mette al centro l'immediatezza, rendendo il brand accessibile e invitante fin dal primo click, senza barriere d'ingresso per il nuovo pubblico.",
+					},
+					{
+						type: "text",
+						value:
+							"Le fondamenta tecniche poggiano su Nuxt, offrendo un'interfaccia ultra-veloce e ottimizzata lato SEO, ideale per uno storytelling visivo di alta qualità. Per garantire fiducia e portata internazionale, ho integrato le API di PayPal per un flusso di pagamento snello e sicuro. Questo stack moderno fornisce un'infrastruttura robusta che bilancia l'eleganza estetica con le prestazioni necessarie per un debutto di successo sul mercato.",
+					},
+					{
+						type: "text",
+						value:
+							"Oltre la vetrina raffinata si cela un pannello di gestione personalizzato, progettato per un controllo operativo senza sforzo. Questa dashboard privata consente al cliente di gestire l'inventario in edizione limitata e monitorare gli ordini in tempo reale senza complicazioni tecniche. Il sistema colma il divario tra l'estetica della moda e la gestione pratica del business, fornendo un centro di comando professionale e intuitivo.",
+					},
+					{
+						type: "text",
+						value:
+							"Come nuovo attore in un settore competitivo, il valore del progetto risiede nella sua totale prontezza per la ribalta. Mentre le analisi post-lancio guideranno le future ottimizzazioni basate sui dati, il brand possiede ora un asset digitale su misura, solido nel codice ed elegante nella sua erogazione. È una piattaforma costruita non solo per vendere, ma per crescere ed evolversi insieme alla collezione stessa",
+					}
 				],
 			},
 			{
 				slug: "marco-iannaccone",
-				name: "Marco Iannaccone",
+				name: "Oltre i limiti del CMS tradizionale",
 				year: "2025",
 				services: "Next.js, Tailwind, Motion, Sanity",
 				description:
-					"Sito portfolio bilingue per l'artista e fotografo Marco Iannaccone (aka Scarlet Lovejoy), pensato per raccontare il suo universo creativo in modo chiaro.",
+					"Riprogettazione architetturale e di performance per un portfolio artistico",
+				metaDescription:
+					"Case study di redesign headless per portfolio fotografico: migrazione da WordPress a Next.js e Sanity per performance, SEO e gestione archivio.",
 				image: "/works/marco-iannaccone-01.png",
 				client: "Marco Iannaccone",
 				techStack: "Next.js, Tailwind, Framer Motion, Sanity CMS",
@@ -227,7 +252,7 @@ const it: Dictionary = {
 					{
 						type: "text",
 						value:
-							"Ho progettato una struttura editoriale semplice da aggiornare, con priorita su leggibilita, ritmo visivo e gestione autonoma dei contenuti da CMS.",
+							"Il progetto ha riguardato la trasformazione radicale della presenza digitale di un fotografo professionista, migrando da un'architettura WordPress limitata a un moderno ecosistema Headless. L'esigenza era duplice: elevare la performance visiva del portfolio e semplificare l'archiviazione di un corpo di lavoro eterogeneo, che spazia dalle esposizioni internazionali alle performance artistiche, fino alla bibliografia curata dall'autore",
 					},
 					{
 						type: "image",
@@ -237,12 +262,17 @@ const it: Dictionary = {
 					{
 						type: "text",
 						value:
-							"Il risultato e un portfolio bilingue con navigazione lineare, pagine rapide e sezioni pensate per valorizzare sia progetto che biografia.",
+							"La soluzione è un prodotto sartoriale basato su Next.js e Sanity CMS, dove la velocità di caricamento e la resa d'immagine sono diventate i pilastri dell'esperienza utente. Grazie a questo stack, ho costruito una struttura dati flessibile che permette al cliente di gestire in autonomia ogni contenuto, garantendo al contempo un'estetica minimalista e una fluidità di navigazione inarrivabile per i sistemi tradizionali.",
 					},
 					{
 						type: "image",
 						src: "/work-detail-placeholder-2.svg",
 						alt: "Placeholder secondo dettaglio progetto Marco Iannaccone",
+					},
+					{
+						type: "text",
+						value:
+							"Il risultato è una galleria digitale dove la tecnologia si mette al servizio dell’arte. Il passaggio a Sanity ha trasformato la gestione del catalogo in un processo intuitivo, mentre Next.js assicura un’indicizzazione SEO impeccabile per libri e mostre. Questo case study dimostra come la migrazione verso il 'decoupled web' non sia solo una scelta tecnica, ma un atto di cura estetica per proteggere e valorizzare il patrimonio visivo di un artista.",
 					},
 				],
 			},
@@ -303,29 +333,31 @@ const it: Dictionary = {
 			"Linee guida pratiche per onboarding e manutenzione",
 			"Supporto su rilascio, QA e monitoraggio post-go-live",
 		],
-		stackTitle: "Linguaggi e framework",
-		stackItems: [
-			"HTML",
-			"CSS / SCSS",
-			"JavaScript (ES6+)",
+		stackFrontendTitle: "Front-end",
+		stackFrontendItems: [
 			"TypeScript",
-			"React",
 			"Vue",
-			"Svelte",
-			"Next.js",
 			"Nuxt",
+			"React",
+			"Next.js",
 			"Astro",
 		],
-		toolingTitle: "Tool che utilizzo",
-		toolingItems: [
-			"Git e GitHub",
-			"Figma",
-			"VS Code",
+		stackUITitle: "UI/UX",
+		stackUIText: [
+			"HTML", "CSS/SCSS", "Tailwind"
+		],
+		stackToolTitle: "Tool & Workflow",
+		stackToolText: [
+			"GitHub", "Figma", "Vite"
+		],
+		stackBackendTitle: "Backend",
+		stackBackendItems: [
 			"Node.js",
-			"Vite",
-			"Prisma",
+			"Hono",
 			"Supabase",
-			"PostgreSQL",
+			"Prisma",
+			"Drizzle ",
+			"PostgreSQL"
 		],
 		lifestyle:
 			"Collaboro con team interni, agenzie e freelance in formule flessibili: da audit mirati a supporti continuativi su roadmap prodotto.",

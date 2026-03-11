@@ -16,7 +16,9 @@ const { dict, locale } = Astro.props;
 		<header class="about-hero">
 			<h1>
 				<span class="about-title-wrap">
-					<span class="about-title-line js-about-title">{dict.about.heading}</span>
+					<span class="about-title-line js-about-title"
+						>{dict.about.heading}</span
+					>
 				</span>
 			</h1>
 			<p class="about-intro js-about-item">{dict.about.intro}</p>
@@ -36,7 +38,9 @@ const { dict, locale } = Astro.props;
 				{
 					dict.about.timelineItems.map((item) => (
 						<li class="about-timeline-item">
-							<span class="about-timeline-item__year">{item.year}</span>
+							<span class="about-timeline-item__year">
+								{item.year}
+							</span>
 							<div class="about-timeline-item__copy">
 								<h3>{item.title}</h3>
 								<p>{item.description}</p>
@@ -106,17 +110,14 @@ const { dict, locale } = Astro.props;
 
 		const tl = gsap.timeline();
 		if (titleLine) {
-			tl.to(
-				titleLine,
-				{
-					yPercent: 0,
-					rotateX: 0,
-					filter: "blur(0px)",
-					opacity: 1,
-					duration: 1,
-					ease: "power4.out",
-				},
-			);
+			tl.to(titleLine, {
+				yPercent: 0,
+				rotateX: 0,
+				filter: "blur(0px)",
+				opacity: 1,
+				duration: 1,
+				ease: "power4.out",
+			});
 		}
 		tl.to(
 			revealItems,
@@ -140,7 +141,7 @@ const { dict, locale } = Astro.props;
 		--about-surface: #f1eeea;
 		display: block;
 		min-height: auto;
-		padding: clamp(88px, 10vh, 126px) 16px 132px;
+		padding: clamp(88px, 10vh, 126px) 16px 64px;
 		position: relative;
 		z-index: 2;
 	}
@@ -219,7 +220,7 @@ const { dict, locale } = Astro.props;
 
 	.about-timeline-item {
 		display: grid;
-		grid-template-columns: minmax(110px, 150px) minmax(0, 1fr);
+		grid-template-columns: auto;
 		gap: 12px 18px;
 		padding: 16px 0;
 		border-top: 1px solid var(--about-border);
