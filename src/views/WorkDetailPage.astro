@@ -241,6 +241,7 @@ const closeZoomLabel =
 	.work-detail-wrap {
 		margin: 0 auto;
 		max-width: 1440px;
+		position: relative;
 	}
 
 	.work-detail-back {
@@ -430,7 +431,11 @@ const closeZoomLabel =
 	}
 
 	.work-detail-cta {
-		margin-top: clamp(64px, 4vw, 128px);
+		/* margin-top: clamp(64px, 4vw, 128px); */
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
 	}
 
 	@media (prefers-color-scheme: dark) {
@@ -443,6 +448,7 @@ const closeZoomLabel =
 
 	@media screen and (min-width: 1024px) {
 		.work-detail-page {
+			align-items: stretch;
 			min-height: 100vh;
 			padding-inline: 24px;
 		}
