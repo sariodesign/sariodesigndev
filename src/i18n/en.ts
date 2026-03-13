@@ -263,25 +263,25 @@ const en: Dictionary = {
 	services: {
 		heading: "Services",
 		intro:
-			"I help companies and product teams build web interfaces that are reliable, performant, and easy to maintain.",
+			"I help teams and companies transform complex ideas into solid, high-performing, and easy-to-scale digital products.",
 		background:
-			"My focus is UI engineering and front-end architecture for digital products where technical quality directly impacts business outcomes and release speed.",
+			"I don't just write code: I design bespoke web ecosystems where technical stability becomes a competitive advantage, accelerating release cycles and maximizing user satisfaction.",
 		valueEyebrow: "How I can support you",
 		offers: [
 			{
-				title: "Interfaces for SaaS and complex platforms",
+				title: "Custom Web Development",
 				description:
-					"Front-end implementation for dashboards, private areas, and structured flows with strong focus on clarity and scalability.",
+					"I develop front-end interfaces for SaaS, e-commerce, and complex platforms. Tailored solutions designed to handle intricate workflows with absolute clarity, guiding the user straight to their goal.",
 			},
 			{
-				title: "Operational design systems",
+				title: "Scalable Architectures",
 				description:
-					"I build component libraries and shared rules to reduce delivery time, inconsistency, and technical debt.",
+					"Stop reinventing the wheel with every release. I build cohesive component libraries (Design Systems) to reduce technical debt, speed up development times, and let your product scale safely.",
 			},
 			{
-				title: "Refactoring and stabilization",
+				title: "Performance & Accessibility",
 				description:
-					"I improve existing codebases to raise maintainability, performance, and release quality without blocking product progress.",
+					"I refactor code to eliminate bottlenecks. I improve load times, release stability, and platform inclusivity, ensuring a flawless user experience and top-tier SEO rankings.",
 			},
 		],
 		processTitle: "How we work",

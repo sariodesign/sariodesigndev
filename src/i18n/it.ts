@@ -46,11 +46,11 @@ const it: Dictionary = {
 	home: {
 		photoAlt: "Ritratto di Rosario Russo",
 		availability: "Parlami del tuo progetto",
-		headingStart: "Progetto e sviluppo prodotti digitali sartoriali",
-		headingHighlightFast: "veloci",
-		headingMiddle: ",",
-		headingHighlightEasy: "intuitivi",
-		headingEnd: "costruiti per il tuo business.",
+		headingStart: "Sviluppo prodotti digitali",
+		headingHighlightFast: "su misura",
+		headingMiddle: "progettati per essere",
+		headingHighlightEasy: "veloci",
+		headingEnd: "intuitivi e orientati al business.",
 		headingTags: ["Web App", "SaaS", "E-commerce"],
 		valueEyebrow: "Come posso aiutarti",
 		offers: [
@@ -262,25 +262,25 @@ const it: Dictionary = {
 	services: {
 		heading: "Servizi",
 		intro:
-			"Aiuto team e aziende a progettare e sviluppare interfacce web affidabili, performanti e facili da mantenere.",
+			"Aiuto team e aziende (PMI) a trasformare idee complesse in prodotti digitali solidi, performanti e facili da scalare.",
 		background:
-			"Mi concentro su UI engineering e front-end architecture per prodotti digitali dove la qualita tecnica ha un impatto diretto su business, tempi di rilascio e soddisfazione utente.",
+			"Non mi limito a scrivere codice: progetto ecosistemi web su misura dove la stabilità tecnica diventa un vantaggio competitivo, accelerando i tempi di rilascio e massimizzando la soddisfazione dell'utente finale.",
 		valueEyebrow: "Come posso supportarti",
 		offers: [
 			{
-				title: "Interfacce per SaaS e piattaforme complesse",
+				title: "Sviluppo Web su Misura",
 				description:
-					"Sviluppo front-end per dashboard, aree riservate e flussi articolati con attenzione a chiarezza e scalabilita.",
+					"Sviluppo interfacce front-end per SaaS, e-commerce e piattaforme complesse. Soluzioni sartoriali progettate per gestire flussi articolati con la massima chiarezza, guidando l'utente verso l'obiettivo.",
 			},
 			{
-				title: "Design system operativi",
+				title: "Architetture Scalabili",
 				description:
-					"Costruisco librerie di componenti e regole condivise per ridurre tempi, inconsistenze e debito tecnico.",
+					"Basta reinventare la ruota a ogni rilascio. Costruisco librerie di componenti coerenti (Design System) per ridurre il debito tecnico, accelerare i tempi di sviluppo e far scalare il tuo prodotto in sicurezza.",
 			},
 			{
-				title: "Refactoring e stabilizzazione",
+				title: "Performance & Accessibilità",
 				description:
-					"Intervengo su codice esistente per migliorare manutenibilita, performance e qualita dei rilasci senza fermare il prodotto.",
+					"Intervengo sul codice per eliminare i colli di bottiglia. Miglioro i tempi di caricamento, la stabilità dei rilasci e l'inclusività della piattaforma, garantendo un'esperienza utente e un posizionamento SEO impeccabili.",
 			},
 		],
 		processTitle: "Metodo di lavoro",
