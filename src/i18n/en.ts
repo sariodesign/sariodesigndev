@@ -51,23 +51,23 @@ const en: Dictionary = {
 		headingMiddle: "and",
 		headingHighlightEasy: "easy",
 		headingEnd: "to use",
-		headingTags: ["Web Apps", "Portals", "SaaS", "E-commerce"],
+		headingTags: ["Web Apps", "SaaS", "E-commerce"],
 		valueEyebrow: "How I can help",
 		offers: [
 			{
-				title: "UI Development",
+				title: "Custom Web Development",
 				description:
-					"Modern, responsive front-end interfaces built to ship and last.",
+					"Solid and intuitive digital platforms. I design bespoke interfaces built to guide users and maximize your business results.",
 			},
 			{
-				title: "Design Systems",
+				title: "Scalable Architectures",
 				description:
-					"Reusable components and clear patterns for products that need to scale.",
+					"Building your product for the future. I develop flexible, modular ecosystems ready to grow and expand without technical limits.",
 			},
 			{
 				title: "Performance & Accessibility",
 				description:
-					"Practical improvements across speed, semantics, and inclusive UX.",
+					"Aesthetics need reliability. I guarantee lightning-fast load times and accessible code for a flawless user experience and SEO.",
 			},
 		],
 		stackLabel: "Frequently used stack",

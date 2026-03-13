@@ -46,28 +46,28 @@ const it: Dictionary = {
 	home: {
 		photoAlt: "Ritratto di Rosario Russo",
 		availability: "Parlami del tuo progetto",
-		headingStart: "Sviluppo interfacce web",
+		headingStart: "Progetto e sviluppo prodotti digitali sartoriali",
 		headingHighlightFast: "veloci",
-		headingMiddle: "e",
-		headingHighlightEasy: "facili",
-		headingEnd: "da usare",
-		headingTags: ["Web App", "Portali", "SaaS", "E-commerce"],
+		headingMiddle: ",",
+		headingHighlightEasy: "intuitivi",
+		headingEnd: "costruiti per il tuo business.",
+		headingTags: ["Web App", "SaaS", "E-commerce"],
 		valueEyebrow: "Come posso aiutarti",
 		offers: [
 			{
-				title: "UI Development",
+				title: "Sviluppo Web su Misura",
 				description:
-					"Interfacce front-end moderne, responsive e pronte per la produzione.",
+					"Piattaforme digitali solide e intuitive. Progetto interfacce sartoriali pensate per guidare l'utente e massimizzare i risultati del tuo business.",
 			},
 			{
-				title: "Design Systems",
+				title: "Architetture Scalabili",
 				description:
-					"Componenti riusabili e pattern coerenti per prodotti che devono scalare.",
+					"Costruisco il tuo prodotto pensando al futuro. Sviluppo ecosistemi flessibili e modulari, pronti a crescere ed espandersi senza limiti tecnici.",
 			},
 			{
 				title: "Performance & Accessibilita",
 				description:
-					"Ottimizzazioni concrete su velocita, semantica e qualita dell'esperienza.",
+					"L'estetica non basta senza affidabilità. Garantisco caricamenti fulminei e codice accessibile per un'esperienza utente e un'indicizzazione impeccabili.",
 			},
 		],
 		stackLabel: "Stack ricorrente",
