@@ -122,7 +122,9 @@ const it: Dictionary = {
 	},
 	works: {
 		heading: "Esplora i miei lavori",
+		collaborationsHeading: "Collaborazioni",
 		listAriaLabel: "Lista progetti",
+		collaborationsListAriaLabel: "Lista collaborazioni",
 		openProjectAria: "Apri progetto",
 		clientLabel: "Cliente",
 		techStackLabel: "Tech stack",
@@ -257,6 +259,44 @@ const it: Dictionary = {
 					},
 				],
 			},
+		],
+		collaborations: [
+			{
+				slug: "upclose-studio",
+				name: "Upclose studio",
+				year: "2025",
+				services: "Nuxt, Headless CMS",
+				description: "Sviluppo front-end in Nuxt e integrazione con Headless CMS a partire da design Figma.",
+				metaDescription: "Sviluppo interfacce front-end in Nuxt collegate a CMS Headless (Hygraph, Contentful).",
+				image: "/work-placeholder.svg",
+				client: "Upclose studio",
+				techStack: "Nuxt, Hygraph, Contentful, Figma",
+				agencyUrl: "https://upclose.studio/",
+				detailBlocks: [
+					{
+						type: "text",
+						value: "Details about the collaboration...",
+					}
+				],
+			},
+			{
+				slug: "ribrain",
+				name: "Ribrain",
+				year: "2024",
+				services: "WordPress, Shopify",
+				description: "Sviluppo di temi custom per WordPress e Shopify con UI sartoriale creata da layout XD.",
+				metaDescription: "Sviluppo e customizzazione di template premium per WordPress e Shopify.",
+				image: "/work-placeholder.svg",
+				client: "Ribrain",
+				techStack: "WordPress, Shopify, Adobe XD",
+				agencyUrl: "https://www.ribrainstudio.com/",
+				detailBlocks: [
+					{
+						type: "text",
+						value: "Details about the collaboration...",
+					}
+				],
+			}
 		],
 	},
 	services: {

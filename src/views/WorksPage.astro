@@ -10,6 +10,7 @@ interface Props {
 
 const { dict, locale } = Astro.props;
 const projects = dict.works.projects;
+const collaborations = dict.works.collaborations;
 ---
 
 <main class="work-page">
@@ -53,6 +54,41 @@ const projects = dict.works.projects;
 			))
 		}
 	</section>
+
+	{collaborations && collaborations.length > 0 && (
+		<section class="work-list" aria-label={dict.works.collaborationsListAriaLabel} style="margin-top: clamp(6rem, 8vw, 8rem);">
+			<h2 class="work-title js-work-title">{dict.works.collaborationsHeading}</h2>
+			{
+				collaborations.map((project) => (
+					<article class="work-row js-work-row">
+						<a
+							class="work-row-link"
+							cursor-class="link"
+							href={project.agencyUrl || getLocalizedPath(locale, `/works/${project.slug}`)}
+							target={project.agencyUrl ? "_blank" : undefined}
+							rel={project.agencyUrl ? "noopener noreferrer" : undefined}
+							aria-label={`${dict.works.openProjectAria} ${project.name}`}
+						>
+							<div class="work-row-main">
+								<h3 class="work-row-title">{project.name}</h3>
+								<p class="work-row-description">
+									{project.description}
+								</p>
+							</div>
+							<div class="work-row-meta">
+								<span>{project.services}</span>
+								<span>{project.year}</span>
+							</div>
+							<span class="work-row-arrow" aria-hidden="true">
+								↗
+							</span>
+						</a>
+					</article>
+				))
+			}
+		</section>
+	)}
+
 	<div class="work-page-cta js-work-row">
 		<PageCta dict={dict} locale={locale} showWorksCta={false} />
 	</div>
@@ -65,12 +101,12 @@ const projects = dict.works.projects;
 	const reduceMotion = window.matchMedia(
 		"(prefers-reduced-motion: reduce)",
 	).matches;
-	const title = document.querySelector(".js-work-title");
+	const titles = [...document.querySelectorAll(".js-work-title")];
 	const rows = [...document.querySelectorAll(".js-work-row")];
 
 	if (!reduceMotion) {
-		if (title) {
-			gsap.set(title, {
+		if (titles.length > 0) {
+			gsap.set(titles, {
 				yPercent: 120,
 				rotateX: -14,
 				filter: "blur(8px)",
@@ -84,21 +120,22 @@ const projects = dict.works.projects;
 
 	onPageRevealReady(() => {
 		if (reduceMotion) {
-			if (title) {
-				gsap.set(title, { autoAlpha: 1 });
+			if (titles.length > 0) {
+				gsap.set(titles, { autoAlpha: 1 });
 			}
 			return;
 		}
 
 		const tl = gsap.timeline();
-		if (title) {
-			tl.to(title, {
+		if (titles.length > 0) {
+			tl.to(titles, {
 				yPercent: 0,
 				rotateX: 0,
 				filter: "blur(0px)",
 				autoAlpha: 1,
 				duration: 0.9,
 				ease: "power4.out",
+				stagger: 0.1,
 			});
 		}
 		tl.to(

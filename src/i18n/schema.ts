@@ -32,6 +32,7 @@ export interface LocalizedProject {
 	client: string;
 	techStack: string;
 	detailBlocks: LocalizedProjectDetailBlock[];
+	agencyUrl?: string;
 }
 
 export interface LocalizedHomeOffer {
@@ -111,12 +112,15 @@ export interface Dictionary {
 	};
 	works: {
 		heading: string;
+		collaborationsHeading: string;
 		listAriaLabel: string;
+		collaborationsListAriaLabel: string;
 		openProjectAria: string;
 		clientLabel: string;
 		techStackLabel: string;
 		backToWorksLabel: string;
 		projects: LocalizedProject[];
+		collaborations: LocalizedProject[];
 	};
 	services: {
 		heading: string;
